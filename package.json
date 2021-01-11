@@ -1,0 +1,39 @@
+{
+  "name": "elite-bn-backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "nodemon --exec babel-node src/index.js",
+    "lint": "eslint .",
+    "lintfix": "eslint . --fix"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/atlp-rwanda/elite-bn-backend.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/atlp-rwanda/elite-bn-backend/issues"
+  },
+  "homepage": "https://github.com/atlp-rwanda/elite-bn-backend#readme",
+  "dependencies": {
+    "@babel/preset-env": "^7.12.11",
+    "@babel/register": "^7.12.10",
+    "dotenv": "^8.2.0",
+    "eslint": "^7.17.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-plugin-import": "^2.22.1",
+    "express": "^4.17.1",
+    "nodemon": "^2.0.7",
+    "swagger-jsdoc": "^6.0.1",
+    "swagger-ui-express": "^4.1.6"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.12.10",
+    "@babel/core": "^7.12.10",
+    "@babel/node": "^7.12.10"
+  }
+}
