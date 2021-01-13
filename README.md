@@ -1,2 +1,1 @@
-![CI/CD](https://github.com/atlp-rwanda/elite-bn-backend/workflows/CI/CD/badge.svg)
-# elite-bn-backend
+![CI/CD](https://github.com/atlp-rwanda/elite-bn-backend/workflows/CI/CD/badge.svg)  ![Code Climate maintainability](https://img.shields.io/codeclimate/maintainability/atlp-rwanda/elite-bn-backend)
