@@ -32,8 +32,8 @@ jobs:
       env:
         PORT: ${{secrets.PORT}}
     - name: test coverage
-        run: npm run coveralls
+      run: npm run coveralls
     - name: Coveralls
-        uses: coverallsapp/github-action@master
-        with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
+      uses: coverallsapp/github-action@master
+      with:
+        github-token: ${{ secrets.GITHUB_TOKEN }}
