@@ -10,8 +10,10 @@
     "lintfix": "eslint . --fix",
     "test": "mocha --require @babel/register test/*.spec.js --timeout 60000 --exit || true",
     "build": "rm -rf ./build/ && babel ./src/ -d ./build/src/ && cp -r ./src/models/ ./build/models/ && babel ./src/index.js -d ./build/",
-    "coverage": "nyc --reporter=html --reporter=text npm test", 
-    "coveralls": "npm run coverage && nyc report --reporter=lcov --reporter=text"
+    "coverage": "nyc --reporter=html --reporter=text npm test",
+    "coveralls": "npm run coverage && nyc report --reporter=lcov --reporter=text",
+    "db:migrate": "sequelize db:migrate",
+    "db:seed": "sequelize db:seed:all"
   },
   "repository": {
     "type": "git",
@@ -39,6 +41,10 @@
     "express": "^4.17.1",
     "nodemon": "^2.0.7",
     "nyc": "^15.1.0",
+    "pg": "^8.5.1",
+    "pg-hstore": "^2.3.3",
+    "sequelize": "^6.3.5",
+    "sequelize-cli": "^6.2.0",
     "swagger-jsdoc": "^6.0.1",
     "swagger-ui-express": "^4.1.6"
   },
@@ -46,6 +52,10 @@
     "chai": "^4.2.0",
     "coveralls": "^3.1.0",
     "mocha": "^8.2.1",
-    "sinon": "^9.2.3"
+    "sinon": "^9.2.3",
+    "@babel/cli": "^7.12.10",
+    "@babel/core": "^7.12.10",
+    "@babel/node": "^7.12.10",
+    "@babel/register": "^7.12.10"
   }
 }
