@@ -4,12 +4,13 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node src/index.js",
+    "start": "babel-node src/index.js",
     "dev": "nodemon --exec babel-node src/index.js",
     "lint": "eslint .",
     "lintfix": "eslint . --fix",
     "test": "mocha --require @babel/register test/*.spec.js --timeout 60000 --exit || true",
-    "coverage":"nyc --reporter=html --reporter=text npm test"
+    "build": "rm -rf ./build/ && babel ./src/ -d ./build/src/ && cp -r ./src/models/ ./build/models/ && babel ./src/index.js -d ./build/",
+    "coverage": "nyc --reporter=html --reporter=text npm test"
   },
   "repository": {
     "type": "git",
@@ -33,14 +34,14 @@
     "nodemon": "^2.0.7",
     "nyc": "^15.1.0",
     "swagger-jsdoc": "^6.0.1",
-    "swagger-ui-express": "^4.1.6"
-  },
-  "devDependencies": {
+    "swagger-ui-express": "^4.1.6",
     "@babel/cli": "^7.12.10",
     "@babel/core": "^7.12.10",
     "@babel/node": "^7.12.10",
     "@babel/plugin-transform-runtime": "^7.12.10",
-    "@babel/register": "^7.12.10",
+    "@babel/register": "^7.12.10"
+  },
+  "devDependencies": {
     "chai": "^4.2.0",
     "mocha": "^8.2.1",
     "sinon": "^9.2.3"
