@@ -10,7 +10,7 @@
     "lintfix": "eslint . --fix",
     "test": "mocha --require @babel/register test/*.spec.js --timeout 60000 --exit || true",
     "build": "rm -rf ./build/ && babel ./src/ -d ./build/src/ && cp -r ./src/models/ ./build/models/ && babel ./src/index.js -d ./build/",
-    "coverage": "nyc --reporter=html --reporter=text npm test",
+    "coverage": "nyc --reporter=html --reporter=text npm test", 
     "coveralls": "npm run coverage && nyc report --reporter=lcov --reporter=text"
   },
   "repository": {
