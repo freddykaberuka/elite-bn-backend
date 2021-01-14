@@ -4,10 +4,14 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node src/index.js",
+    "start": "babel-node src/index.js",
     "dev": "nodemon --exec babel-node src/index.js",
     "lint": "eslint .",
-    "lintfix": "eslint . --fix"
+    "lintfix": "eslint . --fix",
+    "test": "mocha --require @babel/register test/*.spec.js --timeout 60000 --exit || true",
+    "build": "rm -rf ./build/ && babel ./src/ -d ./build/src/ && cp -r ./src/models/ ./build/models/ && babel ./src/index.js -d ./build/",
+    "coverage": "nyc --reporter=html --reporter=text npm test", 
+    "coveralls": "npm run coverage && nyc report --reporter=lcov --reporter=text"
   },
   "repository": {
     "type": "git",
@@ -20,20 +24,28 @@
   },
   "homepage": "https://github.com/atlp-rwanda/elite-bn-backend#readme",
   "dependencies": {
+    "@babel/cli": "^7.12.10",
+    "@babel/core": "^7.12.10",
+    "@babel/node": "^7.12.10",
+    "@babel/plugin-transform-runtime": "^7.12.10",
     "@babel/preset-env": "^7.12.11",
     "@babel/register": "^7.12.10",
+    "@babel/runtime": "^7.12.5",
+    "chai-http": "^4.3.0",
     "dotenv": "^8.2.0",
     "eslint": "^7.17.0",
     "eslint-config-airbnb-base": "^14.2.1",
     "eslint-plugin-import": "^2.22.1",
     "express": "^4.17.1",
     "nodemon": "^2.0.7",
+    "nyc": "^15.1.0",
     "swagger-jsdoc": "^6.0.1",
     "swagger-ui-express": "^4.1.6"
   },
   "devDependencies": {
-    "@babel/cli": "^7.12.10",
-    "@babel/core": "^7.12.10",
-    "@babel/node": "^7.12.10"
+    "chai": "^4.2.0",
+    "coveralls": "^3.1.0",
+    "mocha": "^8.2.1",
+    "sinon": "^9.2.3"
   }
 }

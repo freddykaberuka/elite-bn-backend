@@ -1,1 +1,1 @@
-# elite-bn-backend
+![CI/CD](https://github.com/atlp-rwanda/elite-bn-backend/workflows/CI/CD/badge.svg)  ![Code Climate maintainability](https://img.shields.io/codeclimate/maintainability/atlp-rwanda/elite-bn-backend)  [![Coverage Status](https://coveralls.io/repos/github/atlp-rwanda/elite-bn-backend/badge.svg?branch=ch-testing-setup)](https://coveralls.io/github/atlp-rwanda/elite-bn-backend?branch=ch-testing-setup)
