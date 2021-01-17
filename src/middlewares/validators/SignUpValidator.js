@@ -1,4 +1,4 @@
-/* eslint-disable */
+
 import Joi from 'joi';
 
 let schema = Joi.object({

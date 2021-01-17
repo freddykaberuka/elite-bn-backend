@@ -42,11 +42,10 @@ class User {
             })
         }
 
-        //Create a verification link
-        let startLink = 'http://localhost:3000/auth/signup/verify/'+userToken;
 
         //Send the email to the email
-        var transporter = nodemailer.createTransport({
+        let startLink = 'http://localhost:3000/auth/signup/verify/'+userToken;
+        let transporter = nodemailer.createTransport({
             service: 'gmail',
             auth: {
                 user: process.env.PARENT_EMAIL,
@@ -54,7 +53,7 @@ class User {
             }
         });
 
-        var mailOptions = {
+        let mailOptions = {
             from: process.env.PARENT_EMAIL,
             to: vUser.email,
             subject: 'Verify your email for barefoot nomad',
@@ -65,9 +64,8 @@ class User {
             if (error) {
                 console.log(error);
             } else {
-                console.log('Email sent: ' + info.response);
                 return response.status(200).send({
-                    message: "Check the email for the verification"
+                    message: 'Check the email for the verification'+info.response
                 })
             }
         });
@@ -88,7 +86,6 @@ class User {
     static confirmEmail = async (request, response) => {
         const token = request.params.token;
         const decoded = jwtDecode(token);
-
         let suspectedUser = {};
 
         if (!decoded.hasOwnProperty('email') || !decoded.hasOwnProperty('password') || !decoded.hasOwnProperty('active')) {
@@ -114,11 +111,11 @@ class User {
                         email: decoded.email
                     }
                 });
-                response.status(200).send({
+                return response.status(200).send({
                     message: "Email verified"
                 })
             } catch (error) {
-                response.status(400).send({
+                return response.status(400).send({
                     message: "Invalid link"
                 })
             }
