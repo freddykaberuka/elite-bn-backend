@@ -1,17 +1,19 @@
-module.exports = (sequelize, DataTypes) => {
-  const User = sequelize.define('User', {
-    email: DataTypes.STRING,
-    password: DataTypes.STRING
-  }, {});
-  User.associate = (models) => {
-    // associations can be defined here
-    User.hasMany(models.Post, {
-      foreignKey: 'userId',
-      as: 'posts',
-      onDelete: 'CASCADE',
-    });
-  };
-  return User;
-};
+import DataTypes from 'sequelize';
+import db from '../config/database';
 
-// src/models/user.js
+const User = db.define('User', {
+  email: {
+    type: DataTypes.STRING,
+    allowNull: false
+  },
+  password: {
+    type: DataTypes.STRING,
+    allowNull: false
+  },
+  active: {
+    type: DataTypes.STRING,
+    allowNull: false,
+    defaultValue: 'FALSE'
+  }
+});
+module.exports = User;

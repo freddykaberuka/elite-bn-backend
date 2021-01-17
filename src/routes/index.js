@@ -1,7 +1,7 @@
 import { Router } from 'express';
 import swaggerUI from 'swagger-ui-express';
-import welcomeRoute from './welcome';
-import Badroute from './badroute';
+// import welcomeRoute from './welcome';
+// import Badroute from './badroute';
 import swaggerDocs from '../swagger';
 import Auth from './auth';
 
