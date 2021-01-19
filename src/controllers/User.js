@@ -8,7 +8,7 @@ const jwtDecode = require('jwt-decode');
 class User {
     static signUp = async (request, response) => {
         //Validation of data
-        (async () => {
+        // (async () => {
             const valid = await SignUpValidator.validate(request.body);
             if (valid !== true) {
                 return response.status(400).send({
@@ -16,7 +16,7 @@ class User {
                     valid
                 })
             }
-        })();
+        // })();
 
         //Valid User
         const vUser = request.body;
@@ -26,7 +26,7 @@ class User {
         //Check if the email is already in the database
         const k = await this.verifyIfEmailisAvailable(vUser);
         if (k == false) {
-            return response.send({
+            return response.status(409).send({
                 message: 'Email is already in the database'
             });
         }
