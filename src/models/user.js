@@ -3,17 +3,22 @@ import db from '../config/database';
 
 const User = db.define('User', {
   email: {
-    type: DataTypes.STRING,
-    allowNull: false
+    type: DataTypes.STRING
   },
   password: {
-    type: DataTypes.STRING,
-    allowNull: false
+    type: DataTypes.STRING
   },
-  active: {
+  isVerified: {
+    type: DataTypes.BOOLEAN,
+    defaultValue: false
+  },
+  firstName: {
     type: DataTypes.STRING,
-    allowNull: false,
-    defaultValue: 'FALSE'
+    allowNull: true
+  },
+  secondName: {
+    type: DataTypes.STRING,
+    allowNull: true
   }
 });
 module.exports = User;

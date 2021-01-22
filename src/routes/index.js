@@ -1,18 +1,26 @@
 import { Router } from 'express';
-import swaggerUI from 'swagger-ui-express';
 // import welcomeRoute from './welcome';
-// import Badroute from './badroute';
-import swaggerDocs from '../swagger';
-import Auth from './auth';
+import Badroute from './badroute';
+// import Auth from './auth';
+import api from './api/apiRoutes';
+import dotenv from 'dotenv';
+import welcomeMessage from '../controllers/index';
+
+dotenv.config();
+const version = process.env.API_VERSION || 'v1';
+const url = `/api/${version}`;
 
 const router = Router();
 
-router.use('/api-docs', swaggerUI.serve, swaggerUI.setup(swaggerDocs));
+router.get('/', welcomeMessage);
 
-router.use('/auth/', Auth);
+router.use(url, api);
+
+// router.use('/auth/', Auth);
 
 // router.use('/', welcomeRoute);
 
 // router.use('/', Badroute);
+
 
 export default router;
