@@ -23,6 +23,7 @@ describe('User tests', async()=>{
             .post('/api/v1/users/signup')
             .send(existingUser)
             .end((error, response)=>{
+                console.log(response);
                 response.should.have.status(200);
                 done();
             })
