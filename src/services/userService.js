@@ -1,6 +1,6 @@
 /*eslint-disable */
-import models from '../models/user';
-const  Users  = models;
+import models from '../models/index';
+const  Users  = models.User;
 /**
  * @exports
  * @class UserService

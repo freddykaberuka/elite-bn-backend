@@ -1,7 +1,6 @@
 /*eslint-disable*/
-import dotenv from 'dotenv';
-
-dotenv.config();
+// import dotenv from 'dotenv';
+require('dotenv').config();
 
 const { DB_USER, DB_PASSWORD, DB_NAME, DB_HOST, DB_PORT, DATABASE_URL,DB_NAME_TEST  } = process.env;
 module.exports = {

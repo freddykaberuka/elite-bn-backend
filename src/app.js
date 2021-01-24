@@ -3,7 +3,6 @@ import express from 'express';
 import dotenv from 'dotenv';
 import router from './routes/index';
 import swaggerDocs from './docs/index';
-import fcn from '../src/services/fileOpener';
 
 dotenv.config();
 
