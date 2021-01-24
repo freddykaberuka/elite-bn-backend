@@ -8,12 +8,16 @@
     "dev": "nodemon --exec babel-node src/index.js",
     "lint": "eslint .",
     "lintfix": "eslint . --fix",
-    "test": "set NODE_ENV=test && mocha --require @babel/register test/*.spec.js --timeout 500000 --exit || true",
+    "test": "set NODE_ENV=test&& npm run migration:reset && mocha --require @babel/register test/*.spec.js --timeout 500000 --exit || true",
     "build": "rm -rf ./build/ && babel ./src/ -d ./build/src/ && cp -r ./src/models/ ./build/models/ && babel ./src/index.js -d ./build/",
     "coverage": "nyc --reporter=html --reporter=text npm test",
     "coveralls": "npm run coverage && nyc report --reporter=lcov --reporter=text",
     "db:migrate": "./node_modules/.bin/sequelize db:migrate",
-    "db:seed": "./node_modules/.bin/sequelize db:seed:all"
+    "db:seed": "./node_modules/.bin/sequelize db:seed:all", 
+    "migration:reset": "npm run migration:undo && npm run db:migrate && npm run db:seed",
+    "migration:undo": "./node_modules/.bin/sequelize db:migrate:undo:all"
+
+
   },
   "repository": {
     "type": "git",

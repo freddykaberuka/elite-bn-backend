@@ -17,14 +17,13 @@ const existingUser = {
 	"lastName": "ISHIMWE"
 }
 
-describe('User tests', async()=>{
+describe('User tests', ()=>{
     it('Should create a new account', (done)=>{
         chai.request(app)
             .post('/api/v1/users/signup')
             .send(existingUser)
             .end((error, response)=>{
-                console.log(response);
-                response.should.have.status(200);
+                response.should.have.status(201);
                 done();
             })
     });
@@ -91,7 +90,5 @@ describe('User tests', async()=>{
                 done();
             })
     });
-    userServices.drop(existingUser.email);
-    
 
 });

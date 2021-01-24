@@ -4,7 +4,7 @@ import Sequelize from 'sequelize';
 import envConfigs from '../database/config/config';
 
 const env = process.env.NODE_ENV || 'development';
-const config = envConfigs[env] || envConfigs['test'];
+const config = envConfigs[env];
 const basename = path.basename(__filename);
 const db = {};
 
@@ -17,8 +17,6 @@ if (config.use_env_variable) {
     config.database,
     config.username,
     config.password,
-    { dialect: 'postgres'},
-    config.host,
     config,
   );
 }
