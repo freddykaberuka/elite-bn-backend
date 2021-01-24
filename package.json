@@ -4,16 +4,20 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "babel-node src/index.js",
+    "start": "npm run db:migrate && npm run db:seed && babel-node ./src/index.js",
     "dev": "nodemon --exec babel-node src/index.js",
     "lint": "eslint .",
     "lintfix": "eslint . --fix",
-    "test": "mocha --require @babel/register test/*.spec.js --timeout 60000 --exit || true",
+    "test": "set NODE_ENV=test&& npm run migration:reset && mocha --require @babel/register test/*.spec.js --timeout 500000 --exit || true",
     "build": "rm -rf ./build/ && babel ./src/ -d ./build/src/ && cp -r ./src/models/ ./build/models/ && babel ./src/index.js -d ./build/",
     "coverage": "nyc --reporter=html --reporter=text npm test",
     "coveralls": "npm run coverage && nyc report --reporter=lcov --reporter=text",
-    "db:migrate": "sequelize db:migrate",
-    "db:seed": "sequelize db:seed:all"
+    "db:migrate": "./node_modules/.bin/sequelize db:migrate",
+    "db:seed": "./node_modules/.bin/sequelize db:seed:all", 
+    "migration:reset": "npm run migration:undo && npm run db:migrate && npm run db:seed",
+    "migration:undo": "./node_modules/.bin/sequelize db:migrate:undo:all"
+
+
   },
   "repository": {
     "type": "git",
@@ -30,32 +34,42 @@
     "@babel/core": "^7.12.10",
     "@babel/node": "^7.12.10",
     "@babel/plugin-transform-runtime": "^7.12.10",
+    "@babel/polyfill": "^7.12.1",
     "@babel/preset-env": "^7.12.11",
-    "@babel/register": "^7.12.10",
     "@babel/runtime": "^7.12.5",
+    "bcrypt": "^5.0.0",
     "chai-http": "^4.3.0",
     "dotenv": "^8.2.0",
     "eslint": "^7.17.0",
     "eslint-config-airbnb-base": "^14.2.1",
     "eslint-plugin-import": "^2.22.1",
     "express": "^4.17.1",
+    "install": "^0.13.0",
+    "joi": "^17.3.0",
+    "jsonwebtoken": "^8.5.1",
+    "jwt-decode": "^3.1.2",
+    "nodemailer": "^6.4.17",
+    "nodemailer-express-handlebars": "^4.0.0",
     "nodemon": "^2.0.7",
+    "npm": "^6.14.11",
     "nyc": "^15.1.0",
     "pg": "^8.5.1",
     "pg-hstore": "^2.3.3",
     "sequelize": "^6.3.5",
     "sequelize-cli": "^6.2.0",
     "swagger-jsdoc": "^6.0.1",
-    "swagger-ui-express": "^4.1.6"
+    "swagger-ui-express": "^4.1.6",
+    "xmlhttprequest": "^1.8.0"
   },
   "devDependencies": {
-    "chai": "^4.2.0",
-    "coveralls": "^3.1.0",
-    "mocha": "^8.2.1",
-    "sinon": "^9.2.3",
     "@babel/cli": "^7.12.10",
     "@babel/core": "^7.12.10",
     "@babel/node": "^7.12.10",
-    "@babel/register": "^7.12.10"
+    "@babel/plugin-proposal-class-properties": "^7.12.1",
+    "@babel/register": "^7.12.10",
+    "chai": "^4.2.0",
+    "coveralls": "^3.1.0",
+    "mocha": "^8.2.1",
+    "sinon": "^9.2.3"
   }
 }
