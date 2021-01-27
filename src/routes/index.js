@@ -1,9 +1,8 @@
 import { Router } from 'express';
 // import welcomeRoute from './welcome';
-import Badroute from './badroute';
+import dotenv from 'dotenv';
 // import Auth from './auth';
 import api from './api/apiRoutes';
-import dotenv from 'dotenv';
 import welcomeMessage from '../controllers/index';
 
 dotenv.config();

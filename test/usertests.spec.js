@@ -17,12 +17,15 @@ const existingUser = {
 	"lastName": "ISHIMWE"
 }
 
+let token = null;
+
 describe('User tests', ()=>{
     it('Should create a new account', (done)=>{
         chai.request(app)
             .post('/api/v1/users/signup')
             .send(existingUser)
             .end((error, response)=>{
+                token = response.body.data.token;
                 response.should.have.status(201);
                 done();
             })
@@ -91,4 +94,74 @@ describe('User tests', ()=>{
             })
     });
 
+    // Login tests
+
+    it('Only Verified user should login', (done) => {
+        chai.request(app)
+          .post('/api/v1/users/signin')
+          .send({ email: User.email, password: 'password' })
+          .end((err, response) => {
+            response.should.have.status(400);
+            done();
+          });
+      });
+
+    it('It should  verify the user', (done) => {
+        chai.request(app)
+          .get(`/api/v1/users/verifyEmail/${token}`)
+          .end((err, response) => {
+            response.should.have.status(200);
+            response.body.should.be.a('object');
+            response.body.should.have.property('status');
+            response.body.should.have.property('message');
+            done();
+          });
+      });
+
+    it('It should login with email and password', (done) => {
+        chai.request(app)
+          .post('/api/v1/users/signin')
+          .send({ email: existingUser.email, password: 'isbernard2001@gmail.com' })
+          .end((err, response) => {
+            response.should.have.status(200);
+            done();
+          });
+      });
+      it('It should not login with Invalid password', (done) => {
+        chai.request(app)
+          .post('/api/v1/users/signin')
+          .send({ email: 'bernie@gmail.com', password: 123456789 })
+          .end((err, response) => {
+            response.should.have.status(400);
+            done();
+          });
+      });
+
+      it('It should not login with null password', (done) => {
+        chai.request(app)
+          .post('/api/v1/users/signin')
+          .send({ email: 'alexisvacilli10@gmail.com', password: null })
+          .end((err, response) => {
+            response.should.have.status(400);
+            done();
+          });
+      });
+      it('It should not login with null email', (done) => {
+        chai.request(app)
+          .post('/api/v1/users/signin')
+          .send({ email: null, password: 'password' })
+          .end((err, response) => {
+            response.should.have.status(400);
+            done();
+          });
+      });
+      it('should not login with unregistred email', (done) => {
+        chai.request(app)
+          .post('/api/v1/users/signin')
+          .send({ email: 'vacilli@gmail.com', password: 'password' })
+          .end((err, response) => {
+            response.should.have.status(404);
+            done();
+          });
+      });
 });
