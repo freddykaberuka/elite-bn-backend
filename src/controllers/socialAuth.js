@@ -10,7 +10,6 @@ class Social {
         let userGot;
         let google = null;
         let facebook = null;
-        console.log(".............................", req.user)
         const column = `${req.user.provider}`;
         if (column === 'google') {
           google = req.user.id;
@@ -39,7 +38,7 @@ class Social {
           Action = 'Redirected by Email';
           status = 301;
         } else {
-          console.log(".............................", req.user)
+          
           const newUser = {
             firstName: req.user.name.familyName,
             lastName: req.user.name.givenName,

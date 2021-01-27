@@ -16,16 +16,29 @@ module.exports = (sequelize, DataTypes) => {
   User.init({
     email: DataTypes.STRING,
     password: DataTypes.STRING,
-    isVerified: DataTypes.BOOLEAN,
+    isVerified: {
+      type: DataTypes.STRING,
+      defaultValue: false
+    },
     firstName: DataTypes.STRING,
     lastName: DataTypes.STRING,
-    googleId: DataTypes.STRING,
-    facebookId: DataTypes.STRING,
+    token: {
+      type: DataTypes.TEXT,
+      allowNull: true
+    },
+    role: {
+      type: DataTypes.STRING,
+      defaultValue: 'requester'
+    },
+    googleId: {
+      type: DataTypes.STRING
+    },
+    facebookId: {
+      type: DataTypes.STRING
+    }
   }, {
     sequelize,
     modelName: 'User',
   });
   return User;
 };
-
-

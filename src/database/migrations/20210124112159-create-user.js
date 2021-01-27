@@ -23,6 +23,12 @@ module.exports = {
       lastName: {
         type: Sequelize.STRING
       },
+      token: {
+        type: Sequelize.TEXT
+      },
+      role: {
+        type: Sequelize.STRING
+      },
       googleId: {
         type: Sequelize.STRING
       },
