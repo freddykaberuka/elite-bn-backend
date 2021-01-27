@@ -10,7 +10,6 @@ class Social {
         let userGot;
         let google = null;
         let facebook = null;
-        console.log(".............................", req.user)
         const column = `${req.user.provider}`;
         if (column === 'google') {
           google = req.user.id;
