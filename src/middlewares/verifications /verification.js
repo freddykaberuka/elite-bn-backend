@@ -30,7 +30,7 @@ export default class verifications {
     }
   }
 
-  static async tokenValid(req, res, next) {-
+  static async tokenValid(req, res, next) {
     try {
       const decoded = await decodeToken(req.params.token);
       const { error } = tokenValid.validate(decoded);
