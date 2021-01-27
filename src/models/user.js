@@ -18,10 +18,14 @@ module.exports = (sequelize, DataTypes) => {
     password: DataTypes.STRING,
     isVerified: DataTypes.BOOLEAN,
     firstName: DataTypes.STRING,
-    lastName: DataTypes.STRING
+    lastName: DataTypes.STRING,
+    googleId: DataTypes.STRING,
+    facebookId: DataTypes.STRING,
   }, {
     sequelize,
     modelName: 'User',
   });
   return User;
 };
+
+
