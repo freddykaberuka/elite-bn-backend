@@ -13,5 +13,6 @@ router.get('/auth/google/callback', passport.authenticate('google'), Social.Oaut
 router.get('/oauth/google', passport.authenticate('google', {scope: ['profile', 'email']}));
 router.get('/oauth/facebook/', passport.authenticate('facebook', {scope: ['public_profile', 'email']}));
 router.get('/facebook/callback', passport.authenticate('facebook'), Social.Oauth);
+router.get('/logout/:token', validateUserData.logOutVerification, UserController.logOut);
 export default router;
 
