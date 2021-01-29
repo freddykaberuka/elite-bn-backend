@@ -96,9 +96,7 @@ class User {
         try {
          const profileImage = await uploadToCloud(req.file, res);
           const { id } = req.userData;
-         // const {firstName, lastName, email, preferedLanguage, officeAddress,} = req.body;
-       // const {profilePicture}= profileImage.url;
-         // console.log('<!><><><><><><><><><><>><><><><><><><><><>', profilePicture)
+     
           const userExist = await userServices.findById(id);
           if (userExist) {
             const update = await userServices.updateAtt({
