@@ -30,6 +30,18 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       defaultValue: 'requester'
     },
+    profilePicture:{
+      type: DataTypes.STRING,
+    },
+    officeAddres: {
+      type: DataTypes.STRING
+    },
+    preferedLanguage: {
+      type: DataTypes.STRING
+    },
+    lineManager: {
+    type:  DataTypes.INTEGER
+    },
     googleId: {
       type: DataTypes.STRING
     },

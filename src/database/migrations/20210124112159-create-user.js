@@ -29,6 +29,18 @@ module.exports = {
       role: {
         type: Sequelize.STRING
       },
+      profilePicture:{
+        type:Sequelize.STRING,
+      },
+      officeAddres: {
+        type:Sequelize.STRING
+      },
+      preferedLanguage: {
+        type:Sequelize.STRING
+      },
+      lineManager: {
+      type: Sequelize.INTEGER
+      },
       googleId: {
         type: Sequelize.STRING
       },
