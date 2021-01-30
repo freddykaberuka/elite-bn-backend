@@ -10,7 +10,7 @@ import dotenv from 'dotenv';
 import bcrypt from 'bcrypt';
 
 dotenv.config();
-const util = new Util();
+const util = new Util();      
 
 class UserValidator {
     static createUser = (req, res, next) => {
