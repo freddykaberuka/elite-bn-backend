@@ -24,9 +24,8 @@ export default class RolePermission {
       util.setSuccess(200, 'Role_permission permission created', createdRoleperm);
       return util.send(res);
     } catch (error) {
-       util.setError(500, 'Role_permission not created');
-       return util.send(res);
-     
+      util.setError(500, 'Role_permission not created');
+      return util.send(res);
     }
   }
 
@@ -41,7 +40,6 @@ export default class RolePermission {
       return util.send(res);
     }
   }
-
 
   static async updateRolePerm(req, res) {
     try {
