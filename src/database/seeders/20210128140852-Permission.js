@@ -3,82 +3,82 @@ module.exports = {
     'Permissions',
     [
       {
-        permissionName: 'viewTheirTravelRequests',
+        permissionName: 'view_t_request',
         createdAt: new Date(),
         updatedAt: new Date()
       },
       {
-        permissionName: 'editTheirTravelRequests',
+        permissionName: 'edit_t_request',
         createdAt: new Date(),
         updatedAt: new Date()
       },
       {
-        permissionName: 'createTravelRequests',
+        permissionName: 'create_t_request',
         createdAt: new Date(),
         updatedAt: new Date()
       },
       {
-        permissionName: 'cancelTheirTravelRequests',
+        permissionName: 'cancel_t_request',
         createdAt: new Date(),
         updatedAt: new Date()
       },
       {
-        permissionName: 'editTheirProfile',
+        permissionName: 'edit_profile',
         createdAt: new Date(),
         updatedAt: new Date()
       },
       {
-        permissionName: 'bookAccomodations',
+        permissionName: 'book_accomodation',
         createdAt: new Date(),
         updatedAt: new Date()
       },
       {
-        permissionName: 'viewTheirDirectReportsTravelRequests',
+        permissionName: 'view_reports',
         createdAt: new Date(),
         updatedAt: new Date()
       },
       {
-        permissionName: 'rejectTheirDirectReportsTravelRequests',
+        permissionName: 'reject_reports',
         createdAt: new Date(),
         updatedAt: new Date()
       },
       {
-        permissionName: 'approveTheirDirectReportsTravelRequests',
+        permissionName: 'approve_reports',
         createdAt: new Date(),
         updatedAt: new Date()
       },
       {
-        permissionName: 'assignRequestersToManager',
+        permissionName: 'assign_requesters_to_manager',
         createdAt: new Date(),
         updatedAt: new Date()
       },
       {
-        permissionName: 'createAccommodations',
+        permissionName: 'c_accomodation',
         createdAt: new Date(),
         updatedAt: new Date()
       },
       {
-        permissionName: 'deleteAccommodations',
+        permissionName: 'd_accomodation',
         createdAt: new Date(),
         updatedAt: new Date()
       },
       {
-        permissionName: 'updateAccommodations',
+        permissionName: 'u_accomodation',
         createdAt: new Date(),
         updatedAt: new Date()
       },
       {
-        permissionName: 'createLocations',
+        permissionName: 'c_location',
         createdAt: new Date(),
         updatedAt: new Date()
       },
       {
-        permissionName: 'updateLocations',
+        permissionName: 'u_location',
         createdAt: new Date(),
         updatedAt: new Date()
       },
       {
-        permissionName: 'deleteLocations',
+        permissionName: 'd_location',
         createdAt: new Date(),
         updatedAt: new Date()
       }

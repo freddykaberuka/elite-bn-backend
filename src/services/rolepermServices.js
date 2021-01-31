@@ -17,7 +17,11 @@ class rolePermService {
   static getRolePermissions() {
     return rolepermission.findAll();
   }
-
+  static findPermByRole(roleId) {
+    return rolepermission.findOne({
+      where: { role_id : modelId}
+    })
+  }
   static createRolePermission(newrolePermission) {
     return rolepermission.create(newrolePermission);
   }

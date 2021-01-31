@@ -1,7 +1,7 @@
 import models from '../models';
 
 const { Role } = models;
-
+const { Permission } = models;
 class RoleService {
   static createRole(newRole) {
     return Role.create(newRole);
@@ -14,7 +14,14 @@ class RoleService {
   }
 
   static getRoles() {
-    return Role.findAll();
+    return Role.findAll({
+      include: [
+        {
+          model: Permission,
+          as: 'permissions'
+        },
+      ],
+    });
   }
 
   static findByName(prop) {
@@ -24,8 +31,13 @@ class RoleService {
   }
 
   static findById(modelId) {
-    return Role.findOne({
-      where: { id: modelId },
+    return Role.findByPk(modelId, {
+      include: [
+        {
+          model: Permission,
+          as: 'permissions'
+        },
+      ],
     });
   }
 
