@@ -1,6 +1,8 @@
 /*eslint-disable */
 import SignUpValidationSchema from '../../helpers/validateSchemas/SignupValidationSchema';
-import SignInValidationSchema from '../../helpers/validateSchemas/signInValidationSchema'
+import SignInValidationSchema from '../../helpers/validateSchemas/signInValidationSchema';
+import forgetpassValidationSchema from '../../helpers/validateSchemas/forgetpassValidationSchema';
+import resetpassValidationSchema from '../../helpers/validateSchemas/resetpassValidationSchema';
 import Util from '../../helpers/utils';
 import userSchema from '../../models/user';
 import userServices from '../../services/userService';

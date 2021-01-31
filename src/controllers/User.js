@@ -2,6 +2,7 @@ import Util from '../helpers/utils';
 import userServices from '../services/userService';
 import sendEmail from '../services/emailService';
 import emailTemplate from '../services/template/sendEmail';
+import passwordTemplate from '../services/template/passwordTemplate';
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
 import dotenv from 'dotenv';
@@ -91,6 +92,50 @@ class User {
             return util.send(res);
         }
     }
+    // forget password
 
+    static forgetpassword = async (req, res) => {
+        const {email}=req.body;
+        const generateToken = (payloads) => {
+            const token = jwt.sign(payloads, process.env.PRIVATE_KEY, { expiresIn: '1d' });
+            return token;
+          };
+          const token=generateToken({email});
+
+        const subject = 'Reset Password for Barefoot Nomad';
+        const url=`${process.env.PASSWORD_RESET_URL}`;
+        sendEmail(passwordTemplate(token, url, email), subject, email);
+        const message = `Dear , A reset Password has been sent to you email please go and click the link.`;
+        const data = {
+          id: email,
+          token
+        };
+       util.setSuccess(200, message, data);
+       return util.send(res);
+  }
+
+  // reset password
+
+  static resetpassword = async(req,res) =>{
+    const token = req.params.newToken;
+    try{
+        const  decodeToken = (token) => {
+            const payload = jwt.verify(token, process.env.PRIVATE_KEY);
+            return payload;
+          };
+        const user = decodeToken(token);
+        const exists = await userServices.findByEmail(user.email);
+        
+        // const token = jwt.sign(process.env.PRIVATE_KEY, { expiresIn: '1d' });
+        // const email = jwt.verify(token, process.env.PRIVATE_KEY);
+        const { password} = req.body;
+        const passwordEncoder = PasswordManip.hashPassword(password);
+        const updatePassword = await exists.update( {password: passwordEncoder });
+        return res.status(200).json({message:'password was reseted successful'});
+        // return token;
+      }catch(error) {
+          return res.status(500).json({message: error.message});
+      }       
+  }
 }
     module.exports = User;
