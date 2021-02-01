@@ -8,8 +8,8 @@ import Social from '../../../controllers/socialAuth';
 const router = express.Router();
 router.post('/signup', validateUserData.createUser, validateUserData.verifyIfEmailisAvailable ,UserController.signUp);
 router.post('/signin', validateUserData.validateUserSigninData, validateUserData.verifySignin, UserController.signIn)
-router.post('/forgotPassword', UserController.forgetpassword);
-router.put('/resetpassword/:newToken',UserController.resetpassword);
+router.post('/forgotPassword', validateUserData.verifyForgetPass, UserController.forgetpassword);
+router.put('/resetpassword/:newToken', UserController.resetpassword);
 router.get('/verifyEmail/:token', validateUserData.verificationValidation ,UserController.accountVerification);
 router.get('/auth/google/callback', passport.authenticate('google'), Social.Oauth);
 router.get('/oauth/google', passport.authenticate('google', {scope: ['profile', 'email']}));

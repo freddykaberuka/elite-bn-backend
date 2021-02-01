@@ -95,6 +95,16 @@ class UserValidator {
 
             
     }
+    static verifyForgetPass = async (req, res, next) => {
+            const {error} = await forgetpassValidationSchema.validate(req.body);
+            if(error){
+                util.setError(400, error);
+                return util.send(res);
+            }
+            return next();
+        }
+  
+    
 }
 
 export default UserValidator;

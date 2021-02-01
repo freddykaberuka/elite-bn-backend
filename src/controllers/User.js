@@ -126,13 +126,15 @@ class User {
         const user = decodeToken(token);
         const exists = await userServices.findByEmail(user.email);
         
-        // const token = jwt.sign(process.env.PRIVATE_KEY, { expiresIn: '1d' });
-        // const email = jwt.verify(token, process.env.PRIVATE_KEY);
-        const { password} = req.body;
-        const passwordEncoder = PasswordManip.hashPassword(password);
-        const updatePassword = await exists.update( {password: passwordEncoder });
-        return res.status(200).json({message:'password was reseted successful'});
-        // return token;
+        
+        const password = req.body;
+        
+        if (password) {
+            const salt = bcrypt.genSaltSync(12);
+            const hash = bcrypt.hashSync(req.body.password, salt);
+            await exists.update( {password: hash });
+            return res.status(200).json({message:'password was reseted successful'});
+        }
       }catch(error) {
           return res.status(500).json({message: error.message});
       }       
