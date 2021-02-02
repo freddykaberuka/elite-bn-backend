@@ -1,24 +1,38 @@
 import jwtDecode from 'jwt-decode';
-import util from '../helpers/utils';
-import roleService from '../services/roleService';
+import Util from '../helpers/utils';
+import rolePermServices from '../services/rolePermServices';
+import permissionServices from '../services/permissionServices';
 
+const util = new Util();
 class authorization {
   static async userAuthorize(req, res, next) {
     const authToken = req.headers;
-    const { permissionname } = authToken;
-    console.log('.....................................');
-    console.log(permissionname);
-    console.log('.....................................');
+    
     if (!authToken) {
-      util.setError(500, 'Access denied');
+      util.setError(401, 'login first to continue');
       return util.send(res);
     }
     const token = authToken.authorization.replace('Bearer ', '');
     const userRoleId = jwtDecode(token).roleId;
-    const permissions = await roleService.findById(3);
-    return res.send(permissions);
+    if(userRoleId == 1){
+      next();
+    }
+    const { permission_name } = authToken;
+    const permissions = await rolePermServices.findPermByRolrId(userRoleId);
+    let permissionIds =[];
+    permissions.forEach(element => {
+      permissionIds.push(element.permission_id);
+    }); 
     
-    return res.send('workin');
+    const permission = await permissionServices.findPermIbByPermName(permission_name)
+    const permissionId = permission.id;
+    const allowed = permissionIds.indexOf(permissionId);
+    
+    if (allowed == -1) {
+      util.setError(401,"you are not allowed to perform this task")
+      return util.send(res)
+    }
+    next();
   }
 }
 

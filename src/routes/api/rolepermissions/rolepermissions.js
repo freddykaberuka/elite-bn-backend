@@ -1,13 +1,15 @@
 import express from 'express';
 import rolesPermController from '../../../controllers/rolepermission';
+import authorize from '../../../middlewares/userAuthorization';
 
 const router = express.Router();
 
-router.get('/', rolesPermController.allRolePermission);
-router.post('/save', rolesPermController.saveRolePerm);
-router.get('/findById/:id', rolesPermController.findRolePerm);
-router.get('/findByPermByRole/:id', rolesPermController.findPermByRole);
-router.patch('/update/:id', rolesPermController.updateRolePerm);
-router.delete('/delete/:id', rolesPermController.deleteRolePerm);
+router
+        .get('/',authorize.userAuthorize, rolesPermController.allRolePermission)
+        .post('/save',authorize.userAuthorize, rolesPermController.saveRolePerm)
+        .get('/findById/:id',authorize.userAuthorize, rolesPermController.findRolePerm)
+        .get('/findByPermByRole/:id',authorize.userAuthorize, rolesPermController.findPermByRole)
+        .patch('/update/:id',authorize.userAuthorize, rolesPermController.updateRolePerm)
+        .delete('/delete/:id',authorize.userAuthorize, rolesPermController.deleteRolePerm);
 
 export default router;

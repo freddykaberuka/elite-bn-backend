@@ -45,7 +45,7 @@ module.exports = (sequelize, DataTypes) => {
     },
     roleId: {
       type: DataTypes.INTEGER,
-      defaultValue: 'requester'
+      defaultValue: '4'
     },
     googleId: {
       type: DataTypes.STRING

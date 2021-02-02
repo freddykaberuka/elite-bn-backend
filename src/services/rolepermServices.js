@@ -45,6 +45,12 @@ class rolePermService {
     });
   }
 
+  static findPermByRolrId(roleId) {
+    return rolepermission.findAll({
+      where: { role_id: roleId },
+    });
+  }
+
   static deletePermission(modelId) {
     return rolepermission.drop({
       where: { id: modelId },
