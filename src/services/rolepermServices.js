@@ -52,7 +52,7 @@ class rolePermService {
   }
 
   static deletePermission(modelId) {
-    return rolepermission.drop({
+    return rolepermission.destroy({
       where: { id: modelId },
     });
   }
