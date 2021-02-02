@@ -95,13 +95,36 @@ class UserValidator {
 
             
     }
-    static verifyForgetPass = async (req, res, next) => {
-            const {error} = await forgetpassValidationSchema.validate(req.body);
-            if(error){
-                util.setError(400, error);
+    static verificationResetValidation = async (req, res, next) => {
+        try {
+            const {
+                token
+            } = req.params;
+            const decodeToken = jwt.verify(token, process.env.PRIVATE_KEY);
+            const getUser = await userServices.findByProp({
+                email: decodeToken.email
+            });
+            next();
+        } catch (error) {
+            const Error = 'The token has expired';
+            util.setError(410, Error);
+            return util.send(res);
+        }
+    }
+ 
+        static verifyEmail = async (req, res, next) => {
+            try{
+             const email = req.body;
+             const getUser = await userServices.findByEmail(req.body.email);
+             if(!getUser){
+                 util.setError(404,'Incorrect email address');
+                 return util.send(res);
+             }
+             return next();
+            }catch(error){
+                util.setError(500,error.message);
                 return util.send(res);
             }
-            return next();
         }
   
     

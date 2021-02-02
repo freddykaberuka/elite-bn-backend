@@ -96,22 +96,28 @@ class User {
 
     static forgetpassword = async (req, res) => {
         const {email}=req.body;
-        const generateToken = (payloads) => {
-            const token = jwt.sign(payloads, process.env.PRIVATE_KEY, { expiresIn: '1d' });
-            return token;
-          };
-          const token=generateToken({email});
+        try{
+            
+            const generateToken = (payloads) => {
+                const token = jwt.sign(payloads, process.env.PRIVATE_KEY, { expiresIn: '1d' });
+                  return token;
+            };
+            const token=generateToken({email});
 
-        const subject = 'Reset Password for Barefoot Nomad';
-        const url=`${process.env.PASSWORD_RESET_URL}`;
-        sendEmail(passwordTemplate(token, url, email), subject, email);
-        const message = `Dear , A reset Password has been sent to you email please go and click the link.`;
-        const data = {
-          id: email,
-          token
-        };
-       util.setSuccess(200, message, data);
-       return util.send(res);
+            const subject = 'Reset Password for Barefoot Nomad';
+            const url=`${process.env.PASSWORD_RESET_URL}`;
+            sendEmail(passwordTemplate(token, url, email), subject, email);
+            const message = `Dear , A reset Password has been sent to you email please go and click the link.`;
+            const data = {
+                id: email,
+                token
+            };
+            util.setSuccess(200, message, data);
+            return util.send(res);
+        }catch(error){
+          util.setError(500,error.message);
+          return util.send(res);
+    }
   }
 
   // reset password
@@ -130,7 +136,7 @@ class User {
         const password = req.body;
         
         if (password) {
-            const salt = bcrypt.genSaltSync(12);
+            const salt = bcrypt.genSaltSync(10);
             const hash = bcrypt.hashSync(req.body.password, salt);
             await exists.update( {password: hash });
             return res.status(200).json({message:'password was reseted successful'});
