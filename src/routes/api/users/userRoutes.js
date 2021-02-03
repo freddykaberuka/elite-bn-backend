@@ -15,3 +15,4 @@ router.get('/oauth/facebook/', passport.authenticate('facebook', {scope: ['publi
 router.get('/facebook/callback', passport.authenticate('facebook'), Social.Oauth);
 export default router;
 
+// https://elite-staging.herokuapp.com/api/v1/users/auth/google/callback

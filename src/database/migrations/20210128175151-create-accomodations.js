@@ -1,38 +1,33 @@
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('Users', {
+    await queryInterface.createTable('Accomodations', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      email: {
+      name: {
         type: Sequelize.STRING
       },
-      password: {
-        type: Sequelize.STRING
-      },
-      isVerified: {
-        type: Sequelize.BOOLEAN
-      },
-      firstName: {
-        type: Sequelize.STRING
-      },
-      lastName: {
-        type: Sequelize.STRING
-      },
-      token: {
+      description: {
         type: Sequelize.TEXT
       },
-      role: {
+      location_id: {
+        type: Sequelize.INTEGER
+      },
+      cost: {
+        type: Sequelize.DOUBLE
+      },
+      image: {
         type: Sequelize.STRING
       },
-      googleId: {
-        type: Sequelize.STRING
+      facilities: {
+        type: Sequelize.ARRAY(Sequelize.STRING),
       },
-      facebookId: {
-        type: Sequelize.STRING
+      roomSize: {
+        type: Sequelize.INTEGER,
+        defaultValue: 0
       },
       createdAt: {
         allowNull: false,
@@ -45,6 +40,6 @@ module.exports = {
     });
   },
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable('Users');
+    await queryInterface.dropTable('Accomodations');
   }
 };
