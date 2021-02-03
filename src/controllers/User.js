@@ -111,7 +111,7 @@ class User {
             util.setSuccess('200', 'user profile updated');
             return util.send(res);
           }
-          util.setError(400, 'The user doesn\'t exist');
+          util.setError(404, 'The user doesn\'t exist');
           return util.send(res);
         } catch (error) {
           util.setError(500, error.message);

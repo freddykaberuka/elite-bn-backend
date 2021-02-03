@@ -1,4 +1,3 @@
-'use strict';
 module.exports = {
   up: async (queryInterface, Sequelize) => {
     await queryInterface.createTable('Users', {
@@ -29,17 +28,17 @@ module.exports = {
       role: {
         type: Sequelize.STRING
       },
-      profilePicture:{
-        type:Sequelize.STRING,
+      profilePicture: {
+        type: Sequelize.STRING,
       },
       officeAddres: {
-        type:Sequelize.STRING
+        type: Sequelize.STRING
       },
       preferedLanguage: {
-        type:Sequelize.STRING
+        type: Sequelize.STRING
       },
       lineManager: {
-      type: Sequelize.INTEGER
+        type: Sequelize.INTEGER
       },
       googleId: {
         type: Sequelize.STRING

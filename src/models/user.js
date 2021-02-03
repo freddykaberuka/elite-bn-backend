@@ -1,7 +1,7 @@
-'use strict';
 const {
   Model
 } = require('sequelize');
+
 module.exports = (sequelize, DataTypes) => {
   class User extends Model {
     /**
@@ -12,7 +12,7 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
     }
-  };
+  }
   User.init({
     email: DataTypes.STRING,
     password: DataTypes.STRING,
@@ -30,7 +30,7 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       defaultValue: 'requester'
     },
-    profilePicture:{
+    profilePicture: {
       type: DataTypes.STRING,
     },
     officeAddres: {
@@ -40,7 +40,7 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING
     },
     lineManager: {
-    type:  DataTypes.INTEGER
+      type: DataTypes.INTEGER
     },
     googleId: {
       type: DataTypes.STRING

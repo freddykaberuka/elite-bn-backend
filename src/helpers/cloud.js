@@ -1,8 +1,9 @@
 import cloudinary from 'cloudinary';
 import dotenv from 'dotenv';
-import Util from '../helpers/utils';
+import Util from './utils';
 
 dotenv.config();
+const util = new Util();
 cloudinary.v2;
 cloudinary.config({
   cloud_name: process.env.CLOUDNAME,
@@ -17,7 +18,7 @@ export const uploadToCloud = async (file, res) => {
     });
     return profilePicture;
   } catch (error) {
-    util.setError(500, err.message);
+    util.setError(500, error.message);
     return util.send(res);
   }
 };

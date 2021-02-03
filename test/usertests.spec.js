@@ -18,6 +18,7 @@ const existingUser = {
 }
 
 let token = null;
+let userid= null;
 
 describe('User tests', ()=>{
     it('Should create a new account', (done)=>{
@@ -124,6 +125,8 @@ describe('User tests', ()=>{
           .send({ email: existingUser.email, password: 'isbernard2001@gmail.com' })
           .end((err, response) => {
             response.should.have.status(200);
+            token = response.body.data.token;
+            userid = response.body.data.userInfo.id;
             done();
           });
       });
@@ -165,3 +168,7 @@ describe('User tests', ()=>{
           });
       });
 });
+export {
+  token,
+  userid
+};

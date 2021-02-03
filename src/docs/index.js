@@ -1,19 +1,17 @@
-import dotenv from 'dotenv';
-import welcome from './welcome';
+import swaggerJSDoc from 'swagger-jsdoc';
 
-dotenv.config();
-
-const paths = { ...welcome };
-const config = {
-  info: {
-    title: 'elite-bn-backend',
-    version: '1.0.0',
-    description: 'Make company global travel and accommodation easy and convenient for the strong workforce of savvy members of staff, by leveraging the modern web',
+const swaggerOptions = {
+  swaggerDefinition: {
+    info: {
+      title: 'Barefoot nomad',
+      version: '1.0.0',
+      description: 'Welcome to Barefoot Nomad global travel and accommodation easy',
+      servers: ['https://localhost:'],
+    },
   },
-  host: process.env.HOST,
-  basePath: '/',
-  schemes: ['http', 'https'],
-  paths
+  apis: ['src/docs/*.js'],
 };
 
-export default config;
+const swaggerDocs = swaggerJSDoc(swaggerOptions);
+
+export default swaggerDocs;
