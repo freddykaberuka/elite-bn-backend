@@ -94,22 +94,26 @@ class UserValidator {
     }
     static logOutVerification = async(req, res, next)=>{
       try{
-        const {
-            token
-        } = req.params;
+        const token = String(req.headers['authorization']).split(' ')[1];
+        /*Reading the token from headers
+        Verifying and decoding the token
+        Check the decoded the token if it has the email in it
+        Check if the email address exists in the DB
+        */
         const decodeToken = jwt.verify(token, process.env.PRIVATE_KEY);
-        const getUserWithToken = await userServices.findByProp({email: decodeToken.email});
-        const tempFullName = String(getUserWithToken[0].dataValues.firstName) + " " + String(getUserWithToken[0].dataValues.lastName);
-        if(tempFullName != decodeToken.fullName){
-            util.setError(403, 'Logout unsuccessful');
+        const getUserWithToken = await userServices.findByEmail(decodeToken.email);
+
+        if(getUserWithToken.dataValues.id != decodeToken.id){
+            util.setError(403, "Logout Unsuccesful");
             return util.send(res);
         }
         return next(); 
       }catch(error){
-        util.setError(403, "Invalid token");
+        util.setError(403, error);
         return util.send(res);
       }
     }
+    
 }
 
 export default UserValidator;
