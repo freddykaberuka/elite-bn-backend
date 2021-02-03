@@ -114,20 +114,40 @@ class UserValidator {
  
         static verifyEmail = async (req, res, next) => {
             try{
-             const email = req.body;
-             const getUser = await userServices.findByEmail(req.body.email);
+             const {email} = req.body;
+             const getUser = await userServices.findByEmail(email);
              if(!getUser){
-                 util.setError(404,'Incorrect email address');
+                 util.setError(404,'Email doesn\'t exist');
                  return util.send(res);
              }
+             req.user = getUser;
              return next();
             }catch(error){
                 util.setError(500,error.message);
                 return util.send(res);
             }
         }
-  
-    
+        static validateResetPasswordData = async (req, res, next) => {
+          const {newToken} = req.params;
+          const {password} =req.body;
+          try{
+            const decodeToken = jwt.verify(newToken, process.env.PRIVATE_KEY);
+            const getUser = await userServices.findByProp({
+                email: decodeToken.email
+            });
+            if(!password){
+                util.setError(400,'New Password is missing');
+                return util.send(res);
+            }
+          req.user=decodeToken;
+          
+          return next();
+            }catch(error){
+                util.setError(500,error.message);
+                return util.send(res);
+            }
+        }
+            
 }
 
 export default UserValidator;

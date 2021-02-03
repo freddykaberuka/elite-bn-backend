@@ -18,7 +18,6 @@ const existingUser = {
 }
 
 let token = null;
-
 describe('User tests', ()=>{
     it('Should create a new account', (done)=>{
         chai.request(app)
@@ -161,6 +160,68 @@ describe('User tests', ()=>{
           .send({ email: 'vacilli@gmail.com', password: 'password' })
           .end((err, response) => {
             response.should.have.status(404);
+            done();
+          });
+      });
+
+      //forget password
+
+      it('should send an reset password link to email', (done) => {
+        chai.request(app)
+          .post('/api/v1/users/forgotPassword')
+          .send({ email: existingUser.email})
+          .end((err, response) => {
+            response.should.have.status(200);
+            response.body.should.have.property('data');
+            response.body.should.have.property('message');
+            token = response.body.data.token;
+            done();
+          });
+      });
+      it('should not send an reset password link to unregistered email', (done) => {
+        chai.request(app)
+          .post('/api/v1/users/forgotPassword')
+          .send({email:'fred@gmail.com'})
+          .end((err, response) => {
+            response.should.have.status(404);
+            response.body.should.have.property('message');
+            done();
+          });
+      });
+
+      // reset password  
+
+      it('should reset password and update it to the Database', (done) => {
+        chai.request(app)
+          .put(`/api/v1/users/resetpassword/${token}`)
+          .send({password: 'password10'})
+          .end((err, response) => {
+            response.should.have.status(200);
+            response.body.should.be.a('object');
+            response.body.should.have.property('message');
+            done();
+          });
+      });
+
+      it('It should  not the reset password without new password', (done) => {
+        chai.request(app)
+          .put(`/api/v1/users/resetpassword/${token}`)
+          .end((err, response) => {
+            response.should.have.status(400);
+            response.body.should.be.a('object');
+            response.body.should.have.property('message');
+            done();
+          });
+      });
+
+      it('It should  not the reset password with empty password', (done) => {
+        chai.request(app)
+          .put(`/api/v1/users/resetpassword/${token}`)
+          .send({password: null })
+          .end((err, response) => {
+            response.should.have.status(400);
+            response.body.should.be.a('object');
+            response.body.should.have.property('message');
             done();
           });
       });

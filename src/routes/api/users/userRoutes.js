@@ -9,8 +9,8 @@ const router = express.Router();
 router
       .post('/signup', validateUserData.createUser, validateUserData.verifyIfEmailisAvailable ,UserController.signUp)
       .post('/signin', validateUserData.validateUserSigninData, validateUserData.verifySignin, UserController.signIn)
-      .post('/forgotPassword', validateUserData.verifyEmail, UserController.forgetpassword)
-      .put('/resetpassword/:newToken', UserController.resetpassword)
+      .post('/forgotPassword', validateUserData.verifyEmail, UserController.forgetPassword)
+      .put('/resetpassword/:newToken', validateUserData.validateResetPasswordData, UserController.resetPassword)
       .get('/verifyEmail/:token', validateUserData.verificationValidation ,UserController.accountVerification)
       .get('/auth/google/callback', passport.authenticate('google'), Social.Oauth)
       .get('/oauth/google', passport.authenticate('google', {scope: ['profile', 'email']}))

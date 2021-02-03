@@ -94,20 +94,15 @@ class User {
     }
     // forget password
 
-    static forgetpassword = async (req, res) => {
+    static forgetPassword = async (req, res) => {
         const {email}=req.body;
         try{
             
-            const generateToken = (payloads) => {
-                const token = jwt.sign(payloads, process.env.PRIVATE_KEY, { expiresIn: '1d' });
-                  return token;
-            };
-            const token=generateToken({email});
-
+            const token = jwt.sign( { email }, process.env.PRIVATE_KEY, { expiresIn: '1d' });
             const subject = 'Reset Password for Barefoot Nomad';
             const url=`${process.env.PASSWORD_RESET_URL}`;
             sendEmail(passwordTemplate(token, url, email), subject, email);
-            const message = `Dear , A reset Password has been sent to you email please go and click the link.`;
+            const message = `Dear ${req.user.dataValues.firstName},A reset Password link has been sent to you email please go and click the link.`;
             const data = {
                 id: email,
                 token
@@ -122,28 +117,16 @@ class User {
 
   // reset password
 
-  static resetpassword = async(req,res) =>{
-    const token = req.params.newToken;
+  static resetPassword = async(req,res) =>{
+      const {email} = req.user;
     try{
-        const  decodeToken = (token) => {
-            const payload = jwt.verify(token, process.env.PRIVATE_KEY);
-            return payload;
-          };
-        const user = decodeToken(token);
-        const exists = await userServices.findByEmail(user.email);
-        
-        
-        const password = req.body;
-        
-        if (password) {
-            const salt = bcrypt.genSaltSync(10);
-            const hash = bcrypt.hashSync(req.body.password, salt);
-            await exists.update( {password: hash });
-            return res.status(200).json({message:'password was reseted successful'});
-        }
+        const password = await bcrypt.hash(req.body.password, 10);
+        await userServices.updateAtt({password},{email});
+        util.setSuccess(200,'Password changed successfully ');
+        return util.send(res);
       }catch(error) {
-          return res.status(500).json({message: error.message});
+          util.setError(500,error.message);
       }       
   }
 }
-    module.exports = User;
+export default User;
