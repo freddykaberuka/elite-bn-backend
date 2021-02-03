@@ -14,5 +14,7 @@
  *         description: Success  
  *       "403":
  *         description: "Logout unsuccesful"
+ *       "500":
+ *         description: "Unknown error"
  *            
  */
