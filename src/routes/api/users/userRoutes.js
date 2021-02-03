@@ -25,3 +25,4 @@ router
 
 export default router;
 
+// https://elite-staging.herokuapp.com/api/v1/users/auth/google/callback
