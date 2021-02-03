@@ -1,19 +1,17 @@
-import dotenv from 'dotenv';
-import welcome from './welcome';
+import swaggerJSDoc from 'swagger-jsdoc';
 
-dotenv.config();
-
-const paths = { ...welcome };
-
-const config = {
+const swaggerOptions = {
   swaggerDefinition: {
     info: {
-      title: "Bernard Portfolio API",
+      title: 'Barefoot nomad',
       version: '1.0.0',
+      description: 'Welcome to Barefoot Nomad global travel and accommodation easy',
+      servers: ['https://localhost:'],
     },
   },
-  apis: ["src/docs/*.js"]
+  apis: ['src/docs/*.js'],
 };
 
+const swaggerDocs = swaggerJSDoc(swaggerOptions);
 
-export default config;
+export default swaggerDocs;
