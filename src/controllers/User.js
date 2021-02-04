@@ -6,6 +6,7 @@ import passwordTemplate from '../services/template/passwordTemplate';
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
 import dotenv from 'dotenv';
+import { uploadToCloud } from '../helpers/cloud';
 
 dotenv.config();
 
@@ -92,7 +93,54 @@ class User {
             return util.send(res);
         }
     }
+
+    static async updateProfile(req, res) {
+        try {
+         const profileImage = await uploadToCloud(req.file, res);
+          const { id } = req.userData;
+     
+          const userExist = await userServices.findById(id);
+          if (userExist) {
+            const update = await userServices.updateAtt({
+              firstName: req.body.firstName,
+              lastName: req.body.lastName,
+              email: req.body.email,
+              preferedLanguage: req.body.preferedLanguage,
+              profilePicture: profileImage.url,
+              officeAddres: req.body.officeAddres,
+            }, { id });
+          
+            util.setSuccess('200', 'user profile updated');
+            return util.send(res);
+          }
+          util.setError(404, 'The user doesn\'t exist');
+          return util.send(res);
+        } catch (error) {
+          util.setError(500, error.message);
+          return util.send(res);
+        }
+      }
+      static async getProfile(req, res) {
+        try {
+          const { id } = req.params;
+          const {
+            firstName, lastName, email, profilePicture, preferedLanguage, officeAddres,
+          } = await userServices.findById(id);
+    
+          const userdata = {
+            firstName, lastName, email, profilePicture, preferedLanguage, officeAddres,
+          };
+          const message = 'profile details displayed successfully!';
+          util.setSuccess(200, message, userdata);
+          return util.send(res);
+        } catch (error) {
+          util.setError(500, 'can\'t retrieve the data');
+          return util.send(res);
+        }
+      }
+    
     // forget password
+
 
     static forgetPassword = async (req, res) => {
         const {email}=req.body;
