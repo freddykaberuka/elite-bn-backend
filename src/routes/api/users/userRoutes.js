@@ -18,5 +18,6 @@ router
  .get('/facebook/callback', passport.authenticate('facebook'), Social.Oauth)
  .get('/profile/:id', UserAuthentication, UserController.getProfile)
  .patch('/updateProfile',upload.single('profilePicture'), UserAuthentication, UserController.updateProfile);
+
 export default router;
 
