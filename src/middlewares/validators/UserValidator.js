@@ -147,6 +147,23 @@ class UserValidator {
                 return util.send(res);
             }
         }
+                   
+    static logOutVerification = async(req, res, next)=>{
+        try{
+          const token = String(req.headers['authorization']).split(' ')[1];
+          const decodeToken = jwt.verify(token, process.env.PRIVATE_KEY);
+          const getUserWithToken = await userServices.findByEmail(decodeToken.email);
+  
+          if(getUserWithToken.dataValues.id != decodeToken.id){
+              util.setError(403, "Logout Unsuccesful");
+              return util.send(res);
+          }
+          return next(); 
+        }catch(error){
+          util.setError(403, error);
+          return util.send(res);
+        }
+      }
             
 }
 

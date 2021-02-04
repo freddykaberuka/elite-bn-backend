@@ -229,6 +229,23 @@ describe('User tests', ()=>{
             done();
           });
       });
+      it("Should not logout with invalid token", (done)=>{
+        chai.request(app)
+            .get('/api/v1/users/logout/')
+            .set({ "Authorization": `Bearer somenonexistenttoken` })
+            .end((error, response)=>{
+              expect(response).to.have.status(403);
+              expect(response.body).to.have.property('status');
+              expect(response.body).to.have.property('message');
+              expect(response.body.status).to.equal(403);
+              expect(response.body.message).to.have.property('name');
+              expect(response.body.message).to.have.property('message');
+              expect(response.body.message.message).to.equal('jwt malformed');
+              expect(response.body.message.name).to.equal('JsonWebTokenError'); 
+
+              done();
+            })
+      })
 });
 export {
   token,
