@@ -9,7 +9,7 @@ const util = new Util();
 export const UserAuthentication = async (req, res, next) => {
   try {
     const token = req.headers.authorization;
-    const decoded = await jwt.verify(token, process.env.JWT_SECRET_KEY);
+    const decoded = await jwt.verify(token, process.env.PRIVATE_KEY);
     const loggedIn = await userService.findByProp({ token });
     if (!loggedIn[0]) {
       const Error = 'Login first To continue';
