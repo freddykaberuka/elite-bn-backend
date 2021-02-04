@@ -28,18 +28,10 @@
  *        
  *               
  *      responses:
-<<<<<<< HEAD
-<<<<<<< HEAD
  *       "201":
  *         description: "Account created"  
-=======
  *       "200":
  *         description: Success  
->>>>>>> d9c1ece (ft-logout)
-=======
- *       "201":
- *         description: "Account created"  
->>>>>>> df7af2a (Matching the source code)
  *       "403":
  *         description: "Account creation failed"
  *            
