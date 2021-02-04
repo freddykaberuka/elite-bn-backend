@@ -8,8 +8,12 @@
     "dev": "nodemon --exec babel-node src/index.js",
     "lint": "eslint .",
     "lintfix": "eslint . --fix",
+<<<<<<< HEAD
     "test": "export NODE_ENV=test&& npm run migration:reset && mocha --require @babel/register test/*.spec.js --timeout 500000 --exit || true",
     "test:windows": "set NODE_ENV=test&& npm run migration:reset && mocha --require @babel/register test/*.spec.js --timeout 500000 --exit || true",
+=======
+    "test": "set NODE_ENV=test&& npm run migration:reset && mocha --require @babel/register test/*.spec.js --timeout 500000 --exit || true",
+>>>>>>> 2e9c960 (FT-LOGOUT)
     "build": "rm -rf ./build/ && babel ./src/ -d ./build/src/ && cp -r ./src/models/ ./build/models/ && babel ./src/index.js -d ./build/",
     "coverage": "nyc --reporter=html --reporter=text npm test",
     "coveralls": "npm run coverage && nyc report --reporter=lcov --reporter=text",

@@ -150,11 +150,6 @@ class UserValidator {
     static logOutVerification = async(req, res, next)=>{
       try{
         const token = String(req.headers['authorization']).split(' ')[1];
-        /*Reading the token from headers
-        Verifying and decoding the token
-        Check the decoded the token if it has the email in it
-        Check if the email address exists in the DB
-        */
         const decodeToken = jwt.verify(token, process.env.PRIVATE_KEY);
         const getUserWithToken = await userServices.findByEmail(decodeToken.email);
 

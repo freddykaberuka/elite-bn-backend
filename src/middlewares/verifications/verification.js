@@ -13,8 +13,13 @@ export default class verifications {
       if (user[0]) {
         const payload = {
           userId: user[0].id,
+<<<<<<< HEAD
           email: user[0].email, 
           resetpassword: true, 
+=======
+          email: user[0].email,
+          resetpassword: true,
+>>>>>>> 2e9c960 (FT-LOGOUT)
         };
         const token = await newJwtToken(payload, '1h');
         res.token = token;

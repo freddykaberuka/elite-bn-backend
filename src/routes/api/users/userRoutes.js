@@ -8,6 +8,7 @@ import { UserAuthentication } from '../../../middlewares/auth';
 import {upload} from '../../../helpers/multer';
 
 const router = express.Router();
+<<<<<<< HEAD
 router
  .post('/signup', validateUserData.createUser, validateUserData.verifyIfEmailisAvailable ,UserController.signUp)
  .post('/signin', validateUserData.validateUserSigninData, validateUserData.verifySignin, UserController.signIn)
@@ -20,5 +21,15 @@ router
  .patch('/updateProfile',upload.single('profilePicture'), UserAuthentication, UserController.updateProfile)
  .get('/logout/', validateUserData.logOutVerification, UserController.logOut);
 
+=======
+router.post('/signup', validateUserData.createUser, validateUserData.verifyIfEmailisAvailable ,UserController.signUp);
+router.post('/signin', validateUserData.validateUserSigninData, validateUserData.verifySignin, UserController.signIn)
+router.get('/verifyEmail/:token', validateUserData.verificationValidation ,UserController.accountVerification);
+router.get('/auth/google/callback', passport.authenticate('google'), Social.Oauth);
+router.get('/oauth/google', passport.authenticate('google', {scope: ['profile', 'email']}));
+router.get('/oauth/facebook/', passport.authenticate('facebook', {scope: ['public_profile', 'email']}));
+router.get('/facebook/callback', passport.authenticate('facebook'), Social.Oauth);
+router.get('/logout/:token', validateUserData.logOutVerification, UserController.logOut);
+>>>>>>> 2e9c960 (FT-LOGOUT)
 export default router;
 
