@@ -122,11 +122,11 @@ class User {
         try {
           const { id } = req.params;
           const {
-            firstName, lastName, email,role, profilePicture, preferedLanguage, officeAddres,
+            firstName, lastName, email, profilePicture, preferedLanguage, officeAddres,
           } = await userServices.findById(id);
     
           const userdata = {
-            firstName, lastName, email,role, profilePicture, preferedLanguage, officeAddres,
+            firstName, lastName, email, profilePicture, preferedLanguage, officeAddres,
           };
           const message = 'profile details displayed successfully!';
           util.setSuccess(200, message, userdata);

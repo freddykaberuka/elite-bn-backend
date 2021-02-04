@@ -25,9 +25,6 @@ module.exports = {
       token: {
         type: Sequelize.TEXT
       },
-      role: {
-        type: Sequelize.STRING
-      },
       profilePicture: {
         type: Sequelize.STRING,
       },

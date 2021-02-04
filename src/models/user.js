@@ -26,10 +26,6 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.TEXT,
       allowNull: true
     },
-    role: {
-      type: DataTypes.STRING,
-      defaultValue: 'requester'
-    },
     profilePicture: {
       type: DataTypes.STRING,
     },
