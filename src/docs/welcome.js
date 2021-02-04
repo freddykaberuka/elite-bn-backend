@@ -1,7 +1,9 @@
 /*eslint-disable */
 
 export const welcome = {
-    '/': {
+  paths:{
+    '/api/v1/users/':
+    {
       get: {
         tags: [
           'welcome',
@@ -20,6 +22,6 @@ export const welcome = {
           },
         },
       },
-    },
+    },}
   };
   
