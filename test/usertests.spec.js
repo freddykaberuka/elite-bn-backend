@@ -174,7 +174,7 @@ describe('User tests', ()=>{
               expect(response.body.message).to.have.property('name');
               expect(response.body.message).to.have.property('message');
               expect(response.body.message.message).to.equal('jwt malformed');
-              expect(response.body.message.name).to.equal('JsonWebTokenError');
+              expect(response.body.message.name).to.equal('JsonWebTokenError'); 
 
               done();
             })
