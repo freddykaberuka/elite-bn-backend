@@ -1,4 +1,3 @@
-
 /**
  * @swagger
  * /:
@@ -8,4 +7,3 @@
  *      '200':
  *        description: success
  */
-

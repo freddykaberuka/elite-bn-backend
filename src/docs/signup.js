@@ -28,8 +28,8 @@
  *        
  *               
  *      responses:
- *       "200":
- *         description: Success  
+ *       "201":
+ *         description: "Account created"  
  *       "403":
  *         description: "Account creation failed"
  *            
