@@ -15,9 +15,14 @@
  *       "403":
  *         description: "Logout unsuccesful"
 <<<<<<< HEAD
+<<<<<<< HEAD
  *       "500":
  *         description: "Unknown error"
 =======
 >>>>>>> d9c1ece (ft-logout)
+=======
+ *       "500":
+ *         description: "Unknown error"
+>>>>>>> df7af2a (Matching the source code)
  *            
  */
