@@ -14,7 +14,10 @@
  *         description: Success  
  *       "403":
  *         description: "Logout unsuccesful"
+<<<<<<< HEAD
  *       "500":
  *         description: "Unknown error"
+=======
+>>>>>>> d9c1ece (ft-logout)
  *            
  */
