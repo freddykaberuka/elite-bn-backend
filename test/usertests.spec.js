@@ -3,6 +3,8 @@ import chaiHttp from 'chai-http';
 import chai, { expect } from 'chai';
 import app from '../src/index';
 import User from '../src/models/user';
+import { exist } from 'joi';
+import userServices from '../src/services/userService';
 require('@babel/polyfill');
 
 chai.use(chaiHttp);

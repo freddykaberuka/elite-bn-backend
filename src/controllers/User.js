@@ -93,20 +93,6 @@ class User {
             return util.send(res);
         }
     }
-    static logOut = async(req, res)=>{
-        try{
-            const token = String(req.headers['authorization']).split(' ')[1];
-            const decodeToken = jwt.verify(token, process.env.PRIVATE_KEY);
-            await userServices.updateAtt({token: null},{email: decodeToken.email});
-            util.setSuccess(200,'Logged Out succesfully');
-            console.log(decodeToken);
-
-            return util.send(res);
-        }catch(error){
-            util.setError(500, error.message);
-            return util.send(res);
-        }
-    }
 
     static async updateProfile(req, res) {
         try {
@@ -190,5 +176,18 @@ class User {
           util.setError(500,error.message);
       }       
   }
+  static logOut = async(req, res)=>{
+    try{
+        const token = String(req.headers['authorization']).split(' ')[1];
+        const decodeToken = jwt.verify(token, process.env.PRIVATE_KEY);
+        await userServices.updateAtt({token: null},{email: decodeToken.email});
+        util.setSuccess(200,'Logged Out succesfully');
+
+        return util.send(res);
+    }catch(error){
+        util.setError(500, error.message);
+        return util.send(res);
+    }
+}
 }
 export default User;

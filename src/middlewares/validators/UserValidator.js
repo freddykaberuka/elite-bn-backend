@@ -4,13 +4,14 @@ import SignInValidationSchema from '../../helpers/validateSchemas/signInValidati
 import forgetpassValidationSchema from '../../helpers/validateSchemas/forgetpassValidationSchema';
 import resetpassValidationSchema from '../../helpers/validateSchemas/resetpassValidationSchema';
 import Util from '../../helpers/utils';
+import userSchema from '../../models/user';
 import userServices from '../../services/userService';
 import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
 import bcrypt from 'bcrypt';
 
 dotenv.config();
-const util = new Util();      
+const util = new Util();
 
 class UserValidator {
     static createUser = (req, res, next) => {
@@ -146,24 +147,24 @@ class UserValidator {
                 return util.send(res);
             }
         }
-            
+                   
     static logOutVerification = async(req, res, next)=>{
-      try{
-        const token = String(req.headers['authorization']).split(' ')[1];
-        const decodeToken = jwt.verify(token, process.env.PRIVATE_KEY);
-        const getUserWithToken = await userServices.findByEmail(decodeToken.email);
-
-        if(getUserWithToken.dataValues.id != decodeToken.id){
-            util.setError(403, "Logout Unsuccesful");
-            return util.send(res);
+        try{
+          const token = String(req.headers['authorization']).split(' ')[1];
+          const decodeToken = jwt.verify(token, process.env.PRIVATE_KEY);
+          const getUserWithToken = await userServices.findByEmail(decodeToken.email);
+  
+          if(getUserWithToken.dataValues.id != decodeToken.id){
+              util.setError(403, "Logout Unsuccesful");
+              return util.send(res);
+          }
+          return next(); 
+        }catch(error){
+          util.setError(403, error);
+          return util.send(res);
         }
-        return next(); 
-      }catch(error){
-        util.setError(403, error);
-        return util.send(res);
       }
-    }
-    
+            
 }
 
 export default UserValidator;
