@@ -3,8 +3,6 @@ import chaiHttp from 'chai-http';
 import chai, { expect } from 'chai';
 import app from '../src/index';
 import User from '../src/models/user';
-import { exist } from 'joi';
-import userServices from '../src/services/userService';
 require('@babel/polyfill');
 
 chai.use(chaiHttp);
@@ -229,6 +227,19 @@ describe('User tests', ()=>{
             done();
           });
       });
+      it("Should not logout with invalid token", (done)=>{
+        chai.request(app)
+            .get('/api/v1/users/logout/somenonexistenttoken')
+            .end((error, response)=>{
+              expect(response).to.have.status(403);
+              expect(response.body).to.have.property('status');
+              expect(response.body).to.have.property('message');
+              expect(response.body.status).to.equal(403);
+              expect(response.body.message).to.equal('Invalid token');
+
+              done();
+            })
+      })
 });
 export {
   token,

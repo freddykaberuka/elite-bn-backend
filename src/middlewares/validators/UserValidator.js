@@ -4,7 +4,6 @@ import SignInValidationSchema from '../../helpers/validateSchemas/signInValidati
 import forgetpassValidationSchema from '../../helpers/validateSchemas/forgetpassValidationSchema';
 import resetpassValidationSchema from '../../helpers/validateSchemas/resetpassValidationSchema';
 import Util from '../../helpers/utils';
-import userSchema from '../../models/user';
 import userServices from '../../services/userService';
 import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
@@ -148,6 +147,24 @@ class UserValidator {
             }
         }
             
+    static logOutVerification = async(req, res, next)=>{
+      try{
+        const {
+            token
+        } = req.params;
+        const decodeToken = jwt.verify(token, process.env.PRIVATE_KEY);
+        const getUserWithToken = await userServices.findByProp({email: decodeToken.email});
+        const tempFullName = String(getUserWithToken[0].dataValues.firstName) + " " + String(getUserWithToken[0].dataValues.lastName);
+        if(tempFullName != decodeToken.fullName){
+            util.setError(403, 'Logout unsuccessful');
+            return util.send(res);
+        }
+        return next(); 
+      }catch(error){
+        util.setError(403, "Invalid token");
+        return util.send(res);
+      }
+    }
 }
 
 export default UserValidator;
