@@ -1,4 +1,4 @@
-import jwtDecode from 'jwt-decode';
+import jwt from 'jsonwebtoken';
 import Util from '../helpers/utils';
 import rolePermServices from '../services/rolePermServices';
 import permissionServices from '../services/permissionServices';
@@ -6,16 +6,19 @@ import permissionServices from '../services/permissionServices';
 const util = new Util();
 class authorization {
   static async userAuthorize(req, res, next) {
+    try {
     const authToken = req.headers;
-    if (!authToken) {
+    if (!authToken.authorization) {
       util.setError(401, 'Token Required');
       return util.send(res);
     }
     const token = authToken.authorization.replace('Bearer ', '');
-    const userRoleId = jwtDecode(token).roleId;
+
+    const user = jwt.verify(token, process.env.PRIVATE_KEY);
+    const userRoleId = user.roleId
 
     if (userRoleId == 1) {
-      next();
+      return next();
     }
     const { permission_name } = authToken;
     const permissions = await rolePermServices.findPermByRolrId(userRoleId);
@@ -32,7 +35,10 @@ class authorization {
       util.setError(401, 'you are not allowed to perform this task');
       return util.send(res);
     }
-    next();
+    return next();
+  } catch(error) {
+    next(error);
+  }
   }
 }
 
