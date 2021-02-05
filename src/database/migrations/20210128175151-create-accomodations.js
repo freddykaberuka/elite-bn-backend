@@ -14,10 +14,10 @@ module.exports = {
         type: Sequelize.TEXT
       },
       location_id: {
-        type: Sequelize.INTEGER
+        type: Sequelize.STRING
       },
       cost: {
-        type: Sequelize.DOUBLE
+        type: Sequelize.INTEGER
       },
       image: {
         type: Sequelize.STRING

@@ -4,7 +4,7 @@ import userService from '../services/userService';
 
 const util = new Util();
 
-const decodeToken = async (token) => { await jwt.verify(token, process.env.JWT_SECRET_KEY); };
+const decodeToken = async (token) => { await jwt.verify(token, process.env.PRIVATE_KEY); };
 
 const isAuthenticated = async (req, res, next) => {
   try {

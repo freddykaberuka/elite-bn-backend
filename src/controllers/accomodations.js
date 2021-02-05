@@ -1,5 +1,4 @@
 import accomodationService from '../services/accomodationServices';
-// import { cloudinaryUploader } from '../helpers/cloudinaryUploader';
 import Util from '../helpers/utils';
 
 const util = new Util();
@@ -7,8 +6,6 @@ const util = new Util();
 export default class Accomodations {
   static async createAccomodations(req, res) {
     try {
-      // const { path } = req.files[0];
-      // const image = await cloudinaryUploader(path);
       const accomodation = {
         name: req.body.name,
         description: req.body.description,
@@ -45,7 +42,7 @@ export default class Accomodations {
       util.setSuccess(200, 'Accomodation', accomodation);
       util.send(res);
     } catch (error) {
-      util.setError(500, error);
+      util.setError(500, console.log(error));
       util.send(res);
     }
   }
