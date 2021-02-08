@@ -35,6 +35,18 @@ module.exports = {
         roleId: 1,
         createdAt: new Date(),
         updatedAt: new Date(),
+      },
+      {
+        firstName: 'requesterTest',
+        lastName: 'testing',
+        email: 'neddyberry@gmail.com',
+        // requesterTest password is "admin1234"
+        password: '$2b$10$5bVBlFQxpo3.laIrak8wFuRk5RkfkmLd5N1EuHVTlLFUto/eEoGqe',
+        isVerified: true,
+        token: null,
+        roleId: 4,
+        createdAt: new Date(),
+        updatedAt: new Date(),
       }
     ],
     {},
