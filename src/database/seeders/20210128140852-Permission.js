@@ -90,6 +90,46 @@ module.exports = {
         permissionName: 'delete_user',
         createdAt: new Date(),
         updatedAt: new Date()
+      },
+      {
+        permissionName: 'get_roles',
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+        permissionName: 'create_roles',
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+        permissionName: 'update_role',
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+        permissionName: 'delete_role',
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+        permissionName: 'get_rolepermission',
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+        permissionName: 'create_rolepermission',
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+        permissionName: 'update_rolepermission',
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+        permissionName: 'delete_rolepermission',
+        createdAt: new Date(),
+        updatedAt: new Date()
       }
     ],
     {},
