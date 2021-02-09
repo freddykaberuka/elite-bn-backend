@@ -57,5 +57,10 @@ class UserService {
       email: userEmail
     }})
   }
+  static deleteById(userId){
+    return Users.destroy({
+      where: { id: userId }
+    })
+  }
 }
 export default UserService;

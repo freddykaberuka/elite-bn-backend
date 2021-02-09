@@ -10,7 +10,12 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      // define association here
+      User.belongsTo(models.Role, {
+        foreignKey: 'roleId',
+        onDelete: 'CASCADE',
+        onUpdate: 'CASCADE',
+        foreignKeyConstraint: true,
+      });
     }
   }
   User.init({
@@ -37,6 +42,10 @@ module.exports = (sequelize, DataTypes) => {
     },
     lineManager: {
       type: DataTypes.INTEGER
+    },
+    roleId: {
+      type: DataTypes.INTEGER,
+      defaultValue: '4'
     },
     googleId: {
       type: DataTypes.STRING

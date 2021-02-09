@@ -74,11 +74,12 @@ class User {
     static signIn = async (req, res) => {
         try {
             const userDetails = req.user;
-            const {id, firstName, lastName, email} = userDetails.dataValues;
+            const {id, firstName, lastName, email,roleId} = userDetails.dataValues;
             const response = {
                 id,
                 fullName: `${firstName} ${lastName}`,
-                email
+                email,
+                roleId
             }
             const accessToken = jwt.sign(response, process.env.PRIVATE_KEY, { expiresIn: '7d' });
             await userServices.updateAtt({token:accessToken}, { id: response.id});
@@ -93,7 +94,6 @@ class User {
             return util.send(res);
         }
     }
-
     static async updateProfile(req, res) {
         try {
          const profileImage = await uploadToCloud(req.file, res);
@@ -189,5 +189,54 @@ class User {
         return util.send(res);
     }
 }
+    static async findById (req,res) {
+        
+        try {
+            const user = await userServices.findById(userId);
+            util.setSuccess(200, user)
+            util.send (res)
+        } catch (error) {
+            util.setError(500,error.message)
+            util.send(res)
+        }
+    }
+    static changeRole = async (req, res) =>{
+        try {
+            const { id } = req.params;
+            const user = await userServices.findById(id);
+            if(user){
+                const update = await userServices.updateAtt({
+                    roleId: req.body.roleId,
+                  }, { id });
+      
+                  util.setSuccess('200', 'user role successfully changed');
+                  return util.send(res);
+            }
+
+            util.setError(404, 'user not found');
+            util.send(res);
+        } catch (error) {
+            util.setError(500,error.message)
+            util.send(res)
+        }
+    }
+    static deleteUser = async (req,res) =>{
+        try {
+        const { id } = req.params;
+            const user = await userServices.findById(id);
+            if(user){
+                const update = await userServices.deleteById(id);
+      
+                  util.setSuccess('200', 'user successfully deleted');
+                  return util.send(res);
+            }
+
+            util.setError(404, 'user not found');
+            util.send(res);
+        } catch (error) {
+            util.setError(500,error.message)
+            util.send(res)
+        }
+    }
 }
 export default User;

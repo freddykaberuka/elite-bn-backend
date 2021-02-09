@@ -34,6 +34,9 @@ module.exports = {
       preferedLanguage: {
         type: Sequelize.STRING
       },
+      roleId: {
+        type: Sequelize.INTEGER
+      },
       lineManager: {
         type: Sequelize.INTEGER
       },
