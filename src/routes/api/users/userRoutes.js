@@ -6,6 +6,7 @@ import passport from '../../../database/config/passportSetup';
 import Social from '../../../controllers/socialAuth';
 import { UserAuthentication } from '../../../middlewares/auth';
 import {upload} from '../../../helpers/multer';
+import authorize from '../../../middlewares/userAuthorization';
 
 const router = express.Router();
 router
@@ -18,7 +19,9 @@ router
  .get('/facebook/callback', passport.authenticate('facebook'), Social.Oauth)
  .get('/profile/:id', UserAuthentication, UserController.getProfile)
  .patch('/updateProfile',upload.single('profilePicture'), UserAuthentication, UserController.updateProfile)
- .get('/logout/', validateUserData.logOutVerification, UserController.logOut);
+ .get('/logout/', validateUserData.logOutVerification, UserController.logOut)
+ .patch('/updateRole/:id', authorize.userAuthorize, UserController.changeRole)
+ .delete('/delete/:id', authorize.userAuthorize, UserController.deleteUser);
 
 export default router;
 

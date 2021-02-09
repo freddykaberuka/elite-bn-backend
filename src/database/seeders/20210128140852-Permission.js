@@ -81,6 +81,15 @@ module.exports = {
         permissionName: 'd_location',
         createdAt: new Date(),
         updatedAt: new Date()
+      },
+      {
+        permissionName: 'change_user_role',
+        createdAt: new Date(),
+        updatedAt: new Date()
+      }, {
+        permissionName: 'delete_user',
+        createdAt: new Date(),
+        updatedAt: new Date()
       }
     ],
     {},

@@ -200,5 +200,43 @@ class User {
             util.send(res)
         }
     }
+    static changeRole = async (req, res) =>{
+        try {
+            const { id } = req.params;
+            const user = await userServices.findById(id);
+            if(user){
+                const update = await userServices.updateAtt({
+                    roleId: req.body.roleId,
+                  }, { id });
+      
+                  util.setSuccess('200', 'user role successfully changed');
+                  return util.send(res);
+            }
+
+            util.setError(404, 'user not found');
+            util.send(res);
+        } catch (error) {
+            util.setError(500,error.message)
+            util.send(res)
+        }
+    }
+    static deleteUser = async (req,res) =>{
+        try {
+        const { id } = req.params;
+            const user = await userServices.findById(id);
+            if(user){
+                const update = await userServices.deleteById(id);
+      
+                  util.setSuccess('200', 'user successfully deleted');
+                  return util.send(res);
+            }
+
+            util.setError(404, 'user not found');
+            util.send(res);
+        } catch (error) {
+            util.setError(500,error.message)
+            util.send(res)
+        }
+    }
 }
 export default User;
