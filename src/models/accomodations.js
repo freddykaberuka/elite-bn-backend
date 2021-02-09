@@ -24,11 +24,15 @@ module.exports = (sequelize, DataTypes) => {
     description: DataTypes.TEXT,
     location_id: DataTypes.STRING,
     cost: DataTypes.INTEGER,
-    image: DataTypes.STRING,
+    image: {
+      type: DataTypes.ARRAY(DataTypes.STRING),
+    },
     facilities: {
       type: DataTypes.ARRAY(DataTypes.STRING),
     },
-    roomSize: DataTypes.STRING,
+    capacity: DataTypes.INTEGER,
+    roomsLeft: DataTypes.INTEGER,
+    averageRating: DataTypes.INTEGER,
   }, {
     sequelize,
     modelName: 'Accomodations',

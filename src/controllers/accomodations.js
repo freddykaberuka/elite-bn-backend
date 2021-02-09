@@ -11,7 +11,10 @@ export default class Accomodations {
         description: req.body.description,
         location_id: req.body.location_id,
         facilities: req.body.facilities,
-        roomSize: req.body.roomSize,
+        capacity: req.body.capacity,
+        cost: req.body.cost,
+        roomsLeft: req.body.roomsLeft,
+        averageRating: req.body.averageRating
       };
       console.log(accomodation);
       const newAccomodation = await accomodationService.create(accomodation);

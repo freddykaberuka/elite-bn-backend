@@ -6,8 +6,9 @@ module.exports = {
       location_id: '10000',
       cost: 1000,
       facilities: ['parking', 'pool', 'wifi'],
-      roomSize: 9,
-      image: 'assets/images',
+      capacity: 9,
+      roomsLeft: 10,
+      image: ['image', 'picture'],
       createdAt: new Date(),
       updatedAt: new Date(),
     }], {});

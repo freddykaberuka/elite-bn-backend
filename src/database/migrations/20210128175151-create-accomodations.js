@@ -20,14 +20,20 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       image: {
-        type: Sequelize.STRING
+        type: Sequelize.ARRAY(Sequelize.STRING),
       },
       facilities: {
         type: Sequelize.ARRAY(Sequelize.STRING),
       },
-      roomSize: {
+      capacity: {
         type: Sequelize.INTEGER,
         defaultValue: 0
+      },
+      roomsLeft: {
+        type: Sequelize.INTEGER
+      },
+      averageRating: {
+        type: Sequelize.INTEGER
       },
       createdAt: {
         allowNull: false,
