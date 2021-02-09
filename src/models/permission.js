@@ -14,7 +14,7 @@ module.exports = (sequelize, DataTypes) => {
         through: models.rolepermission,
         as: 'roles',
         foreignKey: 'permission_id'
-      })
+      });
     }
   }
   Permission.init({

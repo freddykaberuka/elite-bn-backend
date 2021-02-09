@@ -43,6 +43,10 @@ module.exports = (sequelize, DataTypes) => {
     lineManager: {
       type: DataTypes.INTEGER
     },
+    roleId: {
+      type: DataTypes.INTEGER,
+      defaultValue: 'requester'
+    },
     googleId: {
       type: DataTypes.STRING
     },

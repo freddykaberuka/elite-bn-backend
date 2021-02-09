@@ -30,8 +30,8 @@ class RoleService {
     });
   }
 
-  static findById(modelId) {
-    return Role.findByPk(modelId, {
+  static findById(roleId) {
+    return Role.findByPk(roleId, {
       include: [
         {
           model: Permission,

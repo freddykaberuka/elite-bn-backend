@@ -15,14 +15,14 @@ module.exports = (sequelize, DataTypes) => {
         targetKey: 'id',
         onDelete: 'SET DEFAULT',
         onUpdate: 'CASCADE',
-        as: 'role',
+        as: 'users',
         foreignKeyConstraint: true,
       });
       Role.belongsToMany(models.Permission, {
         through: models.rolepermission,
         as: 'permissions',
         foreignKey: 'role_id'
-      })
+      });
     }
   }
   Role.init({

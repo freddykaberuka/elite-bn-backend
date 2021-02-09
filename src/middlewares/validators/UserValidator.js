@@ -66,9 +66,11 @@ class UserValidator {
         return next();
     }
     static verifySignin = async (req, res, next) => {
-       try{
-        const {email, password} = req.body;
-        const getUser = await userServices.findByEmail(req.body.email);
+        try{
+            const {email, password} = req.body;
+            const getUser = await userServices.findByEmail(req.body.email);
+            console.log('..................................')
+            console.log('...............')
         if(!getUser){
             util.setError(404,'Incorrect email address');
             return util.send(res);

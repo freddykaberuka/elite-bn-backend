@@ -4,7 +4,6 @@ import rolePerm from './rolepermissions/rolepermissions';
 import roleRoutes from './roles/roleRoutes';
 
 const router = express.Router();
-
 router.use('/users', userRoutes);
 router.use('/rolesPermissions', rolePerm);
 router.use('/roles', roleRoutes);

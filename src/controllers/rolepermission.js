@@ -43,7 +43,7 @@ export default class RolePermission {
 
   static async findPermByRole(req, res) {
     console.log('..................................................');
-    console.log(req.params)
+    console.log(req.params);
   }
 
   static async updateRolePerm(req, res) {
