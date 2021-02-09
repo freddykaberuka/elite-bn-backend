@@ -69,8 +69,6 @@ class UserValidator {
         try{
             const {email, password} = req.body;
             const getUser = await userServices.findByEmail(req.body.email);
-            console.log('..................................')
-            console.log('...............')
         if(!getUser){
             util.setError(404,'Incorrect email address');
             return util.send(res);
