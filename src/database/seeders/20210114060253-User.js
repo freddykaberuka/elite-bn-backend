@@ -9,6 +9,7 @@ module.exports = {
         password: 'samplepassword',
         isVerified: true,
         token: null,
+        roleId: 2,
         createdAt: new Date(),
         updatedAt: new Date(),
       },
@@ -19,6 +20,7 @@ module.exports = {
         password: 'samplepassword',
         isVerified: true,
         token: null,
+        roleId: 4,
         createdAt: new Date(),
         updatedAt: new Date(),
       },
@@ -30,6 +32,7 @@ module.exports = {
         password: '$2b$10$5bVBlFQxpo3.laIrak8wFuRk5RkfkmLd5N1EuHVTlLFUto/eEoGqe',
         isVerified: true,
         token: null,
+        roleId: 1,
         createdAt: new Date(),
         updatedAt: new Date(),
       }
