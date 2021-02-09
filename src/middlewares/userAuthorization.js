@@ -32,12 +32,13 @@ class authorization {
     const allowed = permissionIds.indexOf(permissionId);
 
     if (allowed == -1) {
-      util.setError(401, 'you are not allowed to perform this task');
+      util.setError(401, 'you don\'t have authorization perform this task');
       return util.send(res);
     }
     return next();
   } catch(error) {
-    next(error);
+    util.setError(400, error.message);
+    return util.send(res);
   }
   }
 }

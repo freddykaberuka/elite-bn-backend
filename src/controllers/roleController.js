@@ -17,7 +17,6 @@ export default class Role {
   static async saveRole(req, res) {
     try {
       const { name } = req.body;
-      console.log({ name });
       const createdRole = await roleService.createRole({ name });
       util.setSuccess(200, 'Role created', createdRole);
       return util.send(res);
@@ -42,7 +41,6 @@ export default class Role {
   static async findRoleByName(req, res) {
     try {
       const { name } = req.params;
-
       const singleRole = await roleService.findByName({ name });
       util.setSuccess(200, 'Successfully retrieved Role', singleRole);
       return util.send(res);
