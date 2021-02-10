@@ -1,27 +1,33 @@
 import accomodationService from '../services/accomodationServices';
 import Util from '../helpers/utils';
+import { uploadToCloud } from '../helpers/cloud';
 
 const util = new Util();
 
 export default class Accomodations {
   static async createAccomodations(req, res) {
     try {
+      // const accomodationImage = await uploadToCloud(req.file, res);
+      const {
+        // eslint-disable-next-line camelcase
+        name, description, location_id, facilities, cost, capacity, roomsLeft, averageRating
+      } = req.body;
       const accomodation = {
-        name: req.body.name,
-        description: req.body.description,
-        location_id: req.body.location_id,
-        facilities: req.body.facilities,
-        capacity: req.body.capacity,
-        cost: req.body.cost,
-        roomsLeft: req.body.roomsLeft,
-        averageRating: req.body.averageRating
+        name,
+        description,
+        location_id,
+        facilities,
+        cost,
+        capacity,
+        roomsLeft,
+        averageRating,
+        // image: accomodationImage,
       };
-      console.log(accomodation);
       const newAccomodation = await accomodationService.create(accomodation);
       util.setSuccess(201, 'You have successfully created an accomodation', newAccomodation);
       util.send(res);
     } catch (error) {
-      util.setError(500, console.log(error));
+      util.setError(500, error.message);
       util.send(res);
     }
   }
@@ -32,7 +38,7 @@ export default class Accomodations {
       util.setSuccess(200, 'All available accomodations', accomodations);
       util.send(res);
     } catch (error) {
-      util.setError(500, console.log(error));
+      util.setError(500, error.message);
       util.send(res);
     }
   }
@@ -45,7 +51,7 @@ export default class Accomodations {
       util.setSuccess(200, 'Accomodation', accomodation);
       util.send(res);
     } catch (error) {
-      util.setError(500, console.log(error));
+      util.setError(500, error.message);
       util.send(res);
     }
   }

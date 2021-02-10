@@ -64,6 +64,7 @@ module.exports = {
         email: 'traveladmin2021@gmail.com',
         isVerified: true,
         password: '$2b$10$5N/kpaDcFaT9X1aM4jkrsua.rfCkfq1hdFKu88PE6ROKL0ew.iIKq',
+        roleId: 2,
         token: null,
         createdAt: new Date(),
         updatedAt: new Date(),

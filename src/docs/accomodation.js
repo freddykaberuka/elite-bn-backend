@@ -1,18 +1,25 @@
 /**
  * @swagger
- * /api/v1/accomodations/read/:
+ * /api/v1/accomodations/:
  *   get:
  *     tags:
  *       - Accomodations
- *     name: Accomodations
- *     summary: fetch all available accomodations
+ *     name: accomodations
+ *     summary: Get all available accomodations
  *     consumes:
  *        - application/json
+ *     parameters:
+ *       - name: Authorization
+ *         in: header
+ *         required: true
+ *       - name: permission_name
+ *         in: header
+ *         required: true
  *     responses:
  *       200:
- *             description: Fetch all available accomodations.
- *       500:
- *             description: Server error
+ *             description: accomodations successfully fetched.
+ *       401:
+ *             description: unauthorized
  * */
 /**
 * @swagger
@@ -25,6 +32,12 @@
  *     consumes:
  *       - application/json
  *     parameters:
+ *       - name: Authorization
+ *         in: header
+ *         required: true
+ *       - name: permission_name
+ *         in: header
+ *         required: true
  *       - name: body
  *         in: body
  *         schema:
