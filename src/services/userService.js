@@ -68,10 +68,5 @@ class UserService {
   });
 
   }
-  // static findAll(data){
-  //   return Users.findAll({
-  //     where:{isVerified=='true' && lineManager}
-  //   })
-  // }
 }
 export default UserService;

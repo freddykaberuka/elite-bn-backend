@@ -130,6 +130,11 @@ module.exports = {
         permissionName: 'delete_rolepermission',
         createdAt: new Date(),
         updatedAt: new Date()
+      },
+      {
+        permissionName: 'assignUsertoManager',
+        createdAt: new Date(),
+        updatedAt: new Date()
       }
     ],
     {},

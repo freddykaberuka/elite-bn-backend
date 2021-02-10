@@ -22,8 +22,8 @@ router
  .get('/logout/', validateUserData.logOutVerification, UserController.logOut)
  .patch('/updateRole/:id', authorize.userAuthorize, UserController.changeRole)
  .delete('/delete/:id', authorize.userAuthorize, UserController.deleteUser)
- .put('/assign/manager', UserController.assignUsers)
- .get('/getUser/:id', UserController.viewUsersManager)
+ .put('/assign/manager', authorize.userAuthorize, UserController.assignUsers)
+ .get('/getUser/:id', authorize.userAuthorize,UserController.viewUsersManager)
  ;
  
 export default router;

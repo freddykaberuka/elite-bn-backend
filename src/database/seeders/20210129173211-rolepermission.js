@@ -110,6 +110,12 @@ module.exports = {
       permission_id: '6',
       createdAt: new Date(),
       updatedAt: new Date(),
+    },
+    {
+      role_id: '3',
+      permission_id: '53',
+      createdAt: new Date(),
+      updatedAt: new Date(),
     }], {});
   },
 
