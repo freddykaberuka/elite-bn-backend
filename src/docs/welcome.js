@@ -7,4 +7,3 @@
  *      '200':
  *        description: success
  */
-

@@ -3,7 +3,7 @@ import models from '../models';
 const { Permission } = models;
 class PermissionService {
   static findPermIbByPermName(permName) {
-    return Permission.findOne({where: {permissionName : permName}});
+    return Permission.findOne({ where: { permissionName: permName } });
   }
 
   static createPermission(newPermission) {
@@ -19,11 +19,13 @@ class PermissionService {
       where: { id: modelId },
     });
   }
+
   static updatePerm(set, prop) {
     return Permission.update(set, {
       where: prop,
     });
   }
+
   static deletePermission(modelId) {
     return Permission.destroy({
       where: { id: modelId },
