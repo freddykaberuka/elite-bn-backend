@@ -31,9 +31,9 @@ class UserService {
       {
         where: {
           id,
-          isVerified: 'false',
+          isVerified: 'true',
         },
-        attributes: ['id', 'email', 'isVerified'],
+        attributes: ['id', 'email', 'lineManager', 'isVerified'],
       },
     );
   }
@@ -62,5 +62,16 @@ class UserService {
       where: { id: userId }
     })
   }
+  static findBylineManagerId(lineManagerId){
+    return Users.findOne({where:
+    {id: lineManagerId},
+  });
+
+  }
+  // static findAll(data){
+  //   return Users.findAll({
+  //     where:{isVerified=='true' && lineManager}
+  //   })
+  // }
 }
 export default UserService;

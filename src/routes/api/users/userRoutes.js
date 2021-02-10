@@ -21,7 +21,10 @@ router
  .patch('/updateProfile',upload.single('profilePicture'), UserAuthentication, UserController.updateProfile)
  .get('/logout/', validateUserData.logOutVerification, UserController.logOut)
  .patch('/updateRole/:id', authorize.userAuthorize, UserController.changeRole)
- .delete('/delete/:id', authorize.userAuthorize, UserController.deleteUser);
-
+ .delete('/delete/:id', authorize.userAuthorize, UserController.deleteUser)
+ .put('/assign/manager', UserController.assignUsers)
+ .get('/getUser/:id', UserController.viewUsersManager)
+ ;
+ 
 export default router;
 
