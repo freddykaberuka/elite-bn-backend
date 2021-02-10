@@ -2,7 +2,7 @@ import { Op } from 'sequelize';
 import models from '../models';
 
 const {
-  Accomodations, locations,
+  Accomodations
 } = models;
 /**
  * @exports
