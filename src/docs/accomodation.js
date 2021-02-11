@@ -87,6 +87,13 @@
  *     summary: delete Accomodations
  *     consumes:
  *        - application/json
+ *     parameters:
+ *       - name: Authorization
+ *         in: header
+ *         required: true
+ *       - name: permission_name
+ *         in: header
+ *         required: true
  *     responses:
  *       201:
  *             description: Accomodations successfully deleted.

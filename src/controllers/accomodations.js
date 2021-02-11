@@ -7,17 +7,21 @@ const util = new Util();
 export default class Accomodations {
   static async createAccomodations(req, res) {
     try {
-      const accomodationImage = await uploadToCloud(req.file, res);
+      // const accomodationImage = await uploadToCloud(req.file, res);
+      const {
+        // eslint-disable-next-line camelcase
+        name, description, location_id, facilities, cost, capacity, roomsLeft, averageRating
+      } = req.body;
       const accomodation = {
-        name: req.body.name,
-        description: req.body.description,
-        location_id: req.body.location_id,
-        facilities: req.body.facilities,
-        cost: req.body.cost,
-        capacity: req.body.capacity,
-        roomsLeft: req.body.roomsLeft,
-        averageRating: req.body.averageRating,
-        image: accomodationImage.url
+        name,
+        description,
+        location_id,
+        facilities,
+        cost,
+        capacity,
+        roomsLeft,
+        averageRating,
+        // image: accomodationImage,
       };
       const newAccomodation = await accomodationService.create(accomodation);
       util.setSuccess(201, 'You have successfully created an accomodation', newAccomodation);
@@ -71,19 +75,11 @@ export default class Accomodations {
 
   static async updateAccomodation(req, res) {
     try {
-      const accomodationImage = await uploadToCloud(req.file, res);
-      const { id } = req.params;
-      const updated = await accomodationService.updateAtt({
-        name: req.body.name,
-        description: req.body.description,
-        location_id: req.body.location_id,
-        facilities: req.body.facilities,
-        cost: req.body.cost,
-        capacity: req.body.capacity,
-        roomsLeft: req.body.roomsLeft,
-        averageRating: req.body.averageRating,
-        image: accomodationImage.url
-      }, { id });
+      const { newUpdatedAccomodation } = req;
+      const select = {
+        id: req.params.accomodation
+      };
+      const updated = await accomodationService.updateAtt(newUpdatedAccomodation, select);
       if (updated) {
         util.setSuccess(200, 'You have successfuly updated an accomodation');
         util.send(res);
