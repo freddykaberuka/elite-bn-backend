@@ -15,7 +15,7 @@ const updatePermissionName = 'u_accomodation'
 let accomodation = '';
 const deleteAccom = 'd_accomodation'
 
-  describe.only('ACCOMODATIONS /', () => {
+  describe('ACCOMODATIONS /', () => {
     it('can\'t create Accomodation without login', (done) => {
       chai.request(server)
         .post('/api/v1/accomodations/create')

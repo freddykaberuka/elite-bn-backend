@@ -8,7 +8,7 @@ module.exports = {
       facilities: ['parking', 'pool', 'wifi'],
       capacity: 9,
       roomsLeft: 10,
-      image: ['image', 'picture'],
+      image: 'image',
       createdAt: new Date(),
       updatedAt: new Date(),
     }], {});
