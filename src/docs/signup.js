@@ -1,4 +1,4 @@
- /**
+/**
  * @swagger
  * /api/v1/users/signup:
  *  post:
@@ -24,15 +24,15 @@
  *                "password":
  *                 type: string
  *                 required: true
- *               
- *        
- *               
+ *
+ *
+ *
  *      responses:
  *       "201":
- *         description: "Account created"  
+ *         description: "Account created"
  *       "200":
- *         description: Success  
+ *         description: Success
  *       "403":
  *         description: "Account creation failed"
- *            
+ *
  */

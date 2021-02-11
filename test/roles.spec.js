@@ -57,7 +57,7 @@ describe('Roles/', () => {
         done();
       });
   });
- it('It should  allow   superAdmin  to access roles', (done) => {
+  it('It should  allow   superAdmin  to access roles', (done) => {
     chai.request(app)
       .get('/api/v1/roles')
       .set('authorization', adminToken)

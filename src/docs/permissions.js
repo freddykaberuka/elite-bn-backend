@@ -22,7 +22,7 @@
  *             description: unauthorized
  * */
 
- /**
+/**
 * @swagger
 * /api/v1/permissions/save/:
 *   post:
@@ -83,8 +83,6 @@
  *       401:
  *             description: unauthorized
  * */
-
-
 
 /**
 * @swagger

@@ -1,4 +1,3 @@
-
 import models from '../models';
 
 const { Role } = models;
@@ -43,7 +42,7 @@ class RoleService {
   }
 
   static deleteRole(modelId) {
-    return Role.destroy({where : {id: modelId}});
+    return Role.destroy({ where: { id: modelId } });
   }
 }
 export default RoleService;
