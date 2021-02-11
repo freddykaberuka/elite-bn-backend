@@ -53,7 +53,6 @@ const deleteAccom = 'd_accomodation'
         .field('cost', 1000)
         .attach('image', fs.readFileSync('./test/mocks/file/tree.png'), 'tree.png')
         .end((err, response) => {
-          console.log('<><><><><><>', response.body)
           response.should.have.status(201);
           id = response.body.data.id;
           location_id = response.body.data.location_id
