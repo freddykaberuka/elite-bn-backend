@@ -6,6 +6,6 @@ import BookingValidator from '../../../middlewares/validators/bookingValidator';
 const router = express();
 
 router.post('/book',BookingValidator.validateBooking,BookingValidator.doesAccomodationExists,BookingValidator.isRoomBookedByYou, authorize.userAuthorize, bookingController.book);
-router.get('/availableAccomodations', bookingController.allAvailableAccomodations);
-router.get('/bookedAccomodations', bookingController.allBookedAccomodations);
+router.get('/availableAccomodations',BookingValidator.checkTokenOnly, bookingController.allAvailableAccomodations);
+router.get('/bookedAccomodations',BookingValidator.checkTokenOnly, bookingController.allBookedAccomodations);
 export default router;

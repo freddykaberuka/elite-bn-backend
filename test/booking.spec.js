@@ -79,5 +79,40 @@ describe.only('Booking/', () => {
                 done()
             })
     });
+    it('Should get All available Accomodations  ', (done)=>{
+      chai.request(app)
+          .get('/api/v1/booking/availableAccomodations')
+          .set({ "Authorization": `Bearer ${token}` })
+          .set({ "permission_name": `book_accomodation` })
+          .end((error, response)=>{
+              expect(response.status).to.equal(200);
+              done()
+          })
+  });
+  it('Should get All booked Accomodations ', (done)=>{
+    chai.request(app)
+        .get('/api/v1/booking/bookedAccomodations')
+        .set({ "Authorization": `Bearer ${token}` })
+        .set({ "permission_name": `book_accomodation` })
+        .end((error, response)=>{
+            expect(response.status).to.equal(200);
+            done()
+        })
+});
+it('Should not book an accomodation that does not exist', (done)=>{
+  chai.request(app)
+      .post('/api/v1/booking/book')
+      .set({ "Authorization": `Bearer ${token}` })
+      .set({ "permission_name": `book_accomodation` })
+      .send({
+          checkinDate: "02-11-2021",
+          checkoutDate: "02-15-2021",
+          AccomodationId: 1100,
+          UserId: 2
+      }).end((error, response)=>{
+          expect(response.status).to.equal(404);
+          done()
+      })
+});
   
 });
