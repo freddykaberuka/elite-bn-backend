@@ -24,9 +24,7 @@ module.exports = (sequelize, DataTypes) => {
     description: DataTypes.TEXT,
     location_id: DataTypes.STRING,
     cost: DataTypes.INTEGER,
-    image: {
-      type: DataTypes.ARRAY(DataTypes.STRING),
-    },
+    image: DataTypes.STRING,
     facilities: {
       type: DataTypes.ARRAY(DataTypes.STRING),
     },

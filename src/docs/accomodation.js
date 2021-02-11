@@ -93,19 +93,44 @@
  *       500:
  *             description: Server error
  * */
+
 /**
- * @swagger
- * /api/v1/accomodations/delete/{accomodation}:
- *   patch:
+* @swagger
+* /api/v1/accomodations/update/{id}:
+*   patch:
  *     tags:
  *       - Accomodations
- *     name: update Accomodations
- *     summary: update Accomodations
- *     consumes:
- *        - application/json
- *     responses:
- *       201:
- *             description: Accomodations successfully updated.
- *       500:
- *             description: Server error
- * */
+*     name: accommodation update
+*     summary: update theAcommodationaccommodation
+*     consumes:
+*        - multipart/form-data
+*     parameters:
+*       - name: Authorization
+*         in: header
+*         required: true
+*       - name: permission_name
+*         in: header
+*         required: true
+*       - name: id
+*         in: path
+*         required: true
+*       - in: formData
+*         name: name
+*         type: string
+*         required: true
+*       - in: formData
+*         name: description
+*         type: string
+*         required: true
+*       - in: formData
+*         name: image
+*         type: file
+*         required: true
+*     responses:
+*       201:
+*             description: accomodation updated.
+*       400:
+*             description: Bad request.
+*       401:
+*             description: unAuthorized
+* */

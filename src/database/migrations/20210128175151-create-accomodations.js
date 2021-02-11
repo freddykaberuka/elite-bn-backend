@@ -20,7 +20,7 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       image: {
-        type: Sequelize.ARRAY(Sequelize.STRING),
+        type: Sequelize.STRING,
       },
       facilities: {
         type: Sequelize.ARRAY(Sequelize.STRING),

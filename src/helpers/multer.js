@@ -13,7 +13,6 @@ const fileFilter = (req, file, cb) => {
   cb('Error: Images Only!', null);
 };
 export const upload = multer({
-  dest: 'uploads/',
   storage,
   limits: { fileSize: 1000000 },
   fileFilter,

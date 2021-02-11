@@ -6,9 +6,9 @@ import { upload } from '../../../helpers/multer';
 
 const router = express();
 
-router.post('/create', authorize.userAuthorize, upload.single('accomodationImage'), accomodationValidator.createAccomodation, accomodationController.createAccomodations);
+router.post('/create', upload.single('image'), authorize.userAuthorize, accomodationValidator.createAccomodation, accomodationController.createAccomodations);
 router.get('/read', accomodationController.getAccomodations);
 router.get('/read/:location_id', authorize.userAuthorize, accomodationController.getAccomBylocatonId);
-router.delete('delete/:accomodation', authorize.userAuthorize, accomodationController.deleteAcoomodations);
-router.patch('update/:accomodation', authorize.userAuthorize, accomodationController.updateAccomodation);
+router.delete('/delete/:accomodation', authorize.userAuthorize, accomodationController.deleteAcoomodations);
+router.patch('/update/:id', upload.single('image'), authorize.userAuthorize, accomodationController.updateAccomodation);
 export default router;
