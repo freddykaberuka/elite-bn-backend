@@ -8,7 +8,7 @@
     "dev": "nodemon --exec babel-node src/index.js",
     "lint": "eslint .",
     "lintfix": "eslint . --fix",
-    "test": "export NODE_ENV=test&& npm run migration:reset && mocha --require @babel/register test/*.spec.js --timeout 500000 --exit || true",
+    "test": "export NODE_ENV=test&& npm run migration:reset && mocha --require @babel/register test/*.spec.js --timeout 500000 || true",
     "test:windows": "set NODE_ENV=test&& npm run migration:reset && mocha --require @babel/register test/*.spec.js --timeout 500000 --exit || true",
     "build": "rm -rf ./build/ && babel ./src/ -d ./build/src/ && cp -r ./src/models/ ./build/models/ && babel ./src/index.js -d ./build/",
     "coverage": "nyc --reporter=html --reporter=text npm test",
