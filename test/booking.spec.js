@@ -28,7 +28,7 @@ let adminToken;
 let requesterToken = '';
 let id = '';
 
-describe.only('Booking/', () => {
+describe('Booking/', () => {
     it('It should login with email and password', (done) => {
         chai.request(app)
           .post('/api/v1/users/signin')
