@@ -4,8 +4,8 @@
  *  post:
  *      tags:
  *       - Accomodation Booking
- *      summary: "Creates an account for barefoot nomad"
- *      description: "Needed is youe first and last name, your email and password"
+ *      summary: "User should be able to book an accomodation and stay safe that he has got an accomodation"
+ *      description: "Pass the accomodationId, the token, the checkin date and the checkout date"
  *      consumes:
  *       - application/json
  *      parameters:
@@ -29,12 +29,10 @@
  *                 type: interger
  *                 required: true
  *      responses:
- *       "201":
- *         description: "Account created"
  *       "200":
- *         description: Success
- *       "403":
- *         description: "Account creation failed"
+ *         description: "Accomodation booked"
+ *       "404":
+ *         description: "Accomodation does not exist"
  *
  */
 /**
@@ -43,18 +41,16 @@
  *  get:
  *      tags:
  *       - Accomodation Booking
- *      summary: "Creates an account for barefoot nomad"
- *      description: "Needed is youe first and last name, your email and password"
+ *      summary: "Queries all available accomodations for a user"
+ *      description: "Login and check all available accomodations according to the booked ones and the available ones "
  *      parameters:
  *       - name: token
  *         in: header
  *      responses:
- *       "201":
- *         description: "Account created"
  *       "200":
- *         description: Success
- *       "403":
- *         description: "Account creation failed"
+ *         description: "All your available accomodations"
+ *       "500":
+ *         description: "Unknown error"
  *
  */
 /**
@@ -63,8 +59,8 @@
  *  get:
  *      tags:
  *       - Accomodation Booking
- *      summary: "Creates an account for barefoot nomad"
- *      description: "Needed is youe first and last name, your email and password"
+ *      summary: "Get all your booked accomodations"
+ *      description: "Login and trigger the route to get all booked accomodations"
  *      parameters:
  *       - name: token
  *         in: header
