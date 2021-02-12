@@ -9,6 +9,12 @@
  *      consumes:
  *       - application/json
  *      parameters:
+ *       - name: Authorization
+ *         in: header
+ *         required: true
+ *       - name: permission_name
+ *         in: header
+ *         required: true
  *       - name: body
  *         in: body
  *         schema:
@@ -23,8 +29,8 @@
  *      responses:
  *       "200":
  *         description: "user assigned to a manager successful"
- *       "404":
- *         description: "manager doesn\"t exist"
+ *       "500":
+ *         description: "server error"
  */
 
 // get verified user with assigned manager
@@ -39,12 +45,15 @@
  *      consumes:
  *       - application/json
  *      parameters:
- *       - name: id
- *         in: path
+ *       - name: Authorization
+ *         in: header
+ *         required: true
+ *       - name: permission_name
+ *         in: header
  *         required: true
  *      responses:
  *       "200":
  *         description: "vierified user assigned and their manager"
- *       "404":
- *         description: "user id not exist"
+ *       "500":
+ *         description: "server error"
  */
