@@ -21,6 +21,7 @@ class UserService {
       where: prop,
     });
   }
+ 
   static updateAtt(set, prop) {
     return Users.update(set, {
       where: prop,
@@ -37,6 +38,18 @@ class UserService {
       },
     );
   }
+//new
+  static getUser() {
+    return Users.findAll(
+      {
+        where: {
+          isVerified: 'true'
+        },
+        attributes: ['id', 'email', 'lineManager', 'firstName'],
+      },
+    );
+  }
+
   /**
    * Find a User in storage using login credentials.
    * @param {*} prop HTTP request

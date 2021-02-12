@@ -249,12 +249,7 @@ class User {
                 const update = await userServices.updateAtt({lineManager: lineManagerId}, {id});
                 util.setSuccess(200, 'user assigned to a manager successful');
                 return util.send(res);
-
-            }else{
-                util.setError(400,'manager doesn\'t exist');
-                return util.send(res);
             }
-
         }catch(error){
             util.setError(500,error.message);
             util.send(res)
@@ -265,15 +260,12 @@ class User {
     static viewUsersManager= async (req,res)=>{
         
         try{
-            const {id} = req.params;
-            const viewUsers= await userServices.getUsers(id);
-            if(viewUsers.length >0){
+            const viewUsers= await userServices.getUser();
+            if(viewUsers){
                 util.setSuccess(200, 'vierified user assigned and their manager', viewUsers);
                 return util.send(res);
-            }else{
-                util.setError(400,'user id not exist');
-                return util.send(res)
             }
+            
         }catch(error){
             util.setError(500,error.message);
             return util.send(res)

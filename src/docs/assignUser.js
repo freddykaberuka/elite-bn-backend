@@ -31,7 +31,7 @@
 
 /**
  * @swagger
- * /api/v1/users/getUser/{id}:
+ * /api/v1/users/getUser:
  *  get:
  *      tags: ["ASSIGN USER TO MANAGER"]
  *      summary: "get verified user with assigned manager"
