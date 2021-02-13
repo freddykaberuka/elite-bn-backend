@@ -7,6 +7,7 @@ import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
 import dotenv from 'dotenv';
 import { uploadToCloud } from '../helpers/cloud';
+import eventEmitter from '../helpers/notifications/eventEmitter';
 
 dotenv.config();
 
@@ -87,6 +88,7 @@ class User {
                 token: accessToken,
                 userInfo: response,
             }
+            eventEmitter.emit('userSignedIn', response);
             util.setSuccess(200, 'You have successfully signed in', data);
             return util.send(res)
         } catch (err) {

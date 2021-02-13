@@ -1,4 +1,4 @@
- /**
+/**
  * @swagger
  * /api/v1/users/logout:
  *  get:
@@ -8,13 +8,13 @@
  *       - application/json
  *      parameters:
  *       - name: token
- *         in: header         
+ *         in: header
  *      responses:
  *       "200":
- *         description: Success  
+ *         description: Success
  *       "403":
  *         description: "Logout unsuccesful"
  *       "500":
  *         description: "Unknown error"
- *            
+ *
  */

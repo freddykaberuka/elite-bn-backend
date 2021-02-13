@@ -59,7 +59,7 @@ describe('Permissions/', () => {
         done();
       });
   });
- it('It should  allow   superAdmin  to save new permissions', (done) => {
+  it('It should  allow   superAdmin  to save new permissions', (done) => {
     chai.request(app)
       .post('/api/v1/permissions/save')
       .send({ permissionName: 'testperm' })
