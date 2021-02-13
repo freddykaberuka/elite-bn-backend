@@ -1,3 +1,4 @@
+/* eslint-disable */
 import cloudinary from 'cloudinary';
 import dotenv from 'dotenv';
 import Util from './utils';

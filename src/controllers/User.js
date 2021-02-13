@@ -98,6 +98,7 @@ class User {
     }
     static async updateProfile(req, res) {
         try {
+        console.log(req.file);
          const profileImage = await uploadToCloud(req.file, res);
           const { id } = req.userData;
      
@@ -118,7 +119,8 @@ class User {
           util.setError(404, 'The user doesn\'t exist');
           return util.send(res);
         } catch (error) {
-          util.setError(500, error.message);
+            console.log('=============', error.message);
+          util.setError(400, error.message);
           return util.send(res);
         }
       }

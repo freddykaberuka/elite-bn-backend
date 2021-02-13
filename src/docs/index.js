@@ -14,4 +14,6 @@ const swaggerOptions = {
 
 const swaggerDocs = swaggerJSDoc(swaggerOptions);
 
+
+const swaggerDocs = swaggerJSDoc(swaggerOptions);
 export default swaggerDocs;

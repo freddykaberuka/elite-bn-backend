@@ -1,6 +1,7 @@
 import jwt from 'jsonwebtoken';
 import Util from '../helpers/utils';
 import rolePermServices from '../services/rolePermServices';
+import rolePermServices from '../services/rolepermServices';
 import permissionServices from '../services/permissionServices';
 
 const util = new Util();

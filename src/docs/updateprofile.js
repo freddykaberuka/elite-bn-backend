@@ -35,6 +35,7 @@
 *     responses:
 *       201:
 *             description: Blog successfully Created.
+*             description: user profile updated.
 *       400:
 *             description: Bad request.
 *       401:
