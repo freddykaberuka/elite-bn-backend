@@ -13,15 +13,15 @@ export default class BookingValidator{
         try{
             const {error} = bookingValidationSchema.validate(req.body);
         if(error){
-            util.setError(400, error);
+            util.setError(400, error.message);
             return util.send(res);
         }
         const token = req.headers['authorization'].split(' ')[1];
         const verifyToken = jwt.verify(token, process.env.PRIVATE_KEY);
-        
+
         next();
         }catch(error){
-            util.setError(400, error);
+            util.setError(400, error.message);
             return util.send(res);
         }
 
@@ -30,6 +30,7 @@ export default class BookingValidator{
         const UserId =await jwt.verify(req.headers['authorization'].split(' ')[1], process.env.PRIVATE_KEY).id;
         const bookedRooms = await bookingService.findWithAnd([{UserId:UserId},{AccomodationId:req.body.AccomodationId}]);
         if(bookedRooms == null || bookedRooms.length == 0){
+            req.UserId = UserId;
             next();
         }else{
             util.setError(403, 'You have already booked this accomodation');
@@ -50,9 +51,10 @@ export default class BookingValidator{
         try{ 
         const token = req.headers['authorization'].split(' ')[1];
         const verifyToken = jwt.verify(token, process.env.PRIVATE_KEY);
+        req.UserId = jwt.verify(token , process.env.PRIVATE_KEY).id;
         next();
         }catch(error){
-            util.setError(400, error);
+            util.setError(400, error.message);
             return util.send(res);
         }
     }

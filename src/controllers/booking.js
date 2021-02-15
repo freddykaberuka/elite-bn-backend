@@ -37,7 +37,7 @@ export default class  Booking{
             util.setSuccess(200, "All Booked Accomodations", bookedAcc);
             return util.send(res);
         }catch(error){
-            util.setError(400,error);
+            util.setError(400,'Some kind of error');
             return util.send(res);
         }
     }
@@ -45,7 +45,7 @@ export default class  Booking{
         try{
             const forbiddenAccomodations = [];
     
-            const UserId = await jwt.verify(req.headers['authorization'].split(' ')[1], process.env.PRIVATE_KEY).id;
+            const UserId = req.UserId;
             const bookedAcc =  await bookingService.getIdsOnCondition({UserId:UserId});
             bookedAcc.forEach((accomodation)=>{
                 forbiddenAccomodations.push(accomodation.dataValues.id);
