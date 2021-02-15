@@ -20,7 +20,10 @@ module.exports = (sequelize, DataTypes) => {
   notifications.init({
     receiverId: DataTypes.INTEGER,
     message: DataTypes.TEXT,
-    isRead: DataTypes.BOOLEAN
+    isRead: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false
+    }
   }, {
     sequelize,
     modelName: 'notifications',

@@ -2,56 +2,98 @@
 import dotenv from 'dotenv';
 dotenv.config();
 export const renderEmail = ($message) => {
-  const template = `<!DOCTYPE html>
+  const notificationTemplate = `
+  <!DOCTYPE html>
     <html lang="en">
     <head>
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
         <title>Document</title>
-        <style>
+    </head>
+    <style>
         *{
-            box-sizing: border-box;
-            margin:0px;
-            padding:0px;
-        }
-        html,body{
-            font-family: poppins;
-        }
-        .logo{
-            width:100%;
-            height:auto;
-            background:#f2f2f2;
-            padding:5px 0px 5px 10px;
-        }
-        .logo > div{
-            font-size:20px;
+            font-family: 'Open sans', sans-serif;
+            padding:0;
+            margin:0;
+            overflow-x: hidden;
+            
         }
         .content{
-            padding:10px;
-            color:#121111;
+            /* display: flex;
+            flex-direction: column; */
+            background: url('https://www.travmonkey.com/wp-content/uploads/2011/12/kayak-thailand.jpg');
+            background-size: cover;
+            background-repeat: no-repeat;
+            padding-bottom: 5rem;
+            width: 100%;
+            height: 100%;
+    
         }
-        .button{
-            background-color: #03CE75;
-            padding:13px;
-            border:0px;
-            font-size:15px;
-            margin-top:28px;
-            text-decoration: none;
-            color:#121111
+        .row1{
+            background: linear-gradient(180deg, rgb(70, 70, 70), rgb(27, 27, 27));
+            transform: skew(0deg, 3deg);
+            width: 100%;
+            padding: 1.5rem;
+            margin-top: 4rem;
+        }
+        .row1 p{
+            font-size: 3rem;
+            color: #fff;
+            font-weight: 300;
+            margin-top: 1rem;
+    
+        }
+        .row1 p span{
+            font-weight: 700;
+        }
+        .parent{
+            background: #000;
+        }
+        img{
+            width: 70%;
+            margin: 0 3rem 0 3rem;
+            height: 400px;
+            align-self: center;
+        }
+        .row2{
+            width: 50%;
+            background-color: #fff;
+            opacity: 80%;
+            margin-left: 5%;
+            border-radius: .5rem;
+            padding: .5rem;
+            margin-top: 3rem;
+    
         }
     </style>
-    </head>
     <body>
-        <div class="wrapper">
-           <div class="logo">
-            <div>BareFoot</div>
-           </div>
-          <center> <div class="content">
-            <p>${$message}</p>
-        </div></center>
+        <div class="content">
+          <div class="parent">
+            <div class="row1">
+                <p class="">Barefoot <span>Nomad</span></p>
+            </div>
+          </div>
+          <div class="row2">
+          <p>Hello,</p><br>
+            <h1>You have new notification from barefoot Nomad</h1>
+        <br>
+            <p>"${$message}"</p>
+            <br>
+            <br>
+            <p>We are happy to have you on board! Please reply to this email if you have any comments, questions or feedback.<br><br>
+    
+                Cheerfully yours,<br></p>
+        
+        <br>
+            <p> Barefoot Nomad Team</p></i>
+          </div>
+          
+          
         </div>
+        
     </body>
     </html>`;
-  return template;
+  return notificationTemplate;
 };

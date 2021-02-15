@@ -8,7 +8,9 @@ import bcrypt from 'bcrypt';
 import dotenv from 'dotenv';
 import { uploadToCloud } from '../helpers/cloud';
 import eventEmitter from '../helpers/notifications/eventEmitter';
+import { Listner } from '../helpers/notifications/eventListeners';
 
+Listner.eventListners();
 dotenv.config();
 
 const util = new Util();

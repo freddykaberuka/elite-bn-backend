@@ -33,7 +33,7 @@ class notificationservice {
     return notifications.findOne({
       where: notification,
       attributes: {
-        exclude: ['receiver', 'createdAt', 'updatedAt', 'isRead'],
+        exclude: ['receiverId', 'createdAt', 'updatedAt', 'isRead'],
       }
     });
   }
