@@ -262,7 +262,7 @@ class User {
         try{
             const viewUsers= await userServices.getUser();
             if(viewUsers){
-                util.setSuccess(200, 'vierified user assigned and their manager', viewUsers);
+                util.setSuccess(200, 'verified users and their managers', viewUsers);
                 return util.send(res);
             }
             

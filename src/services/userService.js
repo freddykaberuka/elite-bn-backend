@@ -43,7 +43,8 @@ class UserService {
     return Users.findAll(
       {
         where: {
-          isVerified: 'true'
+          isVerified: 'true',
+          roleId: 4
         },
         attributes: ['id', 'email', 'lineManager', 'firstName'],
       },
