@@ -3,6 +3,7 @@ import SignUpValidationSchema from '../../helpers/validateSchemas/SignupValidati
 import SignInValidationSchema from '../../helpers/validateSchemas/signInValidationSchema';
 import forgetpassValidationSchema from '../../helpers/validateSchemas/forgetpassValidationSchema';
 import resetpassValidationSchema from '../../helpers/validateSchemas/resetpassValidationSchema';
+import userValidationSchema from '../../helpers/validateSchemas/userValidationSchema';
 import Util from '../../helpers/utils';
 import userSchema from '../../models/user';
 import userServices from '../../services/userService';
@@ -163,6 +164,22 @@ class UserValidator {
           util.setError(403, error);
           return util.send(res);
         }
+      }
+
+
+    static assignManager = async (req, res, next) => {
+        const {lineManagerId} = req.body;
+        const {id} =req.body;
+        try{
+          if(!lineManagerId || !id){
+              util.setError(400,'lineManager or User ID is missing');
+              return util.send(res);
+          }
+        return next();
+          }catch(error){
+              util.setError(500,error.message);
+              return util.send(res);
+          }
       }
             
 }
