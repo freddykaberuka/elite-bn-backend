@@ -37,7 +37,7 @@ export default class  Booking{
             util.setSuccess(200, "All Booked Accomodations", bookedAcc);
             return util.send(res);
         }catch(error){
-            util.setError(400,'Some kind of error');
+            util.setError(400,error.message);
             return util.send(res);
         }
     }
