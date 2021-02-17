@@ -21,6 +21,7 @@ class UserService {
       where: prop,
     });
   }
+ 
   static updateAtt(set, prop) {
     return Users.update(set, {
       where: prop,
@@ -31,12 +32,25 @@ class UserService {
       {
         where: {
           id,
-          isVerified: 'false',
+          isVerified: 'true',
         },
-        attributes: ['id', 'email', 'isVerified'],
+        attributes: ['id', 'email', 'lineManager', 'isVerified'],
       },
     );
   }
+//new
+  static getUser() {
+    return Users.findAll(
+      {
+        where: {
+          isVerified: 'true',
+          roleId: 4
+        },
+        attributes: ['id', 'email', 'lineManager', 'firstName'],
+      },
+    );
+  }
+
   /**
    * Find a User in storage using login credentials.
    * @param {*} prop HTTP request
@@ -61,6 +75,12 @@ class UserService {
     return Users.destroy({
       where: { id: userId }
     })
+  }
+  static findBylineManagerId(lineManagerId){
+    return Users.findOne({where:
+    {id: lineManagerId},
+  });
+
   }
 }
 export default UserService;

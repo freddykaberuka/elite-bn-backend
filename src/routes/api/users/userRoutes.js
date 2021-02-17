@@ -23,8 +23,11 @@ router
  .patch('/updateRole/:id', authorize.userAuthorize, UserController.changeRole)
  .delete('/delete/:id', authorize.userAuthorize, UserController.deleteUser)
  .post('/forgotPassword', validateUserData.verifyEmail, UserController.forgetPassword)
- .put('/resetpassword/:newToken', validateUserData.validateResetPasswordData, UserController.resetPassword);
-
+ .put('/resetpassword/:newToken', validateUserData.validateResetPasswordData, UserController.resetPassword)
+ .put('/assign/manager', validateUserData.assignManager, authorize.userAuthorize, UserController.assignUsers)
+ .get('/getUser', authorize.userAuthorize,UserController.viewUsersManager)
+ ;
+ 
 export default router;
 
 // https://elite-staging.herokuapp.com/api/v1/users/auth/google/callback

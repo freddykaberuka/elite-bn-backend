@@ -15,5 +15,24 @@ eventEmitter.on('userSignedIn', async (userInformation) => {
     message: 'you have signed to barefoot nomad app',
   }, receiverInfo.email);
 });
+
+eventEmitter.on('userAssignedToManager', async (payload) => {
+  const { lineManagerId, userId } = payload;
+  const lineManagerInfo = await findUserById(lineManagerId);
+  const userInfo = await findUserById(userId);
+  if (userInfo) {
+    notifyUser({
+      receiver: userId,
+      message: `Hello! ${userInfo.firstName}  You have been assigned to ${lineManagerInfo.firstName} as your line manager`,
+    }, userInfo.email);
+  }
+  if (lineManagerInfo && (lineManagerInfo.roleId != 1) && (lineManagerInfo.roleId != 3)) {
+    notifyUser({
+      receiver: lineManagerId,
+      message: `Hello! ${lineManagerInfo.firstName}  You have been assigned a new person ${userInfo.firstName}`,
+    }, lineManagerInfo.email);
+  }
+});
+
 }
 }

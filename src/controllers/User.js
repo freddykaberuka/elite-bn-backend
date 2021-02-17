@@ -9,6 +9,7 @@ import dotenv from 'dotenv';
 import { uploadToCloud } from '../helpers/cloud';
 import eventEmitter from '../helpers/notifications/eventEmitter';
 import { Listner } from '../helpers/notifications/eventListeners';
+import user from '../models/user';
 
 Listner.eventListners();
 dotenv.config();
@@ -244,5 +245,38 @@ class User {
             util.send(res)
         }
     }
+    //assign users to the managers
+
+    static assignUsers = async (req,res)=> {
+        try{
+            const { lineManagerId, id } = req.body;
+            const lineManager = await userServices.findBylineManagerId(lineManagerId);
+            if (lineManagerId){
+                const update = await userServices.updateAtt({lineManager: lineManagerId}, {id});
+                util.setSuccess(200, 'user assigned to a manager successful');
+                return util.send(res);
+            }
+        }catch(error){
+            util.setError(500,error.message);
+            util.send(res)
+        }
+    }
+    //view verified users with their assigned manager
+    
+    static viewUsersManager= async (req,res)=>{
+        
+        try{
+            const viewUsers= await userServices.getUser();
+            if(viewUsers){
+                util.setSuccess(200, 'verified users and their managers', viewUsers);
+                return util.send(res);
+            }
+            
+        }catch(error){
+            util.setError(500,error.message);
+            return util.send(res)
+        }
+    }
+
 }
 export default User;
