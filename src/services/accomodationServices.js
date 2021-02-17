@@ -91,5 +91,13 @@ class AccomodationsService {
       },
     });
   }
+
+  static findWithoutId(ids) {
+    return Accomodations.findAll({
+      where: {
+        [Op.not]: { id: ids }
+      }
+    });
+  }
 }
 export default AccomodationsService;
