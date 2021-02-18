@@ -12,9 +12,6 @@
  *       - name: Authorization
  *         in: header
  *         required: true
- *       - name: permission_name
- *         in: header
- *         required: true
  *     responses:
  *       200:
  *             description: Get notifications.
@@ -23,7 +20,7 @@
  * */
 /**
  * @swagger
- * /api/v1/notifications/findById/{id}:
+ * /api/v1/notifications/{id}:
  *   get:
  *     tags:
  *       - Notifications
@@ -33,9 +30,6 @@
  *        - application/json
  *     parameters:
  *       - name: Authorization
- *         in: header
- *         required: true
- *       - name: permission_name
  *         in: header
  *         required: true
  *       - name: id
