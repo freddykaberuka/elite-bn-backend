@@ -18,6 +18,7 @@ class authorization {
       const userRoleId = user.roleId;
 
       if (userRoleId == 1) {
+        req.userInfo= user;
         return next();
       }
       const { permission_name } = authToken;
@@ -35,6 +36,7 @@ class authorization {
         util.setError(401, 'you don\'t have authorization to perform this task');
         return util.send(res);
       }
+      req.userInfo= user;
       return next();
     } catch (error) {
       util.setError(400, error.message);

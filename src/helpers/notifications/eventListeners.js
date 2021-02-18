@@ -7,29 +7,20 @@ const findUserById = async (id) => await userServices.findById(id);
 const { notifyUser } = notificationController;
 export class Listner{
 static eventListners(){
-eventEmitter.on('userSignedIn', async (userInformation) => {
-  console.log('^^^^^^^^^^^^^^^^^^^^^2')
-  const receiverInfo = await findUserById(userInformation.id);
-  notifyUser({
-    receiverId: receiverInfo.id,
-    message: 'you have signed to barefoot nomad app',
-  }, receiverInfo.email);
-});
-
 eventEmitter.on('userAssignedToManager', async (payload) => {
-  const { lineManagerId, userId } = payload;
+  const { lineManagerId, id, tokenId } = payload;
   const lineManagerInfo = await findUserById(lineManagerId);
-  const userInfo = await findUserById(userId);
+  const userInfo = await findUserById(id);
   if (userInfo) {
     notifyUser({
-      receiver: userId,
-      message: `Hello! ${userInfo.firstName}  You have been assigned to ${lineManagerInfo.firstName} as your line manager`,
+      receiver: id,
+      message: `Hello! ${userInfo.firstName} ${userInfo.lastName}  You have been assigned to ${lineManagerInfo.firstName} ${lineManagerInfo.lastName} as your line manager`,
     }, userInfo.email);
   }
-  if (lineManagerInfo && (lineManagerInfo.roleId != 1) && (lineManagerInfo.roleId != 3)) {
+  if (lineManagerId != tokenId ) {
     notifyUser({
       receiver: lineManagerId,
-      message: `Hello! ${lineManagerInfo.firstName}  You have been assigned a new person ${userInfo.firstName}`,
+      message: `Hello! ${lineManagerInfo.firstName} ${lineManagerInfo.lastName}  You have been assigned a new person ${userInfo.firstName} ${userInfo.lastName} `,
     }, lineManagerInfo.email);
   }
 });
