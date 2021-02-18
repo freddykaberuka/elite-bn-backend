@@ -4,16 +4,7 @@ import chai from 'chai';
 import fs from 'fs';
 import app from '../src/index';
 import mockData from './mocks/testData';
-import { token, userid } from './usertests.spec';
 
-chai.should();
-chai.use(chaiHttp);
-const { it, describe } = mocha;
-describe('Updating user profile', () => {
-  it('It should  update user profile', (done) => {
-    chai.request(app)
-      .patch('/api/v1/users/updateProfile')
-      .set('authorization', token)
 chai.should();
 chai.use(chaiHttp);
 const user = {
@@ -57,8 +48,6 @@ describe('Updating user profile', () => {
 
   it('It should display user profile', (done) => {
     chai.request(app)
-      .get(`/api/v1/users/profile/${userid}`)
-      .set('authorization', token)
       .get(`/api/v1/users/profile/${userId}`)
       .set('authorization', userToken)
       .end((err, response) => {
