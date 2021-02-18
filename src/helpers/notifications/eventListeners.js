@@ -13,13 +13,13 @@ eventEmitter.on('userAssignedToManager', async (payload) => {
   const userInfo = await findUserById(id);
   if (userInfo) {
     notifyUser({
-      receiver: id,
+      receiverId: userInfo.id,
       message: `Hello! ${userInfo.firstName} ${userInfo.lastName}  You have been assigned to ${lineManagerInfo.firstName} ${lineManagerInfo.lastName} as your line manager`,
     }, userInfo.email);
   }
   if (lineManagerId != tokenId ) {
     notifyUser({
-      receiver: lineManagerId,
+      receiverId: lineManagerInfo.id,
       message: `Hello! ${lineManagerInfo.firstName} ${lineManagerInfo.lastName}  You have been assigned a new person ${userInfo.firstName} ${userInfo.lastName} `,
     }, lineManagerInfo.email);
   }
