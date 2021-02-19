@@ -9,9 +9,8 @@ const util = new Util();
 
 export default class Notifications {
     static async notifyUser(notification, email) {
-        const subject = 'Barefoot nomad Notification'
         await notificationsServices.createNotification(notification);
-        emailSender(renderEmail(notification.message), subject, email);
+        emailSender(renderEmail(notification.message), notification.subject, email);
 }
 static async showAllNotifications(req, res) {
     try {
@@ -28,9 +27,9 @@ static async showAllNotifications(req, res) {
   static async readOneNotification(req, res) {
     try {
       const { id } = req.userData;
-      const { notification } = req.params;
-      const notifications = await notificationsServices.getOne({ receiverId: id, id: notification });
-      await notificationsServices.update({ receiverId: id, id: notification });
+      const { notificationId } = req.params;
+      const notifications = await notificationsServices.getOne({ receiverId: id, id: notificationId });
+      await notificationsServices.update({ receiverId: id, id: notificationId });
       util.setSuccess(200, 'Notifications', notifications);
       return util.send(res);
     } catch (error) {

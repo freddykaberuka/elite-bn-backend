@@ -5,6 +5,6 @@ import notificationsController from '../../../controllers/notifications';
 
 const router = express.Router();
 router.get('/', UserAuthentication, notificationsController.showAllNotifications);
-router.get('/:notification', UserAuthentication, notificationsController.readOneNotification);
+router.get('/:notificationId', UserAuthentication, notificationsController.readOneNotification);
 
 export default router;

@@ -247,7 +247,7 @@ class User {
 
     static assignUsers = async (req,res)=> {
         try{
-            const { tokenId } = req.userInfo.id;
+            const tokenId = req.userInfo.id;
             const { lineManagerId, id } = req.body;
             const lineManager = await userServices.findBylineManagerId(lineManagerId);
             if (lineManagerId){
