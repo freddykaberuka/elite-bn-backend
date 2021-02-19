@@ -5,7 +5,9 @@ import roleRoutes from './roles/roleRoutes';
 import permissionRoutes from './permissions/permissions';
 import accomodationRoutes from './accomodations/accomodationRoute';
 import locationRoutes from './locations/locationRoute';
-import bookingRoutes from './booking/booking'
+import bookingRoutes from './booking/booking';
+import ratingRoutes from './rating/rating';
+
 
 const router = express.Router();
 router.use('/users', userRoutes);
@@ -15,5 +17,6 @@ router.use('/Permissions', permissionRoutes);
 router.use('/accomodations', accomodationRoutes);
 router.use('/locations', locationRoutes);
 router.use('/booking', bookingRoutes);
+router.use('/rating', ratingRoutes);
 
 export default router;
