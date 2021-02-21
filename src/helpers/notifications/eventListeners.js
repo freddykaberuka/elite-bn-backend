@@ -14,21 +14,27 @@ eventEmitter.on('userAssignedToManager', async (payload) => {
   if (userInfo) {
     notifyUser({
       receiverId: userInfo.id,
-      subject: 'Assigned to manager notification',
-      message: `Hello! ${userInfo.firstName} ${userInfo.lastName}  You have been assigned to ${lineManagerInfo.firstName} ${lineManagerInfo.lastName} as your line manager`,
+      subject: 'Assigned To A Manager: Barefoot App',
+      message: `Dear ${userInfo.firstName} ${userInfo.lastName}, 
+      
+                You have been assigned to ${lineManagerInfo.firstName} ${lineManagerInfo.lastName} as your line manager`,
     }, userInfo.email);
   }
   if (lineManagerId != tokenId ) {
     notifyUser({
       receiverId: lineManagerInfo.id,
-      subject: 'Assigned user notification',
-      message: `Hello! ${lineManagerInfo.firstName} ${lineManagerInfo.lastName}  You have been assigned a new person ${userInfo.firstName} ${userInfo.lastName} `,
+      subject: 'Assigned To A User: Barefoot App',
+      message: `Dear ${lineManagerInfo.firstName} ${lineManagerInfo.lastName},
+
+                You have been assigned a new user ${userInfo.firstName} ${userInfo.lastName} `,
     }, lineManagerInfo.email);
   } else{
     notifyUser({
       receiverId: lineManagerInfo.id,
-      subject: 'Assigned user notification',
-      message: `Hello! ${lineManagerInfo.firstName} ${lineManagerInfo.lastName}  You have assigned yourself a new person ${userInfo.firstName} ${userInfo.lastName} `,
+      subject: 'Assigned To A User: Barefoot App',
+      message: `Dear ${lineManagerInfo.firstName} ${lineManagerInfo.lastName},
+
+                You have assigned yourself a new user ${userInfo.firstName} ${userInfo.lastName} `,
     }, lineManagerInfo.email);
   }
 });

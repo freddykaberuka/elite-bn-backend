@@ -70,24 +70,11 @@ export const renderEmail = ($message) => {
     </style>
     <body>
         <div class="content">
-          <div class="parent">
-            <div class="row1">
-                <p class="">Barefoot <span>Nomad</span></p>
-            </div>
-          </div>
           <div class="row2">
-          <p>Hello,</p><br>
-            <h1>You have new notification from barefoot Nomad</h1>
         <br>
-            <p>"${$message}"</p>
+            <p>${$message}</p>
             <br>
-            <br>
-            <p>We are happy to have you on board! Please reply to this email if you have any comments, questions or feedback.<br><br>
-    
-                Cheerfully yours,<br></p>
-        
-        <br>
-            <p> Barefoot Nomad Team</p></i>
+            <p>Please reply to this email if you have any questions.</p>
           </div>
           
           
