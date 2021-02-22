@@ -1,14 +1,13 @@
 /*eslint-disable */
-import RatingsValidationSchema from '../../helpers/validateSchemas/rating';
 import ReviewsValidationSchema from '../../helpers/validateSchemas/review';
 import Util from '../../helpers/utils';
 import jwt from 'jsonwebtoken';
 import accomodationService from '../../services/accomodationServices';
 
 const util = new Util();
-class ratingsValidation{
+class reviewsValidation{
     static validate = (req, res, next)=>{
-        const {error} = RatingsValidationSchema.validate(req.body);
+        const {error} = ReviewsValidationSchema.validate(req.body);
         if(error){
             util.setError(400, error.message);
             return util.send(res);
@@ -38,4 +37,4 @@ class ratingsValidation{
     }
     
 }
-export default ratingsValidation;
+export default reviewsValidation;

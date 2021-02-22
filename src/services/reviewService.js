@@ -1,11 +1,11 @@
 /*eslint-disable */
 import models from '../models/index';
-const  Rating  = models.Rating;
+const  Review  = models.Review;
 /**
  * @exports
- * @class RatingService
+ * @class ReviewService
  */
-class RatingService {
+class ReviewService {
   /**
    * create new user
    * @static createuser
@@ -13,22 +13,22 @@ class RatingService {
    * @memberof userService
    * @returns {object} data
    */
-  static addRating(newRating) {
-    return Rating.create(newRating);
+  static addReview(newReview) {
+    return Review.create(newReview);
   }
   static findByProp(prop) {
-    return Rating.findAll({
+    return Review.findAll({
       where: prop,
     });
   }
  
   static updateAtt(set, prop) {
-    return Rating.update(set, {
+    return Review.update(set, {
       where: prop,
     });
   }
-  static getRating(id) {
-    return Rating.findAll(
+  static getReview(id) {
+    return Review.findAll(
       {
         where: {
           id,
@@ -39,7 +39,7 @@ class RatingService {
     );
   }
 //new
-  static getRating() {
+  static getReview() {
     return Rating.findAll(
       {
         attributes: ['id', 'accomodationId', 'rating', 'review'],
@@ -48,35 +48,35 @@ class RatingService {
   }
 
   /**
-   * Find a Rating in storage using login credentials.
+   * Find a Review in storage using login credentials.
    * @param {*} prop HTTP request
    * @returns {*} JSON data
    */
   static findByEmail(prop) {
-    return Rating.findOne({
+    return Review.findOne({
       where: { email: prop },
     });
   }
   static findById(modelId) {
-    return Rating.findOne({
+    return Review.findOne({
       where: { id: modelId },
     });
   }
   static drop(userEmail){
-    return Rating.drop({where: {
+    return Review.drop({where: {
       email: userEmail
     }})
   }
   static deleteById(userId){
-    return Rating.destroy({
+    return Review.destroy({
       where: { id: userId }
     })
   }
   static findBylineManagerId(lineManagerId){
-    return Rating.findOne({where:
+    return Review.findOne({where:
     {id: lineManagerId},
   });
 
   }
 }
-export default RatingService;
+export default ReviewService;

@@ -145,6 +145,11 @@ module.exports = {
         permissionName: 'rate_accomodations',
         createdAt: new Date(),
         updatedAt: new Date()
+      },
+      {
+        permissionName: 'reviews_accomodations',
+        createdAt: new Date(),
+        updatedAt: new Date()
       }
     ],
     {},
