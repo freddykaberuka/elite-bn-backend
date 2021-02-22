@@ -44,6 +44,19 @@ const util = new Util();
       return util.send(res);
     }
    }
+   static getReview =async (req, res)=>{
+    try{
+      const getReview = await ReviewService.getReview();
+      if(getReview){
+        util.setSuccess(200,'Reviews',getReview);
+        return util.send(res);
+      }
+      util.setError(400, error.message);
+    }catch(error){
+      util.setError(404,error.message);
+      return util.send(res);
+    }
+   }
 
 
 }

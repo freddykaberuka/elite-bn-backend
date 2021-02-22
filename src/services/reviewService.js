@@ -40,9 +40,9 @@ class ReviewService {
   }
 //new
   static getReview() {
-    return Rating.findAll(
+    return Review.findAll(
       {
-        attributes: ['id', 'accomodationId', 'rating', 'review'],
+        attributes: ['id', 'accomodationId', 'review'],
       },
     );
   }

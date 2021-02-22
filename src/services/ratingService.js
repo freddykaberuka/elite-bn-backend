@@ -42,7 +42,7 @@ class RatingService {
   static getRating() {
     return Rating.findAll(
       {
-        attributes: ['id', 'accomodationId', 'rating', 'review'],
+        attributes: ['id', 'accomodationId', 'rating'],
       },
     );
   }
