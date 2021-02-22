@@ -9,24 +9,23 @@ import {upload} from '../../../helpers/multer';
 import authorize from '../../../middlewares/userAuthorization';
 
 const router = express.Router();
-router
- .post('/signup', validateUserData.createUser, validateUserData.verifyIfEmailisAvailable ,UserController.signUp)
- .post('/signin', validateUserData.validateUserSigninData, validateUserData.verifySignin, UserController.signIn)
- .get('/verifyEmail/:token', validateUserData.verificationValidation ,UserController.accountVerification)
- .get('/auth/google/callback', passport.authenticate('google'), Social.Oauth)
- .get('/oauth/google', passport.authenticate('google', {scope: ['profile', 'email']}))
- .get('/oauth/facebook/', passport.authenticate('facebook', {scope: ['public_profile', 'email']}))
- .get('/facebook/callback', passport.authenticate('facebook'), Social.Oauth)
- .get('/profile/:id', UserAuthentication, UserController.getProfile)
- .patch('/updateProfile',upload.single('profilePicture'), UserAuthentication, UserController.updateProfile)
- .get('/logout/', validateUserData.logOutVerification, UserController.logOut)
- .patch('/updateRole/:id', authorize.userAuthorize, UserController.changeRole)
- .delete('/delete/:id', authorize.userAuthorize, UserController.deleteUser)
- .post('/forgotPassword', validateUserData.verifyEmail, UserController.forgetPassword)
- .put('/resetpassword/:newToken', validateUserData.validateResetPasswordData, UserController.resetPassword)
- .put('/assign/manager', validateUserData.assignManager, authorize.userAuthorize, UserController.assignUsers)
- .get('/getUser', authorize.userAuthorize,UserController.viewUsersManager)
- ;
+
+router.post('/signup', validateUserData.createUser, validateUserData.verifyIfEmailisAvailable ,UserController.signUp);
+router.post('/signin', validateUserData.validateUserSigninData, validateUserData.verifySignin, UserController.signIn);
+router.get('/verifyEmail/:token', validateUserData.verificationValidation ,UserController.accountVerification);
+router.get('/auth/google/callback', passport.authenticate('google'), Social.Oauth);
+router.get('/oauth/google', passport.authenticate('google', {scope: ['profile', 'email']}));
+router.get('/oauth/facebook/', passport.authenticate('facebook', {scope: ['public_profile', 'email']}));
+router.get('/facebook/callback', passport.authenticate('facebook'), Social.Oauth);
+router.get('/profile/:id', UserAuthentication, UserController.getProfile);
+router.patch('/updateProfile',upload.single('profilePicture'), UserAuthentication, UserController.updateProfile);
+router.get('/logout/', validateUserData.logOutVerification, UserController.logOut);
+router.patch('/updateRole/:id', authorize.userAuthorize, UserController.changeRole);
+router.delete('/delete/:id', authorize.userAuthorize, UserController.deleteUser);
+router.post('/forgotPassword', validateUserData.verifyEmail, UserController.forgetPassword);
+router.put('/resetpassword/:newToken', validateUserData.validateResetPasswordData, UserController.resetPassword);
+router.put('/assign/manager', validateUserData.assignManager, authorize.userAuthorize, UserController.assignUsers);
+router.get('/getUser', authorize.userAuthorize,UserController.viewUsersManager);
  
 export default router;
 
