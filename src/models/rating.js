@@ -17,10 +17,6 @@ module.exports = (sequelize, DataTypes) => {
     userId: DataTypes.INTEGER,
     accomodationId: DataTypes.INTEGER,
       rating: DataTypes.INTEGER,
-      review: {
-        type: DataTypes.STRING,
-        allowNull: true
-      }
   }, {
     sequelize,
     modelName: 'Rating',

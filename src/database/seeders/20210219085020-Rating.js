@@ -7,7 +7,6 @@ module.exports = {
         userId: 4,
         accomodationId: 1,
         rating: 3,
-        review: 'We got this hotel and it is becomming rags... Very angry',
         createdAt: new Date(),
         updatedAt: new Date(),
       }], {});

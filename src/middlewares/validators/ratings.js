@@ -1,6 +1,5 @@
 /*eslint-disable */
 import RatingsValidationSchema from '../../helpers/validateSchemas/rating';
-import ReviewsValidationSchema from '../../helpers/validateSchemas/review';
 import Util from '../../helpers/utils';
 import jwt from 'jsonwebtoken';
 import accomodationService from '../../services/accomodationServices';

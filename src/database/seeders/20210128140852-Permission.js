@@ -147,7 +147,7 @@ module.exports = {
         updatedAt: new Date()
       },
       {
-        permissionName: 'reviews_accomodations',
+        permissionName: 'review_accomodations',
         createdAt: new Date(),
         updatedAt: new Date()
       }
