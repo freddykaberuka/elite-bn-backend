@@ -13,7 +13,7 @@ const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.json());
-app.use(passport.initialize());
+app.use(passport.initialize()); 
 app.use(passport.session());
 router.use('/api-docs', swaggerUI.serve, swaggerUI.setup(swaggerDocs));
 app.use(router);
