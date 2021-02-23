@@ -6,6 +6,6 @@ import rateAndReviewController from '../../../controllers/rateAndReviewControlle
 const router = express.Router();
 
 router.post('/review', reviewValidator.doesAccomodationExists, reviewValidator.validate, reviewValidator.sendToken, authorize.userAuthorize, rateAndReviewController.reviewAccomodation);
-router.get('/allreviews', rateAndReviewController.getReview);
+router.get('/allreviews', reviewValidator.sendToken,rateAndReviewController.getReview);
 
 export default router;
