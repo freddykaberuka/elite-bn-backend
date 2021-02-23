@@ -7,8 +7,11 @@ import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
 import dotenv from 'dotenv';
 import { uploadToCloud } from '../helpers/cloud';
+import eventEmitter from '../helpers/notifications/eventEmitter';
+import { Listner } from '../helpers/notifications/eventListeners';
 import user from '../models/user';
 
+Listner.eventListners();
 dotenv.config();
 
 const util = new Util();
@@ -118,7 +121,6 @@ class User {
           util.setError(404, 'The user doesn\'t exist');
           return util.send(res);
         } catch (error) {
-            console.log('=============', error.message);
           util.setError(400, error.message);
           return util.send(res);
         }
@@ -245,10 +247,12 @@ class User {
 
     static assignUsers = async (req,res)=> {
         try{
+            const tokenId = req.userInfo.id;
             const { lineManagerId, id } = req.body;
             const lineManager = await userServices.findBylineManagerId(lineManagerId);
             if (lineManagerId){
                 const update = await userServices.updateAtt({lineManager: lineManagerId}, {id});
+                eventEmitter.emit('userAssignedToManager', { lineManagerId, id, tokenId});
                 util.setSuccess(200, 'user assigned to a manager successful');
                 return util.send(res);
             }

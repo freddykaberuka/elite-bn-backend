@@ -1,4 +1,4 @@
-module.exports = {
+        module.exports = {
   up: (queryInterface) => queryInterface.bulkInsert(
     'Users',
     [
@@ -68,7 +68,20 @@ module.exports = {
         token: null,
         createdAt: new Date(),
         updatedAt: new Date(),
-      },{
+      },
+      {
+        firstName: 'alexvacili1',
+        lastName: 'testing',
+        email: 'alexisvacilli1@gmail.com',
+        // requesterTest password is "admin1234"
+        password: '$2b$10$5bVBlFQxpo3.laIrak8wFuRk5RkfkmLd5N1EuHVTlLFUto/eEoGqe',
+        isVerified: true,
+        token: null,
+        roleId: 3,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
         firstName: 'Freddy',
         lastName: 'Cyusa',
         email: 'trojanx07@gmail.com',
@@ -78,7 +91,8 @@ module.exports = {
         token: null,
         createdAt: new Date(),
         updatedAt: new Date(),
-      },{
+      }
+      ,{
         firstName: 'William',
         lastName: 'James Sidis',
         email: 'jamessidis2000@gmail.com',
@@ -95,3 +109,5 @@ module.exports = {
 
   down: (queryInterface) => queryInterface.bulkDelete('Users', null, {}),
 };
+
+        
