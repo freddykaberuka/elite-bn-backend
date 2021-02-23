@@ -140,6 +140,16 @@ module.exports = {
         permissionName: 'get_users',
         createdAt: new Date(),
         updatedAt: new Date()
+      },
+      {
+        permissionName: 'rate_accomodations',
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+        permissionName: 'review_accomodations',
+        createdAt: new Date(),
+        updatedAt: new Date()
       }
     ],
     {},
