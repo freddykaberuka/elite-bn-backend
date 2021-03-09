@@ -72,7 +72,7 @@ class Social {
     };
     util.setSuccess(status, message, data);
     res.writeHead(302, {
-      Location: `http://localhost:8080/dashboard?name=${fullName}&email=${email}&roleId=${roleId}&token=${token}`
+      Location: `https://elite-staging.herokuapp.com/dashboard?name=${fullName}&email=${email}&roleId=${roleId}&token=${token}`
     });
     res.end();
     // return util.send(res);
