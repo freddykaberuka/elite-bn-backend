@@ -1,4 +1,3 @@
-
 /**
  * @swagger
  * /api/v1/users/assign/manager:

@@ -6,7 +6,7 @@ export default class Locations {
   // eslint-disable-next-line consistent-return
   static createLocations(req, res, next) {
     const {
-      error
+      error,
     } = schema.validate(req.body);
     if (error) {
       util.setError(400, error.message);

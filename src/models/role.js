@@ -1,5 +1,5 @@
 const {
-  Model
+  Model,
 } = require('sequelize');
 
 module.exports = (sequelize, DataTypes) => {
@@ -21,12 +21,12 @@ module.exports = (sequelize, DataTypes) => {
       Role.belongsToMany(models.Permission, {
         through: models.rolepermission,
         as: 'permissions',
-        foreignKey: 'role_id'
+        foreignKey: 'role_id',
       });
     }
   }
   Role.init({
-    name: DataTypes.STRING
+    name: DataTypes.STRING,
   }, {
     sequelize,
     modelName: 'Role',

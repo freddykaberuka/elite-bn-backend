@@ -17,7 +17,7 @@ export default class Accomodations {
         capacity: req.body.capacity,
         roomsLeft: req.body.roomsLeft,
         averageRating: req.body.averageRating,
-        image: accomodationImage.url
+        image: accomodationImage.url,
       };
       const newAccomodation = await accomodationService.create(accomodation);
       util.setSuccess(201, 'You have successfully created an accomodation', newAccomodation);
@@ -82,7 +82,7 @@ export default class Accomodations {
         capacity: req.body.capacity,
         roomsLeft: req.body.roomsLeft,
         averageRating: req.body.averageRating,
-        image: accomodationImage.url
+        image: accomodationImage.url,
       }, { id });
       if (updated) {
         util.setSuccess(200, 'You have successfuly updated an accomodation');

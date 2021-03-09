@@ -18,7 +18,7 @@ class RoleService {
       include: [
         {
           model: Permission,
-          as: 'permissions'
+          as: 'permissions',
         },
       ],
     });
@@ -35,7 +35,7 @@ class RoleService {
       include: [
         {
           model: Permission,
-          as: 'permissions'
+          as: 'permissions',
         },
       ],
     });

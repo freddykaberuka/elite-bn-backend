@@ -15,7 +15,7 @@
  *        consumes:
  *         - application/json
  *        security:
- *          - Bearer: []  
+ *          - Bearer: []
  *        parameters:
  *         - name: Authorization
  *           in: header
@@ -56,7 +56,7 @@
  *        consumes:
  *         - application/json
  *        security:
- *          - Bearer: []  
+ *          - Bearer: []
  *        parameters:
  *         - name: Authorization
  *           in: header
@@ -96,7 +96,7 @@
  *        summary: "User should be able to get all accommodations"
  *        description: "Pass the token after signin"
  *        security:
- *          - Bearer: []  
+ *          - Bearer: []
  *        parameters:
  *         - name: Authorization
  *           in: header
@@ -107,7 +107,6 @@
  *           description: "Accomodation does not exist"
  *
  */
-
 
 /**
  * @swagger
@@ -124,7 +123,7 @@
  *        summary: "User should be able to get all ratings of an accommodation"
  *        description: "Pass the token after signin"
  *        security:
- *          - Bearer: []  
+ *          - Bearer: []
  *        parameters:
  *         - name: Authorization
  *           in: header

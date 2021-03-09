@@ -95,8 +95,8 @@ class AccomodationsService {
   static findWithoutId(ids) {
     return Accomodations.findAll({
       where: {
-        [Op.not]: { id: ids }
-      }
+        [Op.not]: { id: ids },
+      },
     });
   }
 }

@@ -1,5 +1,5 @@
 const {
-  Model
+  Model,
 } = require('sequelize');
 
 module.exports = (sequelize, DataTypes) => {
@@ -23,36 +23,36 @@ module.exports = (sequelize, DataTypes) => {
     password: DataTypes.STRING,
     isVerified: {
       type: DataTypes.STRING,
-      defaultValue: false
+      defaultValue: false,
     },
     firstName: DataTypes.STRING,
     lastName: DataTypes.STRING,
     token: {
       type: DataTypes.TEXT,
-      allowNull: true
+      allowNull: true,
     },
     profilePicture: {
       type: DataTypes.STRING,
     },
     officeAddres: {
-      type: DataTypes.STRING
+      type: DataTypes.STRING,
     },
     preferedLanguage: {
-      type: DataTypes.STRING
+      type: DataTypes.STRING,
     },
     lineManager: {
-      type: DataTypes.INTEGER
+      type: DataTypes.INTEGER,
     },
     roleId: {
       type: DataTypes.INTEGER,
-      defaultValue: '4'
+      defaultValue: '4',
     },
     googleId: {
-      type: DataTypes.STRING
+      type: DataTypes.STRING,
     },
     facebookId: {
-      type: DataTypes.STRING
-    }
+      type: DataTypes.STRING,
+    },
   }, {
     sequelize,
     modelName: 'User',

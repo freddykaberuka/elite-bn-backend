@@ -1,5 +1,5 @@
 const {
-  Model
+  Model,
 } = require('sequelize');
 
 module.exports = (sequelize, DataTypes) => {
@@ -15,7 +15,7 @@ module.exports = (sequelize, DataTypes) => {
   }
   rolepermission.init({
     role_id: DataTypes.STRING,
-    permission_id: DataTypes.STRING
+    permission_id: DataTypes.STRING,
   }, {
     sequelize,
     modelName: 'rolepermission',

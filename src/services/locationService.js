@@ -3,7 +3,7 @@ import models from '../models';
 // eslint-disable-next-line import/no-duplicates
 
 const {
-  Locations
+  Locations,
 } = models;
 /**
  * @exports

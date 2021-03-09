@@ -5,7 +5,7 @@ module.exports = {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
       },
       userId: {
         type: Sequelize.INTEGER,
@@ -13,8 +13,8 @@ module.exports = {
         reference: {
           model: 'User',
           key: 'id',
-          as: 'userId'
-        }
+          as: 'userId',
+        },
       },
       accomodationId: {
         type: Sequelize.INTEGER,
@@ -22,24 +22,24 @@ module.exports = {
         reference: {
           model: 'Accommodation',
           key: 'id',
-          as: 'accommodationId'
-        }
+          as: 'accommodationId',
+        },
       },
       rating: {
         type: Sequelize.INTEGER,
-        allowNull: false
+        allowNull: false,
       },
       createdAt: {
         allowNull: false,
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
       },
       updatedAt: {
         allowNull: false,
-        type: Sequelize.DATE
-      }
+        type: Sequelize.DATE,
+      },
     });
   },
   down: async (queryInterface, Sequelize) => {
     await queryInterface.dropTable('Ratings');
-  }
+  },
 };

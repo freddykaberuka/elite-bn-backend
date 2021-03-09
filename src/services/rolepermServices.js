@@ -20,7 +20,7 @@ class rolePermService {
 
   static findPermByRole(roleId) {
     return rolepermission.findOne({
-      where: { role_id: modelId }
+      where: { role_id: modelId },
     });
   }
 

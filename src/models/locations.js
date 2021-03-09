@@ -1,5 +1,5 @@
 const {
-  Model
+  Model,
 } = require('sequelize');
 
 module.exports = (sequelize, DataTypes) => {
@@ -21,7 +21,7 @@ module.exports = (sequelize, DataTypes) => {
   }
   Locations.init({
     location_id: DataTypes.INTEGER,
-    name: DataTypes.STRING
+    name: DataTypes.STRING,
   }, {
     sequelize,
     modelName: 'Locations',

@@ -1,4 +1,3 @@
-'use strict';
 module.exports = {
   up: async (queryInterface, Sequelize) => {
     await queryInterface.createTable('Bookings', {
@@ -6,35 +5,35 @@ module.exports = {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
       },
       checkinDate: {
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
       },
       checkoutDate: {
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
       },
       UserId: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
       },
       AccomodationId: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
       },
       isAvailable: {
         type: Sequelize.BOOLEAN,
-        defaultValue: false
+        defaultValue: false,
       },
       createdAt: {
         allowNull: false,
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
       },
       updatedAt: {
         allowNull: false,
-        type: Sequelize.DATE
-      }
+        type: Sequelize.DATE,
+      },
     });
   },
   down: async (queryInterface, Sequelize) => {
     await queryInterface.dropTable('Bookings');
-  }
+  },
 };

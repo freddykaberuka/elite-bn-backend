@@ -1,5 +1,5 @@
 const {
-  Model
+  Model,
 } = require('sequelize');
 
 module.exports = (sequelize, DataTypes) => {
@@ -22,8 +22,8 @@ module.exports = (sequelize, DataTypes) => {
     message: DataTypes.TEXT,
     isRead: {
       type: DataTypes.BOOLEAN,
-      defaultValue: false
-    }
+      defaultValue: false,
+    },
   }, {
     sequelize,
     modelName: 'notifications',

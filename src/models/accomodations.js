@@ -1,5 +1,5 @@
 const {
-  Model
+  Model,
 } = require('sequelize');
 
 module.exports = (sequelize, DataTypes) => {
@@ -15,7 +15,7 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: 'location_id',
         onDelete: 'cascade',
         onUpdate: 'cascade',
-        as: 'Accomodations'
+        as: 'Accomodations',
       });
     }
   }

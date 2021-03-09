@@ -9,7 +9,7 @@ chai.should();
 chai.use(chaiHttp);
 const user = {
   email: 'neddyberry@gmail.com',
-  password: 'admin1234'
+  password: 'admin1234',
 };
 let userToken = '';
 let userId = '';
