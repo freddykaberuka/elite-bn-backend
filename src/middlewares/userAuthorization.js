@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 import jwt from 'jsonwebtoken';
 import Util from '../helpers/utils';
 import rolePermServices from '../services/rolepermServices';
@@ -17,7 +18,7 @@ class authorization {
       const user = jwt.verify(token, process.env.PRIVATE_KEY);
       const userRoleId = user.roleId;
 
-      if (userRoleId == 1) {
+      if (userRoleId === 1) {
         req.userInfo = user;
         return next();
       }
@@ -28,15 +29,18 @@ class authorization {
         permissionIds.push(element.permission_id);
       });
 
-      const permission = await permissionServices.findPermIbByPermName(permission_name);
+      const permission = await permissionServices.findPermIbByPermName(
+        permission_name,
+      );
       const permissionId = permission.id;
       const allowed = permissionIds.indexOf(permissionId);
 
       if (allowed == -1) {
-        util.setError(401, 'you don\'t have authorization to perform this task');
+        util.setError(401, "you don't have authorization to perform this task");
         return util.send(res);
       }
       req.userInfo = user;
+
       return next();
     } catch (error) {
       util.setError(400, error.message);

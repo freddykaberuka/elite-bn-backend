@@ -1,6 +1,4 @@
-const {
-  Model,
-} = require('sequelize');
+const { Model } = require('sequelize');
 
 module.exports = (sequelize, DataTypes) => {
   class User extends Model {
@@ -16,46 +14,58 @@ module.exports = (sequelize, DataTypes) => {
         onUpdate: 'CASCADE',
         foreignKeyConstraint: true,
       });
+      User.hasMany(models.Trip, {
+        foreignKey: 'user_id',
+        as: 'requester',
+      });
+
+      User.hasMany(models.User, {
+        foreignKey: 'lineManager',
+        as: 'manager',
+      });
     }
   }
-  User.init({
-    email: DataTypes.STRING,
-    password: DataTypes.STRING,
-    isVerified: {
-      type: DataTypes.STRING,
-      defaultValue: false,
+  User.init(
+    {
+      email: DataTypes.STRING,
+      password: DataTypes.STRING,
+      isVerified: {
+        type: DataTypes.STRING,
+        defaultValue: false,
+      },
+      firstName: DataTypes.STRING,
+      lastName: DataTypes.STRING,
+      token: {
+        type: DataTypes.TEXT,
+        allowNull: true,
+      },
+      profilePicture: {
+        type: DataTypes.STRING,
+      },
+      officeAddres: {
+        type: DataTypes.STRING,
+      },
+      preferedLanguage: {
+        type: DataTypes.STRING,
+      },
+      lineManager: {
+        type: DataTypes.INTEGER,
+      },
+      roleId: {
+        type: DataTypes.INTEGER,
+        defaultValue: '4',
+      },
+      googleId: {
+        type: DataTypes.STRING,
+      },
+      facebookId: {
+        type: DataTypes.STRING,
+      },
     },
-    firstName: DataTypes.STRING,
-    lastName: DataTypes.STRING,
-    token: {
-      type: DataTypes.TEXT,
-      allowNull: true,
+    {
+      sequelize,
+      modelName: 'User',
     },
-    profilePicture: {
-      type: DataTypes.STRING,
-    },
-    officeAddres: {
-      type: DataTypes.STRING,
-    },
-    preferedLanguage: {
-      type: DataTypes.STRING,
-    },
-    lineManager: {
-      type: DataTypes.INTEGER,
-    },
-    roleId: {
-      type: DataTypes.INTEGER,
-      defaultValue: '4',
-    },
-    googleId: {
-      type: DataTypes.STRING,
-    },
-    facebookId: {
-      type: DataTypes.STRING,
-    },
-  }, {
-    sequelize,
-    modelName: 'User',
-  });
+  );
   return User;
 };

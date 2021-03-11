@@ -9,6 +9,7 @@ import bookingRoutes from './booking/booking';
 import notificationsRoutes from './notifications/notifications';
 import ratingRoutes from './rating/rating';
 import reviewRoutes from './review/review';
+import tripRoutes from './trip/tripRoutes';
 
 const router = express.Router();
 router.use('/users', userRoutes);
@@ -21,5 +22,6 @@ router.use('/booking', bookingRoutes);
 router.use('/notifications', notificationsRoutes);
 router.use('/rating', ratingRoutes);
 router.use('/review', reviewRoutes);
+router.use('/trip', tripRoutes);
 
 export default router;

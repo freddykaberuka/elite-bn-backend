@@ -1,6 +1,4 @@
-const {
-  Model,
-} = require('sequelize');
+const { Model } = require('sequelize');
 
 module.exports = (sequelize, DataTypes) => {
   class Accomodations extends Model {
@@ -17,23 +15,31 @@ module.exports = (sequelize, DataTypes) => {
         onUpdate: 'cascade',
         as: 'Accomodations',
       });
+      Accomodations.hasMany(models.Trip, {
+        foreignKey: 'accomodationId',
+        onDelete: 'CASCADE',
+        as: 'accomodation',
+      });
     }
   }
-  Accomodations.init({
-    name: DataTypes.STRING,
-    description: DataTypes.TEXT,
-    location_id: DataTypes.STRING,
-    cost: DataTypes.INTEGER,
-    image: DataTypes.STRING,
-    facilities: {
-      type: DataTypes.ARRAY(DataTypes.STRING),
+  Accomodations.init(
+    {
+      name: DataTypes.STRING,
+      description: DataTypes.TEXT,
+      location_id: DataTypes.STRING,
+      cost: DataTypes.INTEGER,
+      image: DataTypes.STRING,
+      facilities: {
+        type: DataTypes.ARRAY(DataTypes.STRING),
+      },
+      capacity: DataTypes.INTEGER,
+      roomsLeft: DataTypes.INTEGER,
+      averageRating: DataTypes.INTEGER,
     },
-    capacity: DataTypes.INTEGER,
-    roomsLeft: DataTypes.INTEGER,
-    averageRating: DataTypes.INTEGER,
-  }, {
-    sequelize,
-    modelName: 'Accomodations',
-  });
+    {
+      sequelize,
+      modelName: 'Accomodations',
+    },
+  );
   return Accomodations;
 };
