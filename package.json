@@ -41,9 +41,6 @@
     "chai-http": "^4.3.0",
     "cloudinary": "^1.23.0",
     "dotenv": "^8.2.0",
-    "eslint": "^7.17.0",
-    "eslint-config-airbnb-base": "^14.2.1",
-    "eslint-plugin-import": "^2.22.1",
     "express": "^4.17.1",
     "express-fileupload": "^1.2.1",
     "fs": "0.0.1-security",
@@ -79,6 +76,9 @@
     "@babel/register": "^7.12.10",
     "chai": "^4.2.0",
     "coveralls": "^3.1.0",
+    "eslint": "^7.21.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-plugin-import": "^2.22.1",
     "mocha": "^8.2.1",
     "sinon": "^9.2.3"
   }

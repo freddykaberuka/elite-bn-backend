@@ -8,7 +8,7 @@ export default class locations {
     try {
       const location = {
         location_id: req.body.location_id,
-        name: req.body.name
+        name: req.body.name,
       };
       const newLocation = await locationService.createlocation(location);
       util.setSuccess(200, 'You have successfuly created a location', newLocation);

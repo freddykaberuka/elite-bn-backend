@@ -8,11 +8,11 @@ chai.use(chaiHttp);
 
 const requester = {
   email: 'neddyberry@gmail.com',
-  password: 'admin1234'
+  password: 'admin1234',
 };
 const admin = {
   email: 'admin@barefoot.com',
-  password: 'admin1234'
+  password: 'admin1234',
 };
 const permission = 'get_rolepermission';
 
@@ -72,7 +72,7 @@ describe('Rolepermissions/', () => {
       .post('/api/v1/rolesPermissions/save')
       .send({
         role_id: '100',
-        permission_id: '100'
+        permission_id: '100',
       })
       .set('authorization', adminToken)
       .end((err, response) => {

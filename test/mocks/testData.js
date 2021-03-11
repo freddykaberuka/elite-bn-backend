@@ -9,6 +9,6 @@ const mockData = {
     lastName: 'test2',
     preferedLanguage: 'english',
     officeAddres: 'kigali, rwanda',
-  }
+  },
 };
 export default mockData;

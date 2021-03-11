@@ -10,18 +10,18 @@ chai.should();
 
 const manager = {
   email: 'trojanx07@gmail.com',
-  password: 'admin1234'
+  password: 'admin1234',
 };
 const user = {
   email: 'neddyberry@gmail.com',
-  password: 'admin1234'
+  password: 'admin1234',
 };
 
 let token = '';
 let Usertoken = '';
-let userId= '';
-let managerId='';
-let notificationId= '';
+let userId = '';
+let managerId = '';
+let notificationId = '';
 const permissionName = 'assignUsertoManager';
 const { it, describe } = mocha;
 describe('User Assign tests', () => {
@@ -32,7 +32,7 @@ describe('User Assign tests', () => {
       .end((err, response) => {
         response.should.have.status(200);
         token = response.body.data.token;
-        managerId= response.body.data.userInfo.id;
+        managerId = response.body.data.userInfo.id;
         done();
       });
   });
@@ -43,7 +43,7 @@ describe('User Assign tests', () => {
       .end((err, response) => {
         response.should.have.status(200);
         Usertoken = response.body.data.token;
-        userId= response.body.data.userInfo.id;
+        userId = response.body.data.userInfo.id;
         done();
       });
   });
@@ -84,5 +84,4 @@ describe('User Assign tests', () => {
         done();
       });
   });
-
 });

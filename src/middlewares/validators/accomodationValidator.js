@@ -6,7 +6,7 @@ export default class Accomodation {
   // eslint-disable-next-line consistent-return
   static createAccomodation(req, res, next) {
     const {
-      error
+      error,
     } = schema.validate(req.body);
     if (error) {
       util.setError(400, error.message);

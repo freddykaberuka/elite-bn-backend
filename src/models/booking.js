@@ -1,7 +1,7 @@
-'use strict';
 const {
-  Model
+  Model,
 } = require('sequelize');
+
 module.exports = (sequelize, DataTypes) => {
   class Booking extends Model {
     /**
@@ -14,7 +14,7 @@ module.exports = (sequelize, DataTypes) => {
       Booking.belongsTo(models.Accomodations);
       Booking.belongsTo(models.User);
     }
-  };
+  }
   Booking.init({
     checkinDate: DataTypes.DATE,
     checkoutDate: DataTypes.DATE,
@@ -22,8 +22,8 @@ module.exports = (sequelize, DataTypes) => {
     AccomodationId: DataTypes.INTEGER,
     isAvailable: {
       type: DataTypes.BOOLEAN,
-      defaultValue: false
-    }
+      defaultValue: false,
+    },
   }, {
     sequelize,
     modelName: 'Booking',

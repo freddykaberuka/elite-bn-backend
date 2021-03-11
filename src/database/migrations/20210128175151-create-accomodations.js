@@ -5,19 +5,19 @@ module.exports = {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
       },
       name: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
       },
       description: {
-        type: Sequelize.TEXT
+        type: Sequelize.TEXT,
       },
       location_id: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
       },
       cost: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
       },
       image: {
         type: Sequelize.STRING,
@@ -27,25 +27,25 @@ module.exports = {
       },
       capacity: {
         type: Sequelize.INTEGER,
-        defaultValue: 0
+        defaultValue: 0,
       },
       roomsLeft: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
       },
       averageRating: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
       },
       createdAt: {
         allowNull: false,
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
       },
       updatedAt: {
         allowNull: false,
-        type: Sequelize.DATE
-      }
+        type: Sequelize.DATE,
+      },
     });
   },
   down: async (queryInterface, Sequelize) => {
     await queryInterface.dropTable('Accomodations');
-  }
+  },
 };

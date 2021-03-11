@@ -9,7 +9,7 @@ const accomodationSchema = joi.object({
   capacity: joi.number().required().min(0),
   roomsLeft: joi.number(),
   cost: joi.number().required(),
-  averageRating: joi.number().min(1).max(5)
+  averageRating: joi.number().min(1).max(5),
 
 });
 
