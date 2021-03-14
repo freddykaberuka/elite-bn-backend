@@ -149,11 +149,18 @@ module.exports = {
     },
     {
       role_id: '4',
+      permission_id: '31',
+      createdAt: new Date(),
+      updatedAt: new Date(),
+    },
+    {
+      role_id: '4',
       permission_id: '30',
       createdAt: new Date(),
       updatedAt: new Date(),
     }], {});
   },
+  
 
   down: (queryInterface) => queryInterface.bulkDelete('rolepermissions', null, {}),
 };
