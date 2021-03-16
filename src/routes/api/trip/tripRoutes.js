@@ -2,21 +2,31 @@ import asyncHandler from 'express-async-handler';
 import { Router } from 'express';
 import tripController from '../../../controllers/tripController';
 import authorize from '../../../middlewares/userAuthorization';
-import checkTripOwner from '../../../middlewares/checkTripOwner';
 import commentController from '../../../controllers/tripComment';
 
 const router = Router();
 
 router
-  .route('/findById/:id')
+  .route('/:page/:itemsPerPage')
   .get(
     authorize.userAuthorize,
-    checkTripOwner,
-    asyncHandler(tripController.findTrip),
+    asyncHandler(tripController.findAllTrips),
   );
 router
-  .route('/save')
+  .route('/')
   .post(authorize.userAuthorize, asyncHandler(tripController.create));
+router
+  .route('/cancel-travel-request/:id')
+  .patch(authorize.userAuthorize, asyncHandler(tripController.cancelRequest));
+router
+  .route('/approve-travel-request/:id')
+  .patch(authorize.userAuthorize, asyncHandler(tripController.approveRequest));
+router
+  .route('/reject-travel-request/:id')
+  .patch(authorize.userAuthorize, asyncHandler(tripController.rejectRequest));
+router
+  .route('/update-travel-request/:id')
+  .patch(authorize.userAuthorize, asyncHandler(tripController.updateTrip));
 
 // comment
 router.post('/:id/comment', authorize.userAuthorize, commentController.createComment);

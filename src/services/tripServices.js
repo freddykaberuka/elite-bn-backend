@@ -16,5 +16,34 @@ class TripsService {
       where: { id: modelId },
     });
   }
+
+  static getAllTripsByRole(condition, skip, itemsPerPage) {
+    return Trip.findAndCountAll({
+      where: condition,
+      offset: skip,
+      limit: itemsPerPage,
+      include: [
+        {
+          model: models.Accomodations,
+          as: 'accomodation',
+        },
+        {
+          model: models.Locations,
+          as: 'to',
+          attributes: ['name'],
+        },
+        {
+          model: models.User,
+          as: 'requester',
+          attributes: ['firstName', 'lastName', 'email'],
+        }],
+    });
+  }
+
+  static updateTrip(set, prop) {
+    return Trip.update(set, {
+      where: prop,
+    });
+  }
 }
 export default TripsService;
