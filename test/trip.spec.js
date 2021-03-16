@@ -2,7 +2,9 @@ import { it, describe } from 'mocha';
 import chai, { expect } from 'chai';
 import chaiHttp from 'chai-http';
 import app from '../src/index';
-import { signin, trip, signin2, trip2 } from './mocks/tripMocks';
+import {
+  signin, trip, signin2, trip2,
+} from './mocks/tripMocks';
 
 chai.expect();
 chai.use(chaiHttp);
@@ -22,6 +24,9 @@ const signIn = async (user) => {
 const permission = 'create_t_request';
 const permission2 = 'xxxxxx';
 const permission3 = 'view_t_request';
+let page = 1;
+let tripId = 0;
+const itemsPerPage = 20;
 
 describe('Travel request', () => {
   it('should create a trip', async () => {
@@ -30,12 +35,14 @@ describe('Travel request', () => {
 
     const res = await chai
       .request(app)
-      .post('/api/v1/trip/save')
+      .post('/api/v1/trips/')
       .set('authorization', token)
       .set('permission_name', permission)
       .send(trip);
 
     expect(res.status).to.be.equal(201);
+    expect(await res.body).to.have.property('data');
+    tripId = res.body.data.id;
     expect(res.body).to.have.property(
       'message',
       'You have successfully created a trip',
@@ -47,7 +54,7 @@ describe('Travel request', () => {
 
     const res = await chai
       .request(app)
-      .post('/api/v1/trip/save')
+      .post('/api/v1/trips/')
       .set('authorization', token)
       .set('permission_name', permission2)
       .send(trip);
@@ -57,7 +64,7 @@ describe('Travel request', () => {
   it('Invalid Token', async () => {
     const res = await chai
       .request(app)
-      .post('/api/v1/trip/save')
+      .post('/api/v1/trips/')
       .set('permission_name', permission2)
       .send(trip);
 
@@ -70,28 +77,30 @@ describe('Travel request', () => {
 
     const res = await chai
       .request(app)
-      .get('/api/v1/trip/findById/1')
+      .get(`/api/v1/trips/${page}/${itemsPerPage}`)
       .set('authorization', token)
       .set('permission_name', permission3);
 
     expect(res.status).to.be.equal(200);
     expect(res.body).to.have.property(
       'message',
-      'You have successfully fetched the trip',
+      'You have successfully fetched the trips',
     );
   });
-  it('Trip Not found', async () => {
+  it('Page Not found', async () => {
     const userData = await signIn(signin);
     const { token } = userData;
 
+    page = 200000;
+
     const res = await chai
       .request(app)
-      .get('/api/v1/trip/findById/5')
+      .get(`/api/v1/trips/${page}/${itemsPerPage}`)
       .set('authorization', token)
       .set('permission_name', permission3);
 
-    expect(res.status).to.be.equal(404);
-    expect(res.body).to.have.property('message', 'Trip not found');
+    expect(res.status).to.be.equal(403);
+    expect(res.body).to.have.property('message', 'No trip added yet or page not found.');
   });
   it('Not allowed To View Trip', async () => {
     const userData = await signIn(signin2);
@@ -99,14 +108,14 @@ describe('Travel request', () => {
 
     const res = await chai
       .request(app)
-      .get('/api/v1/trip/findById/1')
+      .get(`/api/v1/trips/${page}/${itemsPerPage}`)
       .set('authorization', token)
       .set('permission_name', permission3);
 
-    expect(res.status).to.be.equal(403);
+    expect(res.status).to.be.equal(500);
     expect(res.body).to.have.property(
       'message',
-      'not allowed to view this trip',
+      'No trip added yet or page not found.',
     );
   });
   it('Trip valiolation', async () => {
@@ -115,7 +124,7 @@ describe('Travel request', () => {
 
     const res = await chai
       .request(app)
-      .post('/api/v1/trip/save')
+      .post('/api/v1/trips/')
       .set('authorization', token)
       .set('permission_name', permission)
       .send(trip2);
@@ -124,6 +133,55 @@ describe('Travel request', () => {
     expect(res.body).to.have.property(
       'message',
       'notNull Violation: Trip.reason cannot be null',
+    );
+  });
+
+  it('should cancel travel request', async () => {
+    const userData = await signIn(signin);
+    const { token } = userData;
+    console.log(tripId);
+    const res = await chai
+      .request(app)
+      .patch(`/api/v1/trips/cancel-travel-request/${tripId}`)
+      .set('authorization', token)
+      .set('permission_name', permission);
+
+    expect(res.status).to.be.equal(201);
+    expect(res.body).to.have.property(
+      'message',
+      'You have successfully canceled the trip',
+    );
+  });
+
+  it('should not cancel  travel request that was canceled', async () => {
+    const userData = await signIn(signin);
+    const { token } = userData;
+    const res = await chai
+      .request(app)
+      .patch(`/api/v1/trips/cancel-travel-request/${tripId}`)
+      .set('authorization', token)
+      .set('permission_name', permission);
+
+    expect(res.status).to.be.equal(401);
+    expect(res.body).to.have.property(
+      'message',
+      'Trip was already canceled.',
+    );
+  });
+
+  it('should not cancel  travel request that is not available', async () => {
+    const userData = await signIn(signin);
+    const { token } = userData;
+    const res = await chai
+      .request(app)
+      .patch(`/api/v1/trips/cancel-travel-request/${-5}`)
+      .set('authorization', token)
+      .set('permission_name', permission);
+
+    expect(res.status).to.be.equal(401);
+    expect(res.body).to.have.property(
+      'message',
+      'Cancelling trip has failed.',
     );
   });
 });

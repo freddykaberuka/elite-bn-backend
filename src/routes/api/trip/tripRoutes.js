@@ -2,19 +2,20 @@ import asyncHandler from 'express-async-handler';
 import { Router } from 'express';
 import tripController from '../../../controllers/tripController';
 import authorize from '../../../middlewares/userAuthorization';
-import checkTripOwner from '../../../middlewares/checkTripOwner';
 
 const router = Router();
 
 router
-  .route('/findById/:id')
+  .route('/:page/:itemsPerPage')
   .get(
     authorize.userAuthorize,
-    checkTripOwner,
-    asyncHandler(tripController.findTrip),
+    asyncHandler(tripController.findAllTrips),
   );
 router
-  .route('/save')
+  .route('/')
   .post(authorize.userAuthorize, asyncHandler(tripController.create));
+router
+  .route('/cancel-travel-request/:id')
+  .patch(authorize.userAuthorize, asyncHandler(tripController.cancelRequest));
 
 export default router;

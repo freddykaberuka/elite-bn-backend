@@ -16,8 +16,7 @@ module.exports = {
         allowNull: false,
       },
       destination: {
-        type: Sequelize.ARRAY(Sequelize.STRING),
-        default: [],
+        type: Sequelize.INTEGER,
       },
       travelDate: {
         type: Sequelize.DATE,
@@ -42,8 +41,8 @@ module.exports = {
         type: Sequelize.INTEGER,
       },
       status: {
-        type: Sequelize.STRING,
-        default: false,
+        type: Sequelize.ENUM('pending', 'approved', 'canceled', 'rejected'),
+        defaultValue: 'pending',
       },
       createdAt: {
         allowNull: false,

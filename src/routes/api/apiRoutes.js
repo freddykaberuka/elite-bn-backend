@@ -22,6 +22,6 @@ router.use('/booking', bookingRoutes);
 router.use('/notifications', notificationsRoutes);
 router.use('/rating', ratingRoutes);
 router.use('/review', reviewRoutes);
-router.use('/trip', tripRoutes);
+router.use('/trips', tripRoutes);
 
 export default router;
