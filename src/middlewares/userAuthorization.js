@@ -1,8 +1,8 @@
 /* eslint-disable camelcase */
-import jwt from 'jsonwebtoken';
-import Util from '../helpers/utils';
-import rolePermServices from '../services/rolepermServices';
-import permissionServices from '../services/permissionServices';
+import jwt from "jsonwebtoken";
+import Util from "../helpers/utils";
+import rolePermServices from "../services/rolepermServices";
+import permissionServices from "../services/permissionServices";
 
 const util = new Util();
 class authorization {
@@ -10,10 +10,10 @@ class authorization {
     try {
       const authToken = req.headers;
       if (!authToken.authorization) {
-        util.setError(401, 'Token Required');
+        util.setError(401, "Token Required");
         return util.send(res);
       }
-      const token = authToken.authorization.replace('Bearer ', '');
+      const token = authToken.authorization.replace("Bearer ", "");
 
       const user = jwt.verify(token, process.env.PRIVATE_KEY);
       const userRoleId = user.roleId;
@@ -30,12 +30,12 @@ class authorization {
       });
 
       const permission = await permissionServices.findPermIbByPermName(
-        permission_name,
+        permission_name
       );
       const permissionId = permission.id;
       const allowed = permissionIds.indexOf(permissionId);
 
-      if (allowed == -1) {
+      if (allowed === -1) {
         util.setError(401, "you don't have authorization to perform this task");
         return util.send(res);
       }
