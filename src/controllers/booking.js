@@ -26,13 +26,27 @@ export default class  Booking{
               return util.send(res);
         }catch(error){
             util.setError(500, error.message);
+            console.log(error);
             return util.send(res);
         }
     }
+
+
     static async allBookedAccomodations(req, res){
         try{
+            
             const UserId = await jwt.verify(req.headers['authorization'].split(' ')[1], process.env.PRIVATE_KEY).id;
-            const bookedAcc =  await bookingService.getMultipleBooking({UserId:UserId});
+            const bookedAcc =  await bookingService.getMultipleBooking({UserId:UserId, isAvailable: false});
+
+            // checking out expired accomodations
+            const currentDate = new Date().setHours(0,0,0,0);
+            const accomodationId = bookedAcc.accomodationId;
+            if(bookedAcc.checkoutDate < currentDate){
+            const availability = await bookingService.updateAtt({isAvailable: true}, {id:bookedAcc.id });
+            const updateRooms = await accomodationService.updateAtt({roomsLeft: (accomodationDetails[0].dataValues.roomsLeft +1)}, {id:accomodationId });
+            util.setSuccess(201, "updated Booked Accomodations", bookedAcc);
+            return util.send(res);
+            }
 
             util.setSuccess(200, "All Booked Accomodations", bookedAcc);
             return util.send(res);
@@ -49,6 +63,7 @@ export default class  Booking{
             const bookedAcc =  await bookingService.getIdsOnCondition({UserId:UserId});
             bookedAcc.forEach((accomodation)=>{
                 forbiddenAccomodations.push(accomodation.dataValues.id);
+                
             });
             if(forbiddenAccomodations == null || forbiddenAccomodations.length == 0){
                 const availableAccomodations = await accomodationService.getAccomodations();

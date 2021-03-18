@@ -52,21 +52,11 @@ class AccomodationsService {
     });
   }
 
-  // static findById(modelId) {
-  //   return Accomodations.findOne({
-  //     where: { id: modelId },
-  //     include: {
-  //       models: reviews,
-  //       as: 'Reviews',
-  //       attributes: ['rate', 'comment'],
-  //       include: {
-  //         models: Users,
-  //         as: 'userInfo',
-  //         attributes: ['firstName', 'email', 'profilePicture'],
-  //       },
-  //     },
-  //   });
-  // }
+  static findById(modelId) {
+    return Accomodations.findOne({
+      where: { id: modelId },
+    });
+  }
 
   static findByIdAndLocation(Id, destination) {
     return Accomodations.findOne({
@@ -85,7 +75,7 @@ class AccomodationsService {
 
   static findByAccomoId(prop) {
     return Accomodations.findAll({
-      where: prop,
+      where: { id: prop },
       attributes: {
         exclude: ['facilities', 'location_id', 'description', 'updatedAt', 'createdAt'],
       },
