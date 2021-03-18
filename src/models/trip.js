@@ -29,6 +29,11 @@ module.exports = (sequelize, DataTypes) => {
         foreignKeyConstraint: true,
         as: 'accomodation',
       });
+
+      Trip.hasMany(models.comment, {
+        foreignKey: 'tripId',
+        as: 'Trip',
+      });
     }
   }
   Trip.init(
