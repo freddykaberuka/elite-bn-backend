@@ -67,6 +67,39 @@ class TripController {
       return util.send(res);
     });
   }
+
+
+  static async updateTrip(req, res) {
+    const { id: userId } = req.userInfo;
+    const { id: tripId } = req.params;
+    const trip = await tripServices.findById(tripId);
+    if (!trip || trip.user_id !== userId) {
+      util.setError(401, 'You don\'t own this trip.');
+      return util.send(res);
+    }
+    const data ={
+      orgin: req.body.orgin || trip.orgin,
+      destination: req.body.destination || trip.destination,
+      reason: req.body.reason || trip.reason,
+      type: req.body.type || trip.type,
+      returnDate: req.body.returnDate || trip.returnDate,
+      accomodationId: req.body.accomodationId || trip.accomodationId,
+      lineManager: req.body.lineManager || trip.lineManager,
+      status: 'pending'
+    };
+
+
+    tripServices.updateTrip(data, { id: tripId }).then((result) => {
+      util.setSuccess(201, 'You have successfully edited the trip', result);
+      return util.send(res);
+    }).catch(() => {
+      util.setError(500, 'Something is wrong');
+      return util.send(res);
+    });
+  }
+
+
+
 }
 
 export default TripController;

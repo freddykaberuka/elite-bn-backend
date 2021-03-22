@@ -110,3 +110,45 @@
  *       "401":
  *         description: "Trip was already canceled."
  */
+
+
+
+ // cancel travel request
+
+ /**
+  * @swagger
+  * /api/v1/trips/update-travel-request/{id}/:
+  *  patch:
+  *      tags:
+  *       - Trips
+  *      name: update-travel-request
+  *      summary: "update travel request"
+  *      description: "Edit travel request which has not been accepted or canceled."
+  *      consumes:
+  *       - application/json
+  *      parameters:
+  *       - name: Authorization
+  *         in: header
+  *         required: true
+  *       - name: permission_name
+  *         in: header
+  *         required: true
+  *       - name: id
+  *         in: path
+  *         type: integer
+  *         required: true
+  *       - name: body
+  *         in: body
+  *         schema:
+  *             type: object
+  *             properties:
+  *                name:
+  *                  type: string
+  *                orgin:
+  *                  type: string
+  *      responses:
+  *       "200":
+  *         description: "You have successfully updated the trip"
+  *       "401":
+  *         description: "Trip was already updated."
+  */

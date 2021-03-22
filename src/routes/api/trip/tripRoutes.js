@@ -18,4 +18,9 @@ router
   .route('/cancel-travel-request/:id')
   .patch(authorize.userAuthorize, asyncHandler(tripController.cancelRequest));
 
+  router
+    .route('/update-travel-request/:id')
+    .patch(authorize.userAuthorize, asyncHandler(tripController.updateTrip));
+
+
 export default router;

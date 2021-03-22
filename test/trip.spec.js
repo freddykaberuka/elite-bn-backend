@@ -184,4 +184,71 @@ describe('Travel request', () => {
       'Cancelling trip has failed.',
     );
   });
+
+  it('should not edit travel request that is not available', async () => {
+    const userData = await signIn(signin);
+    const { token } = userData;
+    const res = await chai
+      .request(app)
+      .patch(`/api/v1/trips/update-travel-request/${-5}`)
+      .set('authorization', token)
+      .set('permission_name', permission);
+
+    expect(res.status).to.be.equal(401);
+    expect(res.body).to.have.property(
+      'message',
+      'You don\'t own this trip.',
+    );
+  });
+
+  it('should not edit travel request which is not his own', async () => {
+    const userData = await signIn(signin);
+    const { token } = userData;
+    const res = await chai
+      .request(app)
+      .patch(`/api/v1/trips/update-travel-request/${-5}`)
+      .set('authorization', token)
+      .set('permission_name', permission);
+
+    expect(res.status).to.be.equal(401);
+    expect(res.body).to.have.property(
+      'message',
+      'You don\'t own this trip.',
+    );
+  });
+
+  it('should edit travel request', async () => {
+    const userData = await signIn(signin);
+    const { token } = userData;
+    console.log(tripId);
+    const res = await chai
+      .request(app)
+      .patch(`/api/v1/trips/update-travel-request/${tripId}`)
+      .set('authorization', token)
+      .set('permission_name', permission);
+
+    expect(res.status).to.be.equal(201);
+    expect(res.body).to.have.property(
+      'message',
+      'You have successfully edited the trip',
+    );
+  });
+
+  it('should edit travel request without request id', async () => {
+    const userData = await signIn(signin);
+    const { token } = userData;
+    console.log(tripId);
+    const res = await chai
+      .request(app)
+      .patch(`/api/v1/trips/update-travel-request`)
+      .set('authorization', token)
+      .set('permission_name', permission);
+
+    expect(res.status).to.be.equal(500);
+    expect(res.body).to.have.property(
+      'message',
+      'Something is wrong',
+    );
+  });
+
 });
