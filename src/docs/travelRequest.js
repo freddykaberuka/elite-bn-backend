@@ -108,14 +108,88 @@
  *       "200":
  *         description: "You have successfully canceled the trip"
  *       "401":
- *         description: "Trip was already canceled."
+ *         description: "You don't own this trip."
+ *       "409":
+ *         description: "You can't cancel trip::{id}"
+ *       "501":
+ *         description: "Trip::{id} not found"
+ *       "500":
+ *         description: "something is wrong"
  */
 
+// approve travel request
 
+/**
+ * @swagger
+ * /api/v1/trips/approve-travel-request/{id}/:
+ *  patch:
+ *      tags:
+ *       - Trips
+ *      name: approve-travel-request
+ *      summary: "approve travel requests"
+ *      description: "The manager should be able to approve a travel request."
+ *      consumes:
+ *       - application/json
+ *      parameters:
+ *       - name: Authorization
+ *         in: header
+ *         required: true
+ *       - name: permission_name
+ *         in: header
+ *         required: true
+ *       - name: id
+ *         in: path
+ *         type: integer
+ *         required: true
+ *      responses:
+ *       "200":
+ *         description: "You have successfully approved the trip"
+ *       "401":
+ *         description: "Trip was not reported to you."
+ *       "501":
+ *         description: "Trip::{id} not found"
+ *       "500":
+ *         description: "something is wrong"
+ */
 
- // cancel travel request
+// reject travel request
 
- /**
+/**
+ * @swagger
+ * /api/v1/trips/reject-travel-request/{id}/:
+ *  patch:
+ *      tags:
+ *       - Trips
+ *      name: reject-travel-request
+ *      summary: "reject travel requests"
+ *      description: "The manager should be able to reject a travel request."
+ *      consumes:
+ *       - application/json
+ *      parameters:
+ *       - name: Authorization
+ *         in: header
+ *         required: true
+ *       - name: permission_name
+ *         in: header
+ *         required: true
+ *       - name: id
+ *         in: path
+ *         type: integer
+ *         required: true
+ *      responses:
+ *       "200":
+ *         description: "You have successfully rejected the trip"
+ *       "401":
+ *         description: "Trip was not reported to you."
+ *       "501":
+ *         description: "Trip::{id} not found"
+ *       "500":
+ *         description: "something is wrong"
+ */
+
+// update travel request
+
+/**
   * @swagger
   * /api/v1/trips/update-travel-request/{id}/:
   *  patch:
@@ -146,9 +220,27 @@
   *                  type: string
   *                orgin:
   *                  type: string
+  *                destination:
+  *                  type: integer
+  *                reason:
+  *                  type: string
+  *                type:
+  *                  type: string
+  *                returnDate:
+  *                  type: string
+  *                accomodationId:
+  *                  type: integer
+  *                lineManager:
+  *                  type: integer
   *      responses:
   *       "200":
   *         description: "You have successfully updated the trip"
   *       "401":
-  *         description: "Trip was already updated."
+  *         description: "You don't own this trip."
+  *       "409":
+  *         description: "You can't update trip::{id}"
+  *       "501":
+  *         description: "Trip::{id} not found"
+  *       "500":
+  *         description: "something is wrong"
   */
