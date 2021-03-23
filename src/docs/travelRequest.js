@@ -20,8 +20,6 @@
  *         schema:
  *             type: object
  *             properties:
- *                name:
- *                  type: string
  *                orgin:
  *                  type: string
  *                destination:
@@ -216,8 +214,6 @@
   *         schema:
   *             type: object
   *             properties:
-  *                name:
-  *                  type: string
   *                orgin:
   *                  type: string
   *                destination:
