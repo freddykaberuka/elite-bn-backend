@@ -34,23 +34,31 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: 'tripId',
         as: 'Trip',
       });
+
+      Trip.belongsTo(models.Locations, {
+        foreignKey: 'destination',
+        onDelete: 'CASCADE',
+        onUpdate: 'CASCADE',
+        foreignKeyConstraint: true,
+        as: 'to',
+      });
     }
   }
   Trip.init(
     {
       user_id: DataTypes.INTEGER,
       orgin: { type: DataTypes.STRING, allowNull: false },
-      destination: {
-        type: DataTypes.ARRAY(DataTypes.STRING),
-        defaultValue: [],
-      },
+      destination: DataTypes.INTEGER,
       travelDate: { type: DataTypes.DATE, allowNull: false },
       returnDate: { type: DataTypes.DATE, allowNull: false },
       type: { type: DataTypes.STRING, allowNull: false },
       reason: { type: DataTypes.STRING, allowNull: false },
       accomodationId: DataTypes.INTEGER,
       lineManager: DataTypes.INTEGER,
-      status: { type: DataTypes.STRING, defaultValue: false },
+      status: {
+        type: DataTypes.ENUM('pending', 'approved', 'canceled', 'rejected'),
+        defaultValue: 'pending',
+      },
     },
     {
       sequelize,
