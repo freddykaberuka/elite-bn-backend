@@ -1,7 +1,14 @@
-/* eslint-disable consistent-return */
-/* eslint-disable camelcase */
-import tripServices from '../services/tripServices';
-import Util from '../helpers/utils';
+/* eslint-disable */
+import tripServices from "../services/tripServices";
+import eventEmitter from "../helpers/notifications/eventEmitter";
+import Util from "../helpers/utils";
+import { Listner } from "../helpers/notifications/eventListeners";
+
+Listner.eventTripListeners();
+Listner.editListener();
+Listner.cancelTripListener();
+Listner.rejectListener();
+Listner.approveListener();
 
 const util = new Util();
 
@@ -15,8 +22,12 @@ class TripController {
         user_id: id,
         travelDate: Date.now(),
       });
-
-      util.setSuccess(201, 'You have successfully created a trip', trip);
+      const lineManagerId = req.body.lineManager;
+      eventEmitter.emit("TripRequest", {
+        lineManagerId,
+        id,
+      });
+      util.setSuccess(201, "You have successfully created a trip", trip);
       return util.send(res);
     } catch (error) {
       util.setError(500, error.message);
@@ -33,13 +44,16 @@ class TripController {
     console.log(itemsToSkip, itemsPerPage);
     const isManager = roleId === 3;
     const condition = isManager ? { lineManager: id } : { user_id: id };
-    tripServices.getAllTripsByRole(condition, itemsToSkip, itemsPerPage).then((trips) => {
-      util.setSuccess(200, 'You have successfully fetched the trips', trips);
-      return util.send(res);
-    }).catch(() => {
-      util.setError(500, 'Something is wrong');
-      return util.send(res);
-    });
+    tripServices
+      .getAllTripsByRole(condition, itemsToSkip, itemsPerPage)
+      .then((trips) => {
+        util.setSuccess(200, "You have successfully fetched the trips", trips);
+        return util.send(res);
+      })
+      .catch(() => {
+        util.setError(500, "Something is wrong");
+        return util.send(res);
+      });
   }
 
   static async cancelRequest(req, res) {
@@ -51,21 +65,33 @@ class TripController {
       return util.send(res);
     }
     if (trip.user_id !== userId && trip.lineManager !== userId) {
-      util.setError(401, 'You don\'t own this trip.');
+      util.setError(401, "You don't own this trip.");
       return util.send(res);
     }
-    if (trip.status !== 'pending') {
+    if (trip.status !== "pending") {
       util.setError(409, `You can't cancel trip::${tripId}`);
       return util.send(res);
     }
 
-    tripServices.updateTrip({ status: 'canceled' }, { id: tripId }).then((result) => {
-      util.setSuccess(201, 'You have successfully canceled the trip', result);
-      return util.send(res);
-    }).catch(() => {
-      util.setError(500, 'Something is wrong');
-      return util.send(res);
-    });
+    tripServices
+      .updateTrip({ status: "canceled" }, { id: tripId })
+      .then((result) => {
+        const lineManagerId = req.body.lineManager;
+        const tripId = trip.id;
+
+        const id = trip.user_id;
+        eventEmitter.emit("CancelTrip", {
+          lineManagerId,
+          id,
+          tripId,
+        });
+        util.setSuccess(201, "You have successfully canceled the trip", result);
+        return util.send(res);
+      })
+      .catch(() => {
+        util.setError(500, "Something is wrong");
+        return util.send(res);
+      });
   }
 
   static async approveRequest(req, res) {
@@ -77,16 +103,27 @@ class TripController {
       return util.send(res);
     }
     if (trip.lineManager !== userId) {
-      util.setError(401, 'Trip was not reported to you.');
+      util.setError(401, "Trip was not reported to you.");
       return util.send(res);
     }
-    tripServices.updateTrip({ status: 'approved' }, { id: tripId }).then((result) => {
-      util.setSuccess(201, 'You have successfully approved the trip', result);
-      return util.send(res);
-    }).catch(() => {
-      util.setError(500, 'Something is wrong');
-      return util.send(res);
-    });
+    tripServices
+      .updateTrip({ status: "approved" }, { id: tripId })
+      .then((result) => {
+        const tripId = trip.id;
+        const lineManagerId = trip.lineManager;
+        const id = trip.user_id;
+        eventEmitter.emit("ApproveTrip", {
+          lineManagerId,
+          id,
+          tripId,
+        });
+        util.setSuccess(201, "You have successfully approved the trip", result);
+        return util.send(res);
+      })
+      .catch(() => {
+        util.setError(500, "Something is wrong");
+        return util.send(res);
+      });
   }
 
   static async rejectRequest(req, res) {
@@ -98,16 +135,27 @@ class TripController {
       return util.send(res);
     }
     if (trip.lineManager !== userId) {
-      util.setError(401, 'Trip was not reported to you.');
+      util.setError(401, "Trip was not reported to you.");
       return util.send(res);
     }
-    tripServices.updateTrip({ status: 'rejected' }, { id: tripId }).then((result) => {
-      util.setSuccess(201, 'You have successfully rejected the trip', result);
-      return util.send(res);
-    }).catch(() => {
-      util.setError(500, 'Something is wrong');
-      return util.send(res);
-    });
+    tripServices
+      .updateTrip({ status: "rejected" }, { id: tripId })
+      .then((result) => {
+        const tripId = trip.id;
+        const lineManagerId = trip.lineManager;
+        const id = trip.user_id;
+        eventEmitter.emit("RejectTrip", {
+          lineManagerId,
+          id,
+          tripId,
+        });
+        util.setSuccess(201, "You have successfully rejected the trip", result);
+        return util.send(res);
+      })
+      .catch(() => {
+        util.setError(500, "Something is wrong");
+        return util.send(res);
+      });
   }
 
   static async updateTrip(req, res) {
@@ -119,10 +167,10 @@ class TripController {
       return util.send(res);
     }
     if (trip.user_id !== userId && trip.lineManager !== userId) {
-      util.setError(401, 'You don\'t own this trip.');
+      util.setError(401, "You don't own this trip.");
       return util.send(res);
     }
-    if (trip.status !== 'pending') {
+    if (trip.status !== "pending") {
       util.setError(409, `You can't update trip::${tripId}`);
       return util.send(res);
     }
@@ -137,13 +185,24 @@ class TripController {
       status: trip.status,
     };
 
-    tripServices.updateTrip(data, { id: tripId }).then((result) => {
-      util.setSuccess(201, 'You have successfully edited the trip', result);
-      return util.send(res);
-    }).catch(() => {
-      util.setError(500, 'Something is wrong');
-      return util.send(res);
-    });
+    tripServices
+      .updateTrip(data, { id: tripId })
+      .then((result) => {
+        const tripId = trip.id;
+        const lineManagerId = trip.lineManager;
+        const id = trip.user_id;
+        eventEmitter.emit("EditTrip", {
+          lineManagerId,
+          id,
+          tripId,
+        });
+        util.setSuccess(201, "You have successfully edited the trip", result);
+        return util.send(res);
+      })
+      .catch(() => {
+        util.setError(500, "Something is wrong");
+        return util.send(res);
+      });
   }
 }
 
